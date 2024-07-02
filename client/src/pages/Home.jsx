@@ -1,11 +1,9 @@
-// import Slider from "../component/Slider"
 
-import Slider from "../component/Slider"
 
 function HomePage() {
   return (
     <div>
-      <Slider/>
+      {/* <Slider/> */}
       Home page
     </div>
   )
