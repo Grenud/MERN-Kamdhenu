@@ -5,6 +5,7 @@ import AdoptGaumata from "./pages/AdoptGaumata";
 import JoinMission from "./pages/JoinMission";
 import Shop from "./pages/Shop";
 import ContactUs from "./pages/ContactUs";
+import PageNotFound from "./pages/404";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/join-mission" element={<JoinMission/>} />
         <Route path="/shop" element={<Shop/>} />
         <Route path="/contact-us" element={<ContactUs/>} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
   );
 }

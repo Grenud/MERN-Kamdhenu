@@ -2,7 +2,7 @@ import cowImage from '../assets/personCow.png'
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <footer className="bg-primary lg:grid lg:grid-cols-5">
+    <footer className="bg-light text-secondary lg:grid lg:grid-cols-5">
       <div className="relative block h-32 lg:col-span-2 lg:h-full">
         <img
           src={cowImage}
@@ -161,7 +161,7 @@ function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
-                    to="/"
+                    to="/shop"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Our Products
@@ -170,7 +170,7 @@ function Footer() {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/blog"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Our Blog
@@ -179,7 +179,7 @@ function Footer() {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/contact-us"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Contact us
@@ -188,7 +188,7 @@ function Footer() {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/profile"
                     className="text-secondary transition hover:opacity-75"
                   >
                     My Account
@@ -197,7 +197,7 @@ function Footer() {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/donar-dashboard"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Donor Dashboard
@@ -212,7 +212,7 @@ function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
-                    to="/"
+                    to="/cow-puja"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Cow Puja
@@ -221,7 +221,7 @@ function Footer() {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/veda-about-cow"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Veda About Cow
@@ -230,7 +230,7 @@ function Footer() {
 
                 <li>
                   <Link
-                    to="/"
+                    to="/spiritual-importance"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Spiritual Importance
@@ -238,7 +238,7 @@ function Footer() {
                 </li>
                 <li>
                   <Link
-                    to="/"
+                    to="/testimonials"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Testimonials
@@ -246,7 +246,7 @@ function Footer() {
                 </li>
                 <li>
                   <Link
-                    to="/"
+                    to="/gallery"
                     className="text-secondary transition hover:opacity-75"
                   >
                     Gallery
@@ -262,7 +262,7 @@ function Footer() {
             <ul className="flex flex-wrap gap-4 text-xs">
               <li>
                 <Link
-                  to="/"
+                  to="/terms-and-conditions"
                   className="text-secondary transition hover:opacity-75"
                 >
                   Terms & Conditions
@@ -271,7 +271,7 @@ function Footer() {
 
               <li>
                 <Link
-                  to="/"
+                  to="/privacy-policy"
                   className="text-secondary transition hover:opacity-75"
                 >
                   Privacy Policy
@@ -280,7 +280,7 @@ function Footer() {
 
               <li>
                 <Link
-                  to="/"
+                  to="/policy"
                   className="text-secondary transition hover:opacity-75"
                 >
                   Return & Refund Policy
@@ -289,7 +289,7 @@ function Footer() {
             </ul>
 
             <p className="mt-8 text-xs text-secondary sm:mt-0">
-              &copy; 2022. Company Name. All rights reserved.
+              Copyright &copy; 2024 Kamdhenuseva. All Rights Reserved.
             </p>
           </div>
         </div>
