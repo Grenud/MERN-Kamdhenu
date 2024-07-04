@@ -1,14 +1,21 @@
-// import Slider from "../component/Slider"
+import React from 'react'
+import AboutDevraha from '../component/AboutDevraha'
+import Slider from '../component/Slider'
+import JoinCampaign from '../component/JoinCampaign'
+import CowImgSlider from '../component/CowImgSlider'
+import CowPuja from '../component/CowPuja'
 
-import Slider from "../component/Slider"
-
-function HomePage() {
+function Home() {
   return (
     <div>
-      <Slider/>
-      Home page
+        <Slider/>
+        <AboutDevraha/>
+        <JoinCampaign/>
+        <CowImgSlider/>
+        <CowPuja/>
+      
     </div>
   )
 }
 
-export default HomePage
+export default Home
