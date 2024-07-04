@@ -1,3 +1,4 @@
+
 import React from 'react'
 import AboutDevraha from '../component/AboutDevraha'
 import Slider from '../component/Slider'
@@ -13,9 +14,11 @@ function Home() {
         <JoinCampaign/>
         <CowImgSlider/>
         <CowPuja/>
-      
     </div>
-  )
+  )  
+
 }
+
+
 
 export default Home

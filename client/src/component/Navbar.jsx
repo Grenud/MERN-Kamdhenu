@@ -26,7 +26,7 @@ function Navbar() {
             />
           </div>
         </div>
-        <ul className="hidden md:flex text-white gap-10 ml-auto items-center mr-10">
+        <ul className="hidden md:flex text-black gap-10 ml-auto items-center mr-10">
           {links.map((link, index) => (
             <li key={index} className="group relative">
               <Link to={link.to} className='text-base md:text-xl font-bold'>
