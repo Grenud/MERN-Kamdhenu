@@ -1,5 +1,4 @@
 
-import React from 'react'
 import AboutDevraha from '../component/AboutDevraha'
 import Slider from '../component/Slider'
 import JoinCampaign from '../component/JoinCampaign'
@@ -8,7 +7,7 @@ import CowPuja from '../component/CowPuja'
 
 function Home() {
   return (
-    <div>
+    <div className="">
         <Slider/>
         <AboutDevraha/>
         <JoinCampaign/>

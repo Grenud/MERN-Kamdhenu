@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 .main-container{
-    @apply w-full px-3 md:px-5 lg:px-12 xl:px-16
+    @apply w-full px-3 md:px-5 lg:px-12 xl:px-16 pt-[15vh]
 }
 body{
     @apply font-libre text-neutral-600
