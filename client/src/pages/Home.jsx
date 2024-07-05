@@ -7,7 +7,7 @@ import CowPuja from '../component/CowPuja'
 
 function Home() {
   return (
-    <div className=''>
+    <div className="">
         <Slider/>
         <AboutDevraha/>
         <JoinCampaign/>
