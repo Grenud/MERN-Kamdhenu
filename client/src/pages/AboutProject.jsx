@@ -4,7 +4,7 @@ import Button from "../component/Button";
 function AboutProject() {
   return (
     <section className="main-container">
-      <h1 className="text-3xl font-bold tracking-wider my-2">About</h1>
+      <h1 className="text-3xl font-bold tracking-wider mb-2">About</h1>
       <figure className="w-full h-64 object-cover">
         <img
           src={cowSeva}

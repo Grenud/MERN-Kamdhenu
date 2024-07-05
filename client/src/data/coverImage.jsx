@@ -1,51 +1,27 @@
-import coverImage1 from '../assets/cowcover1.png'
-import coverImage2 from '../assets/cowcover2.png'
-import coverImage3 from '../assets/cowcover3.png'
-import coverImage4 from '../assets/cowcover4.png'
-import coverImage5 from '../assets/cowcover5.png'
-
-
 const coverImageData = [
     {
-        id:1,
-        heading:'share your love',
-        subHeading:'cows are spiritual beings that need our love and care too',
-        btnText:'learn more',
-        href:'/',
-        image:coverImage1
-    },
-    {
-        id:2,
-        heading:'cow is holy',
-        subHeading:"cows aren't animal  they are sacred and motherly affectionate",
-        btnText:'',
-        href:'',
-        image:coverImage2
-    },
-    {
-        id:3,
-        heading:'save a cow',
-        subHeading:'support our spiritual mission for cow seva to protect every cow.',
-        btnText:'',
-        href:'',
-        image:coverImage3
-    },
-    {
-        id:4,
-        heading:'cow is holy',
-        subHeading:"cows aren't animal  they are sacred and motherly affectionate",
-        btnText:'learn more',
-        href:'/',
-        image:coverImage4
-    },
-    {
-        id:5,
-        heading:'share your love',
-        subHeading:'cows are spiritual beings that need our love and care too',
-        btnText:'learn more',
-        href:'/',
-        image:coverImage5
-    },
+        id : 1,
+        image : "https://www.dairypesa.com/wp-content/uploads/2015/10/HOLSTEIN-COW.jpg",
+        heading : "SAVE A COW",
+        paragraph : "Support our Spiritual Mission for Cow Seva to protect every cow.",
+        button : "LEARN MORE"
+      },
+      { 
+        id : 2,
+        image: "https://www.treehugger.com/thmb/PVOiWku5eio3Tzu40yV6xV9vFlk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/cow-playfully-cuddling-another-young-cow-lying-down-in-a-field-under-a-blue-sky--calves-love-each-other-1282528841-cb3871fc5b7a4d6082a4a8b35614e4df.jpg",
+        heading : "SHARE YOUR LOVE",
+        paragraph : "Cows are spiritual beings that need our love and care too.",
+        button : "LEARN MORE"
+      },
+      {
+        id : 3,
+        image : "https://t3.ftcdn.net/jpg/00/55/77/44/360_F_55774465_rYM3C4B2eROfNQcVUpHlx9EOPDSYJw20.jpg",
+        heading : "COW IS HOLY",
+        paragraph : "Cows aren't just a animals, they are scared and motherly affectionate",
+        button : "LEARN MORE"
+      },
+     
+    
 ]
 
 export default coverImageData

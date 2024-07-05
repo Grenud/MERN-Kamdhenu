@@ -1,5 +1,7 @@
+
 import cowImage from '../assets/personCow.png'
 import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="bg-light text-secondary lg:grid lg:grid-cols-5">

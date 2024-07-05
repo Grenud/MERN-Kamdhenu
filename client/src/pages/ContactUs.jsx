@@ -3,7 +3,7 @@ function ContactUs() {
   const phoneNumber = "+917302756618";
   const email = "welcome@kamdhenuseva.com";
   return (
-    <section className="main-container grid lg:grid-cols-6 my-4">
+    <section className="main-container grid lg:grid-cols-6 mb-4">
       <section className="lg:col-span-4 col-span-6">
         <h1 className="text-2xl font-bold tracking-wide my-3 lg:my-4">Our Location</h1>
         <section className="w-full my-5">
