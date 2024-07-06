@@ -9,3 +9,6 @@
 body{
     @apply font-libre text-neutral-600
 }
+::-webkit-scrollbar{
+    display: none;
+}

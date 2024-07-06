@@ -13,7 +13,9 @@ export default {
         'accent1':'#d35400',
         'accent2':'#c0392b',
         'light':'#bdc3c7',
-        'dark-primary':'#013220'
+        'dark-primary':'#013220',
+        'green-light':'#15803d',
+        'green-dark':'#14532d'
       },
       fontFamily: {
         libre: ['"Poppins"', ...defaultTheme.fontFamily.sans]

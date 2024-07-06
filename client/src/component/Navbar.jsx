@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
+import { MdOutlineShoppingBag } from "react-icons/md";
+import { GoPerson } from "react-icons/go";
 
 const links = [
   { to: "/", label: "Home" },
@@ -51,12 +53,12 @@ function Navbar() {
       setScrollY(window.scrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [scrollY]);
 
@@ -81,8 +83,12 @@ function Navbar() {
 
   return (
     <>
-      <div className={`bg-green-800 p-2 fixed top-0 w-full z-50 transition-transform duration-300 ${scrollUp ? '' : '-translate-y-full'}`}>
-        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto">
+      <div
+        className={`bg-green-800 p-2 h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
+          scrollUp ? "" : "-translate-y-full"
+        }`}
+      >
+        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto h-[15vh]">
           <div className="flex items-center">
             <div className="w-14 h-[9vh] rounded-full overflow-hidden md:ml-5">
               <img
@@ -92,23 +98,38 @@ function Navbar() {
               />
             </div>
           </div>
-          <ul className={`hidden md:flex text-white gap-10 ml-auto items-center mr-10`}>
+          <ul
+            className={`hidden md:flex text-white gap-10 ml-auto items-center mr-10`}
+          >
             {links.map((link, index) => (
               <li key={index} className="group relative">
-                <Link to={link.to} className="text-base md:text-xl font-bold">
+                <Link to={link.to} className="text-base font-bold">
                   {link.label}
                 </Link>
                 <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
               </li>
             ))}
-            <li className="group relative" onClick={() => setServiceDropdown(!serviceDropdown)} ref={serviceRef}>
-              <div className="text-base md:text-xl font-bold cursor-pointer">
+            <li
+              className="group relative"
+              onClick={() => setServiceDropdown(!serviceDropdown)}
+              ref={serviceRef}
+            >
+              <div className="text-base font-bold cursor-pointer">
                 Services
               </div>
               {serviceDropdown && (
-                <motion.div variants={staggerVariants} initial="closed" animate="open" className="absolute top-10 left-0 w-40 bg-white text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
+                <motion.div
+                  variants={staggerVariants}
+                  initial="closed"
+                  animate="open"
+                  className="absolute top-10 left-0 w-40 bg-white text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden"
+                >
                   {serviceLinks.map((link, index) => (
-                    <motion.div key={index} variants={itemVariants} className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300">
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300"
+                    >
                       <Link to={link.to} onClick={() => setToggle(false)}>
                         {link.label}
                       </Link>
@@ -118,14 +139,28 @@ function Navbar() {
               )}
               <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
             </li>
-            <li className="group relative" onClick={() => setAboutDropdown(!aboutDropdown)} ref={aboutRef}>
-              <div className="text-base md:text-xl font-bold cursor-pointer">
+
+            <li
+              className="group relative"
+              onClick={() => setAboutDropdown(!aboutDropdown)}
+              ref={aboutRef}
+            >
+              <div className="text-base font-bold cursor-pointer">
                 About
               </div>
               {aboutDropdown && (
-                <motion.div variants={staggerVariants} initial="closed" animate="open" className="absolute top-10 left-0 w-52 bg-white text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
+                <motion.div
+                  variants={staggerVariants}
+                  initial="closed"
+                  animate="open"
+                  className="absolute top-10 left-0 w-52 bg-white text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden"
+                >
                   {aboutLinks.map((link, index) => (
-                    <motion.div key={index} variants={itemVariants} className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300">
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300"
+                    >
                       <Link to={link.to} onClick={() => setToggle(false)}>
                         {link.label}
                       </Link>
@@ -135,6 +170,13 @@ function Navbar() {
               )}
               <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
             </li>
+            <Link to={'/cart'} className="flex gap-2 items-center justify-center cursor-pointer">
+              <div className=" font-semibold">&#8377; 0.00</div>
+              <MdOutlineShoppingBag className="hover:text-light duration-300" size={25} />
+            </Link>
+            <Link to="/profile" className="font-semibold cursor-pointer ">
+              <GoPerson className="hover:text-light duration-300" size={25} />
+            </Link>
             <Link to="/donate">
               <button className="bg-[rgb(109,144,81)] text-white px-8 py-1 rounded-3xl">
                 Donate
@@ -143,16 +185,26 @@ function Navbar() {
           </ul>
           <div className="md:hidden mr-6">
             {toggle ? (
-              <IoMdClose onClick={() => setToggle(!toggle)} className="text-white text-2xl" />
+              <IoMdClose
+                onClick={() => setToggle(!toggle)}
+                className="text-white text-2xl"
+                size={40}
+              />
             ) : (
-              <IoIosMenu onClick={() => setToggle(!toggle)} className="text-white text-2xl" />
+              <IoIosMenu
+                onClick={() => setToggle(!toggle)}
+                className="text-white text-2xl"
+                size={40}
+              />
             )}
           </div>
-          <motion.ul 
+          <motion.ul
             initial="closed"
             animate={toggle ? "open" : "closed"}
             variants={staggerVariants}
-            className={`duration-300 md:hidden w-3/4 h-screen text-black fixed bg-white top-[58px] ${toggle ? "left-[0]" : "left-[-100%]"}`}
+            className={`duration-300 md:hidden w-3/4 h-screen text-black fixed bg-white top-0 ${
+              toggle ? "left-[0]" : "left-[-100%]"
+            }`}
           >
             {links.map((link, index) => (
               <motion.li key={index} variants={itemVariants} className="p-4">
@@ -162,13 +214,25 @@ function Navbar() {
               </motion.li>
             ))}
             <motion.li variants={itemVariants} className="p-4">
-              <div className="cursor-pointer" onClick={() => setServiceDropdown(!serviceDropdown)}>
+              <div
+                className="cursor-pointer"
+                onClick={() => setServiceDropdown(!serviceDropdown)}
+              >
                 Services
               </div>
               {serviceDropdown && (
-                <motion.ul variants={staggerVariants} initial="closed" animate="open" className="pl-3 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
+                <motion.ul
+                  variants={staggerVariants}
+                  initial="closed"
+                  animate="open"
+                  className="pl-3 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden"
+                >
                   {serviceLinks.map((link, index) => (
-                    <motion.li key={index} variants={itemVariants} className="py-2">
+                    <motion.li
+                      key={index}
+                      variants={itemVariants}
+                      className="py-2"
+                    >
                       <Link to={link.to} onClick={() => setToggle(false)}>
                         {link.label}
                       </Link>
@@ -178,13 +242,25 @@ function Navbar() {
               )}
             </motion.li>
             <motion.li variants={itemVariants} className="p-4">
-              <div className="cursor-pointer" onClick={() => setAboutDropdown(!aboutDropdown)}>
+              <div
+                className="cursor-pointer"
+                onClick={() => setAboutDropdown(!aboutDropdown)}
+              >
                 About
               </div>
               {aboutDropdown && (
-                <motion.ul variants={staggerVariants} initial="closed" animate="open" className="pl-4 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
+                <motion.ul
+                  variants={staggerVariants}
+                  initial="closed"
+                  animate="open"
+                  className="pl-4 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden"
+                >
                   {aboutLinks.map((link, index) => (
-                    <motion.li key={index} variants={itemVariants} className="py-2">
+                    <motion.li
+                      key={index}
+                      variants={itemVariants}
+                      className="py-2"
+                    >
                       <Link to={link.to} onClick={() => setToggle(false)}>
                         {link.label}
                       </Link>
