@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CowSlider from '../data/CowSlider';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
-function CowImgSlider() {
+function CowImgSlider({ bottomRef }) {
   const [slide, setSlide] = useState(0);
 
   const nextSlide = () => {
@@ -18,7 +18,7 @@ function CowImgSlider() {
   };
 
   return (
-    <div className='mt-14'>
+    <div className='mt-14' ref={bottomRef}>
     <h1 className='font-bold text-center text-4xl md:text-5xl'>Donate Now to Change Lives</h1>
     <div className='flex items-center'>
       <div className='w-1/12 md:w-8 flex md:ml-5 items-center'>
