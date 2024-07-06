@@ -1,5 +1,6 @@
 import Button from "../component/Button";
 import CowCard from "../component/CowCard";
+
 function AdoptGaumata() {
   return (
     <section className="min-h-screen main-container my-5">
