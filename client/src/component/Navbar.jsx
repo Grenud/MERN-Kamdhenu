@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
-
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 const links = [
   { to: "/", label: "Home" },
   { to: "/join-mission", label: "Join Mission" },
@@ -102,8 +103,8 @@ function Navbar() {
               </li>
             ))}
             <li className="group relative" onClick={() => setServiceDropdown(!serviceDropdown)} ref={serviceRef}>
-              <div className="text-base md:text-xl font-bold cursor-pointer">
-                Services
+              <div className="flex text-base md:text-xl font-bold cursor-pointer">
+                Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {serviceDropdown && (
                 <motion.div variants={staggerVariants} initial="closed" animate="open" className="absolute top-10 left-0 w-40 bg-white text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
@@ -119,8 +120,8 @@ function Navbar() {
               <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
             </li>
             <li className="group relative" onClick={() => setAboutDropdown(!aboutDropdown)} ref={aboutRef}>
-              <div className="text-base md:text-xl font-bold cursor-pointer">
-                About
+              <div className="flex text-base md:text-xl font-bold cursor-pointer">
+              About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {aboutDropdown && (
                 <motion.div variants={staggerVariants} initial="closed" animate="open" className="absolute top-10 left-0 w-52 bg-white text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
@@ -152,7 +153,7 @@ function Navbar() {
             initial="closed"
             animate={toggle ? "open" : "closed"}
             variants={staggerVariants}
-            className={`duration-300 md:hidden w-3/4 h-screen text-black fixed bg-white top-[58px] ${toggle ? "left-[0]" : "left-[-100%]"}`}
+            className={`duration-300 md:hidden w-3/4 h-screen text-black fixed bg-white top-[80px] ${toggle ? 'left-[0]' : 'left-[-100%]'}`}
           >
             {links.map((link, index) => (
               <motion.li key={index} variants={itemVariants} className="p-4">
@@ -162,8 +163,8 @@ function Navbar() {
               </motion.li>
             ))}
             <motion.li variants={itemVariants} className="p-4">
-              <div className="cursor-pointer" onClick={() => setServiceDropdown(!serviceDropdown)}>
-                Services
+              <div className="cursor-pointer flex" onClick={() => setServiceDropdown(!serviceDropdown)}>
+              Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {serviceDropdown && (
                 <motion.ul variants={staggerVariants} initial="closed" animate="open" className="pl-3 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
@@ -178,8 +179,8 @@ function Navbar() {
               )}
             </motion.li>
             <motion.li variants={itemVariants} className="p-4">
-              <div className="cursor-pointer" onClick={() => setAboutDropdown(!aboutDropdown)}>
-                About
+              <div className="cursor-pointer flex" onClick={() => setAboutDropdown(!aboutDropdown)}>
+              About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {aboutDropdown && (
                 <motion.ul variants={staggerVariants} initial="closed" animate="open" className="pl-4 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden">
