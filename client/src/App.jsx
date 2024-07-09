@@ -12,6 +12,8 @@ import VedaAboutCow from './component/VedaAboutCow';
 import SpiritualImp from './component/SpiritualImp';
 import Testimonials from './component/Testimonials';
 import Gallery from './component/Gallery';
+import Cart from "./pages/Cart.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
       <Route path='/spiritual-importance' element={<SpiritualImp/>}/>
       <Route path='/testimonials' element={<Testimonials/>}/>
       <Route path='/gallery' element={<Gallery/>}/>
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
