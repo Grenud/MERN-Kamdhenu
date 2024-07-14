@@ -1,7 +1,6 @@
 import ashramCover from "../assets/AshramDevraha.png";
 import krishna5 from "../assets/Krishna5.jpeg";
 import { memberShip, memberShipStatus } from "../data/tableData";
-import tickSVG from '../assets/check-mark-svgrepo-com.svg'
 import { Link } from "react-router-dom";
 function JoinMission() {
   return (
@@ -83,13 +82,13 @@ function JoinMission() {
                 <>
                   <tr className="">
                     <td className="p-4">{data.d1}</td>
-                    <td className="p-4">{data.d2 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
-                    <td className="p-4">{data.d3 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
-                    <td className="p-4">{data.d4 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
-                    <td className="p-4">{data.d5 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
-                    <td className="p-4">{data.d6 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
-                    <td className="p-4">{data.d7 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
-                    <td className="p-4">{data.d8 ? <img src={tickSVG} className="w-4 h-4" /> : ""}</td>
+                    <td className="p-4">{data.d2 ? "✔" : ""}</td>
+                    <td className="p-4">{data.d3 ? "✔" : ""}</td>
+                    <td className="p-4">{data.d4 ? "✔" : ""}</td>
+                    <td className="p-4">{data.d5 ? "✔" : ""}</td>
+                     <td className="p-4">{data.d6 ? "✔" : ""}</td>
+                     <td className="p-4">{data.d7 ? "✔" : ""}</td>
+                    <td className="p-4">{data.d8 ? "✔" : ""}</td>
                   </tr>
                 </>
               ))}

@@ -10,8 +10,8 @@ import Navbar from "./component/Navbar.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-    <Navbar/>
-      <Cursor/>
+      <Navbar />
+      <Cursor />
       <App />
       <Footer />
     </BrowserRouter>
