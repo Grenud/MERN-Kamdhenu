@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { IoIosMenu, IoMdClose } from "react-icons/io";
+import { IoIosMenu, IoMdClose, IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
-
-import { IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
 
@@ -22,7 +19,7 @@ const serviceLinks = [
 
 const aboutLinks = [
   { to: "/about-project", label: "About Project" },
-  { to: "/about-gaumata", label: "About Gaumata" },
+  { to: "/adopt-gaumata", label: "About Gaumata" },
   { to: "/cow-puja", label: "Cow Puja" },
   { to: "/veda-cow", label: "Veda About Cow" },
   { to: "/spiritual-importance", label: "Spiritual Importance" },
@@ -34,7 +31,6 @@ function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [serviceDropdown, setServiceDropdown] = useState(false);
   const [aboutDropdown, setAboutDropdown] = useState(false);
-
   const [scrollY, setScrollY] = useState(0);
   const [scrollUp, setScrollUp] = useState(true);
 
@@ -101,12 +97,10 @@ function Navbar() {
               />
             </div>
           </div>
-          <ul
-            className={`hidden md:flex text-white gap-10 ml-auto items-center mr-10`}
-          >
+          <ul className={`hidden md:flex text-white gap-10 ml-auto items-center mr-10`}>
             {links.map((link, index) => (
               <li key={index} className="group relative">
-                <Link to={link.to} className="text-base font-bold">
+                <Link to={link.to} className="text-xl font-bold">
                   {link.label}
                 </Link>
                 <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
@@ -116,15 +110,6 @@ function Navbar() {
             <li className="group relative" onClick={() => setServiceDropdown(!serviceDropdown)} ref={serviceRef}>
               <div className="flex text-base md:text-xl font-bold cursor-pointer">
                 Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
-
-            <li
-              className="group relative"
-              onClick={() => setServiceDropdown(!serviceDropdown)}
-              ref={serviceRef}
-            >
-              <div className="text-base font-bold cursor-pointer">
-                Services
-
               </div>
               {serviceDropdown && (
                 <motion.div
@@ -151,15 +136,7 @@ function Navbar() {
 
             <li className="group relative" onClick={() => setAboutDropdown(!aboutDropdown)} ref={aboutRef}>
               <div className="flex text-base md:text-xl font-bold cursor-pointer">
-              About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
-
-            <li
-              className="group relative"
-              onClick={() => setAboutDropdown(!aboutDropdown)}
-              ref={aboutRef}
-            >
-              <div className="text-base font-bold cursor-pointer">
-                About
+                About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {aboutDropdown && (
                 <motion.div
@@ -183,6 +160,7 @@ function Navbar() {
               )}
               <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
             </li>
+
             <Link to={'/cart'} className="flex gap-2 items-center justify-center cursor-pointer">
               <div className=" font-semibold">&#8377; 0.00</div>
               <MdOutlineShoppingBag className="hover:text-light duration-300" size={25} />
@@ -215,9 +193,6 @@ function Navbar() {
             initial="closed"
             animate={toggle ? "open" : "closed"}
             variants={staggerVariants}
-
-            className={`duration-300 md:hidden w-3/4 h-screen text-black fixed bg-white top-[80px] ${toggle ? 'left-[0]' : 'left-[-100%]'}`}
-
             className={`duration-300 md:hidden w-3/4 h-screen text-black fixed bg-white top-0 ${
               toggle ? "left-[0]" : "left-[-100%]"
             }`}
@@ -230,16 +205,8 @@ function Navbar() {
               </motion.li>
             ))}
             <motion.li variants={itemVariants} className="p-4">
-
               <div className="cursor-pointer flex" onClick={() => setServiceDropdown(!serviceDropdown)}>
-              Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
-
-              <div
-                className="cursor-pointer"
-                onClick={() => setServiceDropdown(!serviceDropdown)}
-              >
-                Services
-
+                Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {serviceDropdown && (
                 <motion.ul
@@ -263,14 +230,8 @@ function Navbar() {
               )}
             </motion.li>
             <motion.li variants={itemVariants} className="p-4">
-
               <div className="cursor-pointer flex" onClick={() => setAboutDropdown(!aboutDropdown)}>
-              About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
-              <div
-                className="cursor-pointer"
-                onClick={() => setAboutDropdown(!aboutDropdown)}
-              >
-                About
+                About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
               </div>
               {aboutDropdown && (
                 <motion.ul
@@ -296,7 +257,6 @@ function Navbar() {
           </motion.ul>
         </div>
       </div>
-      <hr className="hidden md:block" />
     </>
   );
 }

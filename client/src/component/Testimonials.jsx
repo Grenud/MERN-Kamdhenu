@@ -9,21 +9,23 @@ function Testimonials() {
   const [ref1, inView1] = useInView({ threshold: 0.55 });
   const [ref2, inView2] = useInView({ threshold: 0.55 });
 
+  const isSmallDevice = window.matchMedia("(max-width: 640px)").matches;
+
   useEffect(() => {
     if (inView1) {
       controls1.start({ y: 0, x: 0 });
     } else {
-      controls1.start({ y: -70, x: -70 });
+      controls1.start({ y: -70, x: isSmallDevice ? -10 : -70 });
     }
-  }, [controls1, inView1]);
+  }, [controls1, inView1, isSmallDevice]);
 
   useEffect(() => {
     if (inView2) {
       controls2.start({ y: 0, x: 0 });
     } else {
-      controls2.start({ y: 70, x: 70 });
+      controls2.start({ y: 70, x: isSmallDevice ? 10 : 70 });
     }
-  }, [controls2, inView2]);
+  }, [controls2, inView2, isSmallDevice]);
 
   return (
     <div className="container mx-auto mt-36 px-4 md:px-0">
@@ -33,8 +35,8 @@ function Testimonials() {
       <div className="mt-30 shadow-xl p-10 mb-20 hover:bg-[#6d9051] group rounded-lg relative">
         <motion.img
           src="https://eiwgew27fhz.exactdn.com/wp-content/themes/puttosaurus/img/quote-left.svg"
-          className="w-10 h-10 absolute top-0 m-8 left-0"
-          initial={{ y: -70, x: -70 }}
+          className="w-10 h-10 absolute top-0 m-8 left-0 self-start mt-4"
+          initial={{ y: -70, x: isSmallDevice ? -10 : -70 }}
           animate={controls1}
           ref={ref1}
           transition={{ duration: 0.4, ease: "easeOut" }}
@@ -59,7 +61,7 @@ function Testimonials() {
           <motion.img
             src="https://eiwgew27fhz.exactdn.com/wp-content/themes/puttosaurus/img/quote-right.svg"
             className="w-10 h-10 self-end mt-4"
-            initial={{ y: 70, x: 70 }}
+            initial={{ y: 70, x: isSmallDevice ? 10 : 70 }}
             animate={controls2}
             ref={ref2}
             transition={{ duration: 0.4, ease: "easeOut" }}
