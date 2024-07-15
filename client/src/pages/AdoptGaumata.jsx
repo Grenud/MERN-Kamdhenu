@@ -13,7 +13,7 @@ function Test() {
   const [old, setOld] = useState("");
   const limit = 10;
   useEffect(() => {
-    console.log(page,gender,sick,adoption,old)
+    console.log(page, gender, sick, adoption, old);
     fetchItems();
   }, [page, gender, sick, adoption, old]);
 
@@ -23,20 +23,18 @@ function Test() {
         params: {
           page,
           limit,
-          gender__c:gender,
-          sick__c:sick,
-          adoption_status__c:adoption,
-          old__c:old,
+          gender__c: gender,
+          sick__c: sick,
+          adoption_status__c: adoption,
+          old__c: old,
         },
       });
-      console.log(response.data)
+      console.log(response.data);
       setItems(response.data);
     } catch (error) {
       console.log("Error while fetching items", error.message);
     }
   };
-
-
 
   return (
     <section className="min-h-screen main-container my-5">
@@ -59,7 +57,10 @@ function Test() {
         </div>
         <div>
           <label>Adoption</label>
-          <select value={adoption} onChange={(e) => setAdoption(e.target.value)}>
+          <select
+            value={adoption}
+            onChange={(e) => setAdoption(e.target.value)}
+          >
             <option value="">All</option>
             <option value="Adopted">Adopted</option>
             <option value="Not Adopted">Not Adopted</option>

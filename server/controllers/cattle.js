@@ -9,10 +9,6 @@ export const getCattle = async (req, res) => {
     old__c,
   } = req.query;
   const offset = (page - 1) * limit;
-  console.log('sick...........')
-  console.log(sick__c)
-  console.log('old')
-  console.log(old__c)
 
   // Create WHERE clauses for filters
   let filterClauses = [];
@@ -44,13 +40,6 @@ export const getCattle = async (req, res) => {
     ? `WHERE ${filterClauses.join(" AND ")}`
     : "";
 
-    console.log('where clause')
-    console.log(whereClause)
-    console.log('filter clause')
-    console.log(filterClauses)
-    console.log('values')
-    console.log(values)
-
   try {
     const result = await poolDb.query(
       `SELECT * FROM bayavasfdc.cattle__c ${whereClause} ORDER BY id LIMIT $1 OFFSET $2`,
@@ -58,7 +47,6 @@ export const getCattle = async (req, res) => {
     );
     res.json(result.rows);
   } catch (error) {
-    console.error(error.message);
     res.status(500).json({ error: "Database error" });
   }
 };
