@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { getCattle } from "../controllers/cattle.js";
-
+import {getCattle} from '../controllers/cattle.js'
 const router = Router()
 
 
