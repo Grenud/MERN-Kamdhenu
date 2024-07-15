@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { IoIosMenu, IoMdClose, IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import {
+  IoIosMenu,
+  IoMdClose,
+  IoIosArrowUp,
+  IoIosArrowDown,
+} from "react-icons/io";
 import { motion } from "framer-motion";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
@@ -97,7 +102,9 @@ function Navbar() {
               />
             </div>
           </div>
-          <ul className={`hidden md:flex text-white gap-10 ml-auto items-center mr-10`}>
+          <ul
+            className={`hidden md:flex text-white gap-10 ml-auto items-center mr-10`}
+          >
             {links.map((link, index) => (
               <li key={index} className="group relative">
                 <Link to={link.to} className="text-xl font-bold">
@@ -107,9 +114,18 @@ function Navbar() {
               </li>
             ))}
 
-            <li className="group relative" onClick={() => setServiceDropdown(!serviceDropdown)} ref={serviceRef}>
+            <li
+              className="group relative"
+              onClick={() => setServiceDropdown(!serviceDropdown)}
+              ref={serviceRef}
+            >
               <div className="flex text-base md:text-xl font-bold cursor-pointer">
-                Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
+                Services{" "}
+                {serviceDropdown ? (
+                  <IoIosArrowUp className="m-1" />
+                ) : (
+                  <IoIosArrowDown className="m-1" />
+                )}
               </div>
               {serviceDropdown && (
                 <motion.div
@@ -134,9 +150,18 @@ function Navbar() {
               <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
             </li>
 
-            <li className="group relative" onClick={() => setAboutDropdown(!aboutDropdown)} ref={aboutRef}>
+            <li
+              className="group relative"
+              onClick={() => setAboutDropdown(!aboutDropdown)}
+              ref={aboutRef}
+            >
               <div className="flex text-base md:text-xl font-bold cursor-pointer">
-                About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
+                About{" "}
+                {aboutDropdown ? (
+                  <IoIosArrowUp className="m-1" />
+                ) : (
+                  <IoIosArrowDown className="m-1" />
+                )}
               </div>
               {aboutDropdown && (
                 <motion.div
@@ -161,9 +186,15 @@ function Navbar() {
               <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
             </li>
 
-            <Link to={'/cart'} className="flex gap-2 items-center justify-center cursor-pointer">
+            <Link
+              to={"/cart"}
+              className="flex gap-2 items-center justify-center cursor-pointer"
+            >
               <div className=" font-semibold">&#8377; 0.00</div>
-              <MdOutlineShoppingBag className="hover:text-light duration-300" size={25} />
+              <MdOutlineShoppingBag
+                className="hover:text-light duration-300"
+                size={25}
+              />
             </Link>
             <Link to="/profile" className="font-semibold cursor-pointer ">
               <GoPerson className="hover:text-light duration-300" size={25} />
@@ -205,8 +236,16 @@ function Navbar() {
               </motion.li>
             ))}
             <motion.li variants={itemVariants} className="p-4">
-              <div className="cursor-pointer flex" onClick={() => setServiceDropdown(!serviceDropdown)}>
-                Services {serviceDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
+              <div
+                className="cursor-pointer flex"
+                onClick={() => setServiceDropdown(!serviceDropdown)}
+              >
+                Services{" "}
+                {serviceDropdown ? (
+                  <IoIosArrowUp className="m-1" />
+                ) : (
+                  <IoIosArrowDown className="m-1" />
+                )}
               </div>
               {serviceDropdown && (
                 <motion.ul
@@ -230,8 +269,16 @@ function Navbar() {
               )}
             </motion.li>
             <motion.li variants={itemVariants} className="p-4">
-              <div className="cursor-pointer flex" onClick={() => setAboutDropdown(!aboutDropdown)}>
-                About {aboutDropdown ? <IoIosArrowUp className='m-1' /> : <IoIosArrowDown className='m-1' />}
+              <div
+                className="cursor-pointer flex"
+                onClick={() => setAboutDropdown(!aboutDropdown)}
+              >
+                About{" "}
+                {aboutDropdown ? (
+                  <IoIosArrowUp className="m-1" />
+                ) : (
+                  <IoIosArrowDown className="m-1" />
+                )}
               </div>
               {aboutDropdown && (
                 <motion.ul
