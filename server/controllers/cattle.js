@@ -50,3 +50,19 @@ export const getCattle = async (req, res) => {
     res.status(500).json({ error: "Database error" });
   }
 };
+
+
+export const getCattleById = async (req,res) => {
+  const id = await req.params.id;
+  try {
+    const result = await poolDb.query(`SELECT * FROM bayavasfdc.cattle__c WHERE id=${id}`);
+    if(result){
+      res.json(result)
+    }else{
+      res.status(400).json("data not found")
+    }
+  } catch (error) {
+    res.status(500).json('Server error')
+    console.log(error.message)
+  }
+}
