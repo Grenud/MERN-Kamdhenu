@@ -8,6 +8,9 @@ const PORT = process.env.PORT;
 
 app.use(cors())
 app.use('/api/v1/cattle',cattleRoute)
+app.use('/',(req,res)=>{
+    res.send("server is responding....")
+})
 
 
 app.listen(PORT,()=>{
