@@ -1,6 +1,9 @@
 import express from 'express'
 import cattleRoute from '../routes/cattle.routes.js'
+import cors from 'cors'
 const router = express.Router()
+
+router.use(cors())
 
 router.use('/cattle',cattleRoute)
 router.use('/',(req,res)=>{

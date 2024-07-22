@@ -1,13 +1,12 @@
 import express from 'express'
-import dontenv from 'dotenv'
-import cattleRoute from './routes/cattle.routes.js'
+import dotenv from 'dotenv'
 import cors from 'cors'
 import api from './api/index.js'
-dontenv.config()
 export const app = express()
+app.use(cors())
+dotenv.config()
 const PORT = process.env.PORT;
 
-app.use(cors())
 app.use('/api/v1',api)
 
 
