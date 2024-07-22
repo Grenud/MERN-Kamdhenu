@@ -8,6 +8,7 @@ import dummyCow from '../assets/cowcover4.png'
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 function AdoptGaumata() {
+  console.log(API_KEY)
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [gender, setGender] = useState("");
@@ -85,7 +86,7 @@ function AdoptGaumata() {
         Adopt Gaumatas
       </h1>
       {!loading ? <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((item) => (
+        {items.length>0 && items?.map((item) => (
           <CowCard imgSrc={"https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} name={item.name} key={item.id} id={item.id} />
         ))}
       </section> : <Loading/>}
