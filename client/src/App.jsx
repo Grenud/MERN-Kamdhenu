@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
 import AboutProject from "./pages/AboutProject.jsx";
@@ -35,7 +34,7 @@ function App() {
       <Route path="/gallery" element={<Gallery />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/shraddha-gaumata" element={<CowCardPage />} />
+      <Route path="/gaumata/:id" element={<CowCardPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

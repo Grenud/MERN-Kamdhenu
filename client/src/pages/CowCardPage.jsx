@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Gaumata from "../assets/Gaumata1.jpeg";
 import Button from "../component/Button";
 import { memberShipStatus } from "../data/tableData";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 function CowCardPage() {
+  let {id} = useParams()
+  console.log(id)
   const [showTable, setShowTable] = useState(true);
+  const [resp,setResp] = useState({})
 
   const handleDescriptionClick = () => {
     setShowTable(true);
@@ -14,12 +20,41 @@ function CowCardPage() {
     setShowTable(false);
   };
 
+  const fetchGaumataData = async () => {
+    try {
+      const res = await axios.get(`${API_KEY}/cattle/get-cattle/${id}`)
+      if(res){ 
+        setResp(res.data.rows[0])
+      }else{
+        setResp(null)
+      }
+      
+    } catch (error) {
+      setResp(null)
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    fetchGaumataData();
+  },[id])
+
   return (
     <div className="main-container">
       <h1 className="font-bold text-black text-4xl mt-20 mb-12">
         Help us to Care Shraddha Gaumata
       </h1>
-      <img src={Gaumata} className="w-100 mx-auto object-cover" alt="Gaumata" />
+      <img src={"https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} className="w-full mx-auto object-cover" alt="Gaumata" />
+      {/* Details */}
+      <section className="flex flex-col gap-2 my-4">
+        <h3 className="text-xl font-semibold tracking-wider">Name : {resp.name  || "No data found"}</h3>
+        <h3>Gender : {resp.gender__c  || "No data found"}</h3>
+        <h3>Adoption Status : {resp.adoption_status__c  || "No data found"}</h3>
+        <h3>Age : {resp.age__c || "No data found"}</h3>
+        <h3>Sick : {resp.sick__c ? "Sicked" : "Not Sicked"}</h3>
+        <h3>Status : {resp.status || "No data found"}</h3>
+        <h3>Is old : {resp.old__c ? "Yes" : "No"}</h3>
+      </section>
+      {/* Details */}
       <Button btnText={"Donate Now"} className="mt-5" />
 
       <div className="flex justify-start mt-20 space-x-8">

@@ -1,6 +1,9 @@
-function CowCard({ imgSrc }) {
+import { Link } from "react-router-dom";
+
+function CowCard({ imgSrc , id , name}) {
   return (
     <section className="bg-light text-neutral-800 rounded-lg overflow-hidden p-2  flex flex-col gap-2">
+      <Link to={`/gaumata/${id}`}>
       <figure className="overflow-hidden duration-300">
         <img
           src={imgSrc}
@@ -8,6 +11,8 @@ function CowCard({ imgSrc }) {
           className="hover:scale-105 duration-300"
         />
       </figure>
+      </Link>
+      <h2 className="text-lg font-semibold tracking-wider">{name}</h2>
       <h2 className="font-semibold tracking-wide text-xl">
         Help us to Care Sharaddha Gaumata
       </h2>
