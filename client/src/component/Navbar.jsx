@@ -262,6 +262,11 @@ function Navbar() {
                   <GoPerson size={25} />
                 </Link>
               </motion.li>
+              <Link to="/donate" onClick={handleMobileLinkClick}>
+                <button className="bg-[rgb(109,144,81)] text-white px-8 py-1 rounded-3xl">
+                  Donate
+                </button>
+              </Link>
             </motion.ul>
           </div>
 
