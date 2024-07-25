@@ -25,17 +25,18 @@ function Slider({ bottomRef }) {
       {/* Image Slider Section */}
       <div className="relative overflow-hidden w-full mt-[15vh]">
         <div
-          className="flex transition-transform duration-500 h-[85vh]"
+          className="flex transition-transform duration-500"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {coverImageData.map((item, index) => (
-            <div key={index} className="min-w-full relative">
+            <div key={index} className="flex-shrink-0 w-full relative">
               <img
                 src={item.image}
                 className="w-full h-full object-cover"
+                style={{ maxHeight: "85vh", objectPosition: "center top" }}
                 alt={item.altText}
               />
-              <div className="absolute top-0 left-0 bg-black opacity-30 w-full h-[85vh]"></div>
+              <div className="absolute top-0 left-0 bg-black opacity-30 w-full h-full"></div>
               <div className="absolute inset-0 flex flex-col items-start ml-[20px] md:ml-[50px] justify-center top-[15%] text-gray-300 text-center">
                 <h1 className="text-4xl md:text-5xl font-bold mb-2 tracking-wide">
                   {item.heading}
