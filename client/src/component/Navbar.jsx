@@ -388,30 +388,6 @@ function Navbar() {
                 )}
               </div>
 
-              {aboutDropdown && (
-                <motion.ul
-                  variants={staggerVariants}
-                  initial="closed"
-                  animate="open"
-                  className="pl-4 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden "
-                >
-                  {aboutLinks.map((link, index) => (
-                    <motion.li
-                      key={index}
-                      variants={itemVariants}
-                      className="py-2"
-                    >
-                      <Link to={link.to} onClick={() => setToggle(false)}>
-                        {link.label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              )}
-            </motion.li>
-          </motion.ul>
-
-
               {/* Cart and Profile */}
               <Link
                 to={"/cart"}
@@ -436,7 +412,6 @@ function Navbar() {
               </Link>
             </div>
           </motion.div>
-
         </div>
       )}
     </>
