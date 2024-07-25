@@ -285,7 +285,7 @@ function Navbar() {
                   variants={staggerVariants}
                   initial="closed"
                   animate="open"
-                  className="pl-4 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden"
+                  className="pl-4 bg-green-800 transition-all text-white duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden "
                 >
                   {aboutLinks.map((link, index) => (
                     <motion.li
