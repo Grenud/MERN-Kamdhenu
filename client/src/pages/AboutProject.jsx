@@ -1,15 +1,16 @@
 import cowSeva from "../assets/Cowseva.png";
 import cowSevaPerson from "../assets/CowsevaP.png";
 import Button from "../component/Button";
+
 function AboutProject() {
   return (
     <section className="main-container">
       <h1 className="text-3xl font-bold tracking-wider mb-2">About</h1>
-      <figure className="w-full h-64 object-cover">
+      <figure className="w-full">
         <img
           src={cowSeva}
           alt="cow-seva-cover-image"
-          className="w-full h-full object-cover rounded-lg"
+          className="w-full h-auto object-cover rounded-lg"
         />
       </figure>
       <p className="my-2 text-neutral-600">
@@ -49,13 +50,17 @@ function AboutProject() {
             communicates and generously shares its love with people.
           </p>
         </div>
-        <figure>
-          <img src={cowSevaPerson} alt="cow-seva-person" />
+        <figure className="w-full lg:w-1/2">
+          <img
+            src={cowSevaPerson}
+            alt="cow-seva-person"
+            className="w-full h-auto object-cover rounded-lg"
+          />
         </figure>
       </section>
       <Button
         btnText={"ADOPT A COW"}
-        className="w-72 font-semibold bg-accent1 hover:bg-accent2 text-light duration-300 my-4"
+        className="w-60 md:w-72  font-semibold bg-accent1 hover:bg-accent2 text-light duration-300 my-4"
       />
     </section>
   );

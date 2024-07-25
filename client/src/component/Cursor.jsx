@@ -21,8 +21,8 @@ function Cursor() {
 
   return (
     <div>
-      <div className='cursor h-6 w-6 bg-[#95C11E] fixed rounded-full z-50 transition-all duration-100'></div>
-      <div className='cursor-blur h-40 w-40 bg-[#96c11e41] rounded-full fixed filter blur-lg z-40 transition-all'></div>
+      <div className='cursor h-6 w-6 bg-[#95C11E] fixed rounded-full z-50 transition-all duration-100 hidden lg:block'></div>
+      <div className='cursor-blur h-40 w-40 bg-[#96c11e41] rounded-full fixed filter blur-lg z-40 transition-all hidden lg:block'></div>
     </div>
   );
 }

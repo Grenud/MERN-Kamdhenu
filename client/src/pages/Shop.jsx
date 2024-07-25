@@ -5,7 +5,7 @@ function Shop() {
     <main className="main-container">
       <section className="w-full flex items-center justify-between my-5">
         <p className="text-muted">Showing the result</p>
-        <select className="py-2 px-4 bg-accent1 text-light rounded-md">
+        <select className="py-2 px-4 w-56 bg-accent1 text-light rounded-md">
           <option value={"default sorting"}>Default sorting</option>
           <option value={"sort-by-popularity"}>Sort by Popularity</option>
           <option value={"sort-by-average-rating"}>
