@@ -24,7 +24,7 @@ function AdoptGaumata() {
   const fetchItems = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`${API_KEY}/cattle/get-cattle`, {
+      const response = await axios.get(`${API_KEY}/api/cattle/get-cattle`, {
         params: {
           page,
           limit,

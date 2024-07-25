@@ -22,7 +22,7 @@ function CowCardPage() {
 
   const fetchGaumataData = async () => {
     try {
-      const res = await axios.get(`${API_KEY}/cattle/get-cattle/${id}`)
+      const res = await axios.get(`${API_KEY}/api/cattle/get-cattle/${id}`)
       if(res){ 
         setResp(res.data.rows[0])
       }else{
