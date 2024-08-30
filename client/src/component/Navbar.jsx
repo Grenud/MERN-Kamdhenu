@@ -130,11 +130,11 @@ function Navbar() {
     <>
       {/* Desktop Navbar */}
       <div
-        className={`bg-green-800 p-2 h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
+        className={`bg-green-800 p-2 h-[12vh] md:h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
           scrollUp ? "" : "-translate-y-full"
         }`}
       >
-        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto h-[15vh]">
+        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto md:h-[15vh]">
           {/* Logo */}
           <div className="flex items-center">
             <div className="w-14 h-[9vh] rounded-full overflow-hidden md:ml-5">
@@ -147,7 +147,7 @@ function Navbar() {
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex text-white gap-10 ml-auto items-center mr-10">
+          <div className="hidden md:flex text-white gap-10  items-center mx-auto">
             <motion.ul
               variants={listVariants}
               initial="closed"
@@ -187,7 +187,7 @@ function Navbar() {
                     variants={listVariants}
                     initial="closed"
                     animate="open"
-                    className="absolute top-10 left-0 w-40 bg-white shadow-md shadow-gray-400 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
+                    className="absolute top-10 left-0 w-40 bg-white shadow-sm shadow-gray-200 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
                   >
                     {serviceLinks.map((link, index) => (
                       <motion.div
@@ -225,7 +225,7 @@ function Navbar() {
                     variants={listVariants}
                     initial="closed"
                     animate="open"
-                    className="absolute top-10 left-0 w-52 bg-white shadow-md shadow-gray-400 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
+                    className="absolute top-10 left-0 w-52 bg-white shadow-sm shadow-gray-200 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
                   >
                     {aboutLinks.map((link, index) => (
                       <motion.div
@@ -275,12 +275,12 @@ function Navbar() {
             {toggle ? (
               <IoMdClose
                 onClick={() => setToggle(!toggle)}
-                className="w-10 h-10 bg-transparent text-white "
+                className="w-8 h-8 bg-transparent text-white "
               />
             ) : (
               <IoIosMenu
                 onClick={() => setToggle(!toggle)}
-                className="w-10 h-10 bg-transparent text-white "
+                className="w-8 h-8 bg-transparent text-white "
               />
             )}
           </div>
