@@ -111,10 +111,10 @@ function Navbar() {
   }, [scrollY]);
 
   const handleMobileDropdown = (type) => {
-    if (type === 'service') {
+    if (type === "service") {
       setMobileServiceDropdown(!mobileServiceDropdown);
       setMobileAboutDropdown(false);
-    } else if (type === 'about') {
+    } else if (type === "about") {
       setMobileAboutDropdown(!mobileAboutDropdown);
       setMobileServiceDropdown(false);
     }
@@ -130,11 +130,11 @@ function Navbar() {
     <>
       {/* Desktop Navbar */}
       <div
-        className={`bg-green-800 p-2 h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
+        className={`bg-green-800 p-2 h-[12vh] md:h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
           scrollUp ? "" : "-translate-y-full"
         }`}
       >
-        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto h-[15vh]">
+        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto md:h-[15vh]">
           {/* Logo */}
           <div className="flex items-center">
             <div className="w-14 h-[9vh] rounded-full overflow-hidden md:ml-5">
@@ -147,7 +147,7 @@ function Navbar() {
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex text-white gap-10 ml-auto items-center mr-10">
+          <div className="hidden md:flex text-white gap-10 items-center mx-auto">
             <motion.ul
               variants={listVariants}
               initial="closed"
@@ -175,7 +175,7 @@ function Navbar() {
                 variants={itemVariants}
               >
                 <div className="flex text-base md:text-xl font-bold cursor-pointer">
-                  Services{" "}
+                  Services
                   {serviceDropdown ? (
                     <IoIosArrowUp className="m-1" />
                   ) : (
@@ -187,7 +187,7 @@ function Navbar() {
                     variants={listVariants}
                     initial="closed"
                     animate="open"
-                    className="absolute top-10 left-0 w-40 bg-white shadow-md shadow-gray-400 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
+                    className="absolute top-10 left-0 w-40 bg-white shadow-sm shadow-gray-200 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
                   >
                     {serviceLinks.map((link, index) => (
                       <motion.div
@@ -213,7 +213,7 @@ function Navbar() {
                 variants={itemVariants}
               >
                 <div className="flex text-base md:text-xl font-bold cursor-pointer">
-                  About{" "}
+                  About
                   {aboutDropdown ? (
                     <IoIosArrowUp className="m-1" />
                   ) : (
@@ -225,7 +225,7 @@ function Navbar() {
                     variants={listVariants}
                     initial="closed"
                     animate="open"
-                    className="absolute top-10 left-0 w-52 bg-white shadow-md shadow-gray-400 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
+                    className="absolute top-10 left-0 w-52 bg-white shadow-sm shadow-gray-200 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
                   >
                     {aboutLinks.map((link, index) => (
                       <motion.div
@@ -258,67 +258,51 @@ function Navbar() {
                 variants={itemVariants}
                 className="text-xl cursor-pointer"
               >
-                <Link to="/profile">
-                  <GoPerson size={25} />
+                <Link to={"/my-account"} className="flex items-center gap-2">
+                  <GoPerson size={25} /> My Account
                 </Link>
               </motion.li>
-              <Link to="/donate" onClick={handleMobileLinkClick}>
-                <button className="bg-[rgb(109,144,81)] text-white px-8 py-1 rounded-3xl">
-                  Donate
-                </button>
-              </Link>
             </motion.ul>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center ml-auto">
-            {toggle ? (
-              <IoMdClose
-                onClick={() => setToggle(!toggle)}
-                className="w-10 h-10 bg-transparent text-white "
-              />
-            ) : (
-              <IoIosMenu
-                onClick={() => setToggle(!toggle)}
-                className="w-10 h-10 bg-transparent text-white "
-              />
-            )}
+          {/* Hamburger Menu for Mobile */}
+          <div
+            className="text-white cursor-pointer text-3xl md:hidden"
+            onClick={() => setToggle(!toggle)}
+          >
+            {toggle ? <IoMdClose /> : <IoIosMenu />}
           </div>
         </div>
       </div>
 
-      {/* Mobile Navbar */}
+      {/* Mobile Dropdown Menu */}
       {toggle && (
-        <div className="md:hidden duration-300 fixed top-0 left-0 w-3/4 h-screen bg-white z-40">
-          <motion.div
-            initial={{ x: -100 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col items-start p-4 mt-3 gap-8 pt-24 text-gray-800 text-lg"
-          >
+        <motion.div
+          variants={navVariants}
+          initial="closed"
+          animate="open"
+          className="fixed top-[10vh] left-0 w-full h-[90vh] bg-green-800 text-white z-40 overflow-auto"
+        >
+          <ul className="flex flex-col gap-6 py-10">
             {links.map((link, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-xl"
-              >
+              <li key={index} className="px-4">
                 <Link
                   to={link.to}
+                  className="text-xl font-bold"
                   onClick={handleMobileLinkClick}
                 >
                   {link.label}
                 </Link>
-              </motion.div>
+              </li>
             ))}
 
-            <div className="flex flex-col items-start gap-4">
-              {/* Mobile Services Dropdown */}
-              <div
+            <li className="px-4 text-xl font-semibold">
+            <div
                 className="flex flex-col items-start cursor-pointer"
                 onClick={() => handleMobileDropdown('service')}
               >
-                <div className="flex items-center text-xl">
-                  Services{" "}
+                <div className="flex items-center font-bold text-xl">
+                  Services
                   {mobileServiceDropdown ? (
                     <IoIosArrowUp className="ml-1" />
                   ) : (
@@ -330,7 +314,7 @@ function Navbar() {
                     variants={listVariants}
                     initial="closed"
                     animate="open"
-                    className="flex flex-col gap-2 text-start bg-green-800 shadow-lg shadow-gray-800 p-4 text-white py-2 rounded-se-3xl rounded-es-3xl"
+                    className="flex flex-col gap-2 text-start bg-white shadow-lg shadow-gray-800 p-4 text-black py-2 rounded-se-3xl rounded-es-3xl"
                   >
                     {serviceLinks.map((link, index) => (
                       <motion.div
@@ -349,70 +333,76 @@ function Navbar() {
                   </motion.div>
                 )}
               </div>
+             
+            </li>
 
-              {/* Mobile About Dropdown */}
+            <li className="px-4 text-xl font-semibold">
               <div
-                className="flex flex-col items-start mt-4 cursor-pointer"
-                onClick={() => handleMobileDropdown('about')}
+                 className="flex flex-col items-start cursor-pointer"
+                onClick={() => handleMobileDropdown("about")}
               >
-                <div className="flex items-center text-xl">
-                  About{" "}
-                  {mobileAboutDropdown ? (
-                    <IoIosArrowUp className="ml-1" />
-                  ) : (
-                    <IoIosArrowDown className="ml-1" />
-                  )}
+              <div className="flex items-center font-bold text-xl">
+                About
+                {mobileAboutDropdown ? (
+                  <IoIosArrowUp className="m-1" />
+                ) : (
+                  <IoIosArrowDown className="m-1" />
+                )}
                 </div>
-                {mobileAboutDropdown && (
-                  <motion.div
+              
+              {mobileAboutDropdown && (
+                <motion.div
                     variants={listVariants}
                     initial="closed"
                     animate="open"
-                    className="flex flex-col gap-2 text-start bg-green-800 shadow-lg shadow-gray-800 p-4 text-white py-2 rounded-se-3xl rounded-es-3xl"
+                    className="flex flex-col gap-2 text-start bg-white shadow-lg shadow-gray-800 p-4 text-black py-2 rounded-se-3xl rounded-es-3xl"
                   >
-                    {aboutLinks.map((link, index) => (
-                      <motion.div
+                
+                  {aboutLinks.map((link, index) => (
+                       
+                    <motion.div
                         key={index}
                         variants={itemVariants}
                         className="text-base"
                       >
-                        <Link
-                          to={link.to}
-                          onClick={handleMobileLinkClick}
-                        >
-                          {link.label}
-                        </Link>
-                      </motion.div>
-                    ))}
+                      <Link
+                        to={link.to}
+                        onClick={handleMobileLinkClick}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
                   </motion.div>
-                )}
+               
+              )}
               </div>
 
-              {/* Cart and Profile */}
+            </li>
+
+            {/* Cart */}
+            <li className="px-4 text-xl">
               <Link
                 to={"/cart"}
+                className="flex items-center gap-2"
                 onClick={handleMobileLinkClick}
-                className="flex items-center gap-2 mt-4 text-xl"
               >
                 <MdOutlineShoppingBag size={25} /> &#8377; 0.00
               </Link>
-              <Link
-                to="/profile"
-                onClick={handleMobileLinkClick}
-                className="text-xl mt-4"
-              >
-                <GoPerson size={25} />
-              </Link>
+            </li>
 
-              {/* Donate Button */}
-              <Link to="/donate" onClick={handleMobileLinkClick}>
-                <button className="bg-[rgb(109,144,81)] text-white px-8 py-1 mt-4 rounded-3xl">
-                  Donate
-                </button>
+            {/* Profile */}
+            <li className="px-4 text-xl">
+              <Link
+                to={"/my-account"}
+                className="flex items-center gap-2"
+                onClick={handleMobileLinkClick}
+              >
+                <GoPerson size={25} /> My Account
               </Link>
-            </div>
-          </motion.div>
-        </div>
+            </li>
+          </ul>
+        </motion.div>
       )}
     </>
   );
