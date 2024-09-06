@@ -24,7 +24,7 @@ const serviceLinks = [
 
 const aboutLinks = [
   { to: "/about-project", label: "About Project" },
-  { to: "/adopt-gaumata", label: "About Gaumata" },
+  { to: "/adopt-gaumata", label: "Adopt Gaumata" },
   { to: "/cow-puja", label: "Cow Puja" },
   { to: "/veda-cow", label: "Veda About Cow" },
   { to: "/spiritual-importance", label: "Spiritual Importance" },
