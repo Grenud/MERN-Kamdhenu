@@ -1,68 +1,80 @@
-import { useEffect, useState } from "react";
-import Gaumata from "../assets/Gaumata1.jpeg";
-import Button from "../component/Button";
-import { memberShipStatus } from "../data/tableData";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import DonateNow from "../component/DonateNow";
+import { memberShipStatus } from "../data/tableData";
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 function CowCardPage() {
-  let {id} = useParams()
-  console.log(id)
+  const { id } = useParams();
   const [showTable, setShowTable] = useState(true);
-  const [resp,setResp] = useState({})
-
-  const handleDescriptionClick = () => {
-    setShowTable(true);
-  };
-
-  const handleDonorsClick = () => {
-    setShowTable(false);
-  };
+  const [resp, setResp] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const fetchGaumataData = async () => {
     try {
-      const res = await axios.get(`${API_KEY}/api/cattle/get-cattle/${id}`)
-      if(res){ 
-        setResp(res.data.rows[0])
-      }else{
-        setResp(null)
+      const res = await axios.get(`${API_KEY}/api/cattle/get-cattle/${id}`);
+      if (res) {
+        setResp(res.data.rows[0]);
+      } else {
+        setResp(null);
       }
-      
     } catch (error) {
-      setResp(null)
-      console.log(error)
+      setResp(null);
+      console.log(error);
     }
-  }
-  useEffect(()=>{
+  };
+
+  useEffect(() => {
     fetchGaumataData();
-  },[id])
+  }, [id]);
 
   return (
     <div className="main-container">
       <h1 className="font-bold text-black text-4xl mt-20 mb-12">
         Help us to Care Shraddha Gaumata
       </h1>
-      <img src={"https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} className="w-full mx-auto object-cover" alt="Gaumata" />
+      <img
+        src={
+          resp.image_1__c ||
+          "https://images.pexels.com/photos/457447/pexels-photo-457447.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        }
+        className="w-full mx-auto object-cover"
+        alt="Gaumata"
+      />
+
       {/* Details */}
       <section className="flex flex-col gap-2 my-4">
-        <h3 className="text-xl font-semibold tracking-wider">Name : {resp.name  || "No data found"}</h3>
-        <h3>Gender : {resp.gender__c  || "No data found"}</h3>
-        <h3>Adoption Status : {resp.adoption_status__c  || "No data found"}</h3>
+        <h3 className="text-xl font-semibold tracking-wider">
+          Name : {resp.name || "No data found"}
+        </h3>
+        <h3>Gender : {resp.gender__c || "No data found"}</h3>
+        <h3>Adoption Status : {resp.adoption_status__c || "No data found"}</h3>
         <h3>Age : {resp.age__c || "No data found"}</h3>
         <h3>Sick : {resp.sick__c ? "Sicked" : "Not Sicked"}</h3>
         <h3>Status : {resp.status || "No data found"}</h3>
         <h3>Is old : {resp.old__c ? "Yes" : "No"}</h3>
       </section>
-      {/* Details */}
-      <Button btnText={"Donate Now"} className="mt-5" />
+
+      {/* Donate Button that triggers modal */}
+      <button
+        onClick={() => setShowModal(true)}
+        className="text-light bg-secondary w-32 h-10 rounded-full flex justify-center items-center"
+      >
+        Donate Now
+      </button>
+
+      
+      {/* Modal */}
+      <DonateNow showModal={showModal} closeModal={() => setShowModal(false)} />
 
       <div className="flex justify-start mt-20 space-x-8">
         <div className="relative group">
           <a
             href="#description"
             className="text-lg text-black"
-            onClick={handleDescriptionClick}
+            onClick={() => setShowTable(true)}
           >
             DESCRIPTION
           </a>
@@ -72,7 +84,7 @@ function CowCardPage() {
           <a
             href="#donors"
             className="text-lg text-black"
-            onClick={handleDonorsClick}
+            onClick={() => setShowTable(false)}
           >
             DONORS <span className="text-gray-500">(0)</span>
           </a>
@@ -127,6 +139,7 @@ function CowCardPage() {
       ) : (
         <div className="my-10">No data to display</div>
       )}
+
     </div>
   );
 }
