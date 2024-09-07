@@ -16,7 +16,7 @@ function AboutDevraha() {
           onClick={openModal}
           className="bg-[#6d9051] text-white hidden sm:inline-block px-8 py-1 rounded-3xl md:mr-14"
         >
-          Donate
+          Donate Now
         </button>
       </div>
 

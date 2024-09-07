@@ -4,11 +4,11 @@ import MembershipTable from "../component/MembershipTable";
 import { Link } from "react-router-dom";
 function JoinMission() {
   return (
-    <main className="main-container flex flex-col gap-5">
-      <figure>
-        <img src={ashramCover} alt="ashram-cover-image" />
+    <main className="main-container flex flex-col p-4 lg:p-12 gap-5 mt-0  md:mt-14">
+      <figure className="relative">
+        <img src={ashramCover} alt="ashram-cover-image"  className="w-full h-full object-cover rounded-lg shadow-xl"/>
       </figure>
-      <p className="text-neutral-500">
+      <p className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-5xl mx-auto">
         You can become the guardian of one or more cows, her (their) friend,
         visit her (them) in the ashram of Sri Devraha Baba or receive news about
         her (them) remotely. You can also become just a happy donator and the
@@ -16,9 +16,18 @@ function JoinMission() {
         friends of our Goshala cows always receive special blessings from Guruji
         Mahatma Sri Devdas Ji Maharaj.
       </p>
-      <section className="w-full">
-        <div className="lg:grid grid-cols-5 gap-8 lg:gap-2 ">
-          <p className="col-span-3 text-neutral-500">
+      <section className="w-full md:max-w-4xl md:mx-auto">
+      <div className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl">
+          {/* Image */}
+          <figure className="w-full mb-6">
+            <img
+              src={krishna5}
+              alt="Krishna image"
+              className="w-full h-auto object-cover rounded-lg shadow-xl"
+            />
+          </figure>
+        <div>
+          <p className="text-neutral-500">
             In the Sri Devraha Baba Ashram goshala the mother cows receive full,
             balanced and high-quality nutrition, care, and most importantly –
             the love of caring people who came to the goshala from a calling in
@@ -41,9 +50,7 @@ function JoinMission() {
             full-fledged inhabitants of the Ashram of Sri Devraha Baba, who are
             under His direct protection.
           </p>
-          <figure className="col-span-2">
-            <img src={krishna5} alt="" />
-          </figure>
+        </div>
         </div>
         <div className="flex flex-col gap-4 mt-4">
         <p>
