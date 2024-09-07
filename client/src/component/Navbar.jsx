@@ -7,7 +7,6 @@ import {
   IoIosArrowDown,
 } from "react-icons/io";
 import { motion } from "framer-motion";
-import { MdOutlineShoppingBag } from "react-icons/md";
 import { GoPerson } from "react-icons/go";
 
 const links = [
@@ -70,9 +69,24 @@ const listVariants = {
 };
 
 const itemVariants = {
-  open: { opacity: 1, y: 0 },
-  closed: { opacity: 0, y: -10 },
+  open: {
+    opacity: 1,
+    maxHeight: "500px", 
+    transition: {
+      opacity: { duration: 0.3 },
+      maxHeight: { duration: 0.3, ease: "easeOut" },
+    },
+  },
+  closed: {
+    opacity: 0,
+    maxHeight: 0,
+    transition: {
+      opacity: { duration: 0.3 },
+      maxHeight: { duration: 0.3, ease: "easeIn" },
+    },
+  },
 };
+
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -130,42 +144,41 @@ function Navbar() {
     <>
       {/* Desktop Navbar */}
       <div
-        className={`bg-green-800 p-2 h-[12vh] md:h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
-          scrollUp ? "" : "-translate-y-full"
-        }`}
-      >
-        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto md:h-[15vh]">
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="w-14 h-[9vh] rounded-full overflow-hidden md:ml-5">
-              <img
-                src="https://kamdhenuseva.com/wp-content/uploads/2021/05/Untitled-design-4.png"
-                className="w-full h-full object-cover"
-                alt="Logo"
-              />
-            </div>
-          </div>
+  className={`bg-green-800 p-2 h-[12vh] md:h-[15vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
+    scrollUp ? "" : "-translate-y-full"
+  }`}
+>
+         <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[15px] mx-auto md:h-[15vh]">
+    {/* Logo */}
+    <div className="flex items-center">
+      <div className="w-12 h-12 md:w-14 md:h-14 sm:w-10 sm:h-10 lg:w-16 lg:h-16 rounded-full overflow-hidden">
+        {/* Adjust logo size for responsiveness */}
+        <img
+          src="https://kamdhenuseva.com/wp-content/uploads/2021/05/Untitled-design-4.png"
+          className="w-full h-full object-cover"
+          alt="Logo"
+        />
+      </div>
+      </div>
 
+
+         
           {/* Desktop Links */}
           <div className="hidden md:flex text-white gap-10 items-center mx-auto">
-            <motion.ul
-              variants={listVariants}
-              initial="closed"
-              animate="open"
-              className="flex gap-10 items-center"
-            >
-              {links.map((link, index) => (
-                <motion.li
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative"
-                >
-                  <Link to={link.to} className="text-xl font-bold">
-                    {link.label}
-                  </Link>
-                  <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
-                </motion.li>
-              ))}
+      <motion.ul
+        variants={listVariants}
+        initial="closed"
+        animate="open"
+        className="flex gap-10 items-center"
+      >
+        {links.map((link, index) => (
+          <motion.li key={index} variants={itemVariants} className="group relative">
+            <Link to={link.to} className="text-lg md:text-xl font-bold">
+              {link.label}
+            </Link>
+            <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 transform -translate-x-1/2 group-hover:w-full"></span>
+          </motion.li>
+        ))}
 
               {/* Services Dropdown */}
               <motion.li
@@ -184,15 +197,14 @@ function Navbar() {
                 </div>
                 {serviceDropdown && (
                   <motion.div
-                    variants={listVariants}
+                    variants={itemVariants}
                     initial="closed"
                     animate="open"
-                    className="absolute top-10 left-0 w-40 bg-white shadow-sm shadow-gray-200 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
+                    className="absolute top-10 left-0 w-40 bg-white shadow-sm shadow-gray-200 text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
                   >
                     {serviceLinks.map((link, index) => (
                       <motion.div
                         key={index}
-                        variants={itemVariants}
                         className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300"
                       >
                         <Link to={link.to} onClick={() => setToggle(false)}>
@@ -202,6 +214,7 @@ function Navbar() {
                     ))}
                   </motion.div>
                 )}
+
                 <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-gray-400 transition-all duration-500 underline-offset-8 transform -translate-x-1/2 group-hover:w-full"></span>
               </motion.li>
 
@@ -222,7 +235,7 @@ function Navbar() {
                 </div>
                 {aboutDropdown && (
                   <motion.div
-                    variants={listVariants}
+                       variants={itemVariants}
                     initial="closed"
                     animate="open"
                     className="absolute top-10 left-0 w-52 bg-white shadow-sm shadow-gray-200 text-black py-2 duration-300 rounded-se-3xl rounded-es-3xl overflow-hidden z-40"
@@ -248,9 +261,14 @@ function Navbar() {
                 variants={itemVariants}
                 className="text-xl cursor-pointer"
               >
-                <Link to={"/cart"} className="flex items-center gap-2">
-                  <MdOutlineShoppingBag size={25} /> &#8377; 0.00
-                </Link>
+                <a
+                  href="https://bayava-shop.vercel.app"
+                  className="flex items-center gap-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Shop
+                </a>
               </motion.li>
 
               {/* Profile */}
@@ -267,13 +285,13 @@ function Navbar() {
 
           {/* Hamburger Menu for Mobile */}
           <div
-            className="text-white cursor-pointer text-3xl md:hidden"
-            onClick={() => setToggle(!toggle)}
-          >
-            {toggle ? <IoMdClose /> : <IoIosMenu />}
-          </div>
-        </div>
-      </div>
+      className="text-white cursor-pointer text-3xl md:hidden"
+      onClick={() => setToggle(!toggle)}
+    >
+      {toggle ? <IoMdClose /> : <IoIosMenu />}
+    </div>
+  </div>
+</div>
 
       {/* Mobile Dropdown Menu */}
       {toggle && (
@@ -297,11 +315,11 @@ function Navbar() {
             ))}
 
             <li className="px-4 text-xl font-semibold">
-            <div
+              <div
                 className="flex flex-col items-start cursor-pointer"
-                onClick={() => handleMobileDropdown('service')}
+                onClick={() => handleMobileDropdown("service")}
               >
-                <div className="flex items-center font-bold text-xl">
+                <div className="flex items-center text-xl">
                   Services
                   {mobileServiceDropdown ? (
                     <IoIosArrowUp className="ml-1" />
@@ -322,10 +340,7 @@ function Navbar() {
                         variants={itemVariants}
                         className="text-base"
                       >
-                        <Link
-                          to={link.to}
-                          onClick={handleMobileLinkClick}
-                        >
+                        <Link to={link.to} onClick={handleMobileLinkClick}>
                           {link.label}
                         </Link>
                       </motion.div>
@@ -333,62 +348,55 @@ function Navbar() {
                   </motion.div>
                 )}
               </div>
-             
             </li>
 
             <li className="px-4 text-xl font-semibold">
               <div
-                 className="flex flex-col items-start cursor-pointer"
+                className="flex flex-col items-start cursor-pointer"
                 onClick={() => handleMobileDropdown("about")}
               >
-              <div className="flex items-center font-bold text-xl">
-                About
-                {mobileAboutDropdown ? (
-                  <IoIosArrowUp className="m-1" />
-                ) : (
-                  <IoIosArrowDown className="m-1" />
-                )}
+                <div className="flex items-center text-xl">
+                  About
+                  {mobileAboutDropdown ? (
+                    <IoIosArrowUp className="m-1" />
+                  ) : (
+                    <IoIosArrowDown className="m-1" />
+                  )}
                 </div>
-              
-              {mobileAboutDropdown && (
-                <motion.div
+
+                {mobileAboutDropdown && (
+                  <motion.div
                     variants={listVariants}
                     initial="closed"
                     animate="open"
                     className="flex flex-col gap-2 text-start bg-white shadow-lg shadow-gray-800 p-4 text-black py-2 rounded-se-3xl rounded-es-3xl"
                   >
-                
-                  {aboutLinks.map((link, index) => (
-                       
-                    <motion.div
+                    {aboutLinks.map((link, index) => (
+                      <motion.div
                         key={index}
                         variants={itemVariants}
                         className="text-base"
                       >
-                      <Link
-                        to={link.to}
-                        onClick={handleMobileLinkClick}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link to={link.to} onClick={handleMobileLinkClick}>
+                          {link.label}
+                        </Link>
+                      </motion.div>
+                    ))}
                   </motion.div>
-               
-              )}
+                )}
               </div>
-
             </li>
 
             {/* Cart */}
             <li className="px-4 text-xl">
-              <Link
-                to={"/cart"}
+              <a
+                href="https://bayava-shop.vercel.app"
                 className="flex items-center gap-2"
-                onClick={handleMobileLinkClick}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <MdOutlineShoppingBag size={25} /> &#8377; 0.00
-              </Link>
+                Shop
+              </a>
             </li>
 
             {/* Profile */}
