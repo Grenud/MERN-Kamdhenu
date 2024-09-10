@@ -1,3 +1,9 @@
+console.log('authLayout is running')
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { SetUser } from '../../redux/AuthSlice';
+import { useNavigate, useLocation } from 'react-router-dom';  // import useLocation
 function AuthLayout({ children }) {
     console.log('AuthLayout component is rendering'); // Debugging log
 
