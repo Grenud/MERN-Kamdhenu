@@ -1,12 +1,8 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { SetUser } from '../../redux/AuthSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
-
 function AuthLayout({ children }) {
+    console.log('AuthLayout component is rendering'); // Debugging log
+
     const navigate = useNavigate();
-    const location = useLocation();  // get the current location
+    const location = useLocation();
     const dispatch = useDispatch();
 
     const fetchUserData = async () => {
@@ -19,7 +15,6 @@ function AuthLayout({ children }) {
                     user: response.data.user
                 }));
             } else {
-                // Handle case when the response is not successful
                 navigate('/login');
             }
         } catch (error) {
@@ -32,8 +27,9 @@ function AuthLayout({ children }) {
     };
 
     useEffect(() => {
-        fetchUserData(); // Fetch data when component mounts
-    }, []);  // Empty array ensures this only runs on component mount
+        console.log('useEffect triggered'); // Log when useEffect triggers
+        fetchUserData();
+    }, []); 
 
     return (
         <>
