@@ -1,15 +1,55 @@
-import React from 'react';
-import cow from '../../assets/cowcover3.png';
-import Button from '../../component/Button';
+import React, { useState, useEffect } from "react";
+import ayurveda from "../../assets/cowcover3.png";
+import { toast } from "react-hot-toast";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import Button from "../../component/Button"; // Assuming Button is the same as in the Register component
 
 export default function SignUp() {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.Auth);
+
+  const handleOnChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post('/api/auth/register', {
+      name: data.name,
+      email: data.email,
+      password: data.password
+    });
+    if (res.data && res.data.success) {
+      toast.success(res.data.message);
+      navigate('/login');
+    } else {
+      toast.error(res.data.message);
+    }
+  };
+
+  useEffect(() => {
+    if (user && user.user && (user.user._id || user.user.id)) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-[#e0d6bf]">
+    <div className="flex min-h-screen items-center justify-center p-4 bg-light">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10">
-      <div
+        <div
           className="w-full md:w-1/2 min-h-[250px] md:h-auto bg-cover bg-center rounded-ts-lg md:rounded-l-lg"
           style={{
-            backgroundImage: `url(${cow})`,
+            backgroundImage: `url(${ayurveda})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -18,64 +58,57 @@ export default function SignUp() {
         <div className="w-full md:w-1/2 flex items-center justify-center p-8">
           <div className="max-w-md w-full space-y-8">
             <h2 className="text-center text-2xl md:text-3xl font-extrabold text-gray-900">
-              Sign Up
+              Create Account
             </h2>
-            <form className="mt-8 space-y-6" action="#" method="POST">
-              <input type="hidden" name="remember" value="true" />
-              <div className="rounded-md shadow-sm -space-y-px">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="phone" className="sr-only">
-                    Enter your phone number
-                  </label>
-                  <input
-                    id="phone"
-                    placeholder="Enter your phone number"
-                    name="phone"
-                    type="tel"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password" className="sr-only">
-                    Enter your password
-                  </label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Enter your password"
-                  />
-                </div>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-2">
+                <label className="font-semibold tracking-wider text-black">
+                  Enter your name
+                </label>
+                <input
+                  placeholder="Name"
+                  name="name"
+                  type="text"
+                  value={data.name}
+                  onChange={handleOnChange}
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                />
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-900"
-                  >
-                    Remember me
-                  </label>
-                </div>
-                <div className="text-sm ml-20">
-                  <a
-                    href="#"
-                    className="font-medium  text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-semibold tracking-wider text-black">
+                  Enter your email
+                </label>
+                <input
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  value={data.email}
+                  onChange={handleOnChange}
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                />
               </div>
-              <div className="flex justify-center">
-                <Button  btnText="Sign Up"  />
+
+              <div className="flex flex-col gap-2">
+                <label className="font-semibold tracking-wider text-black">
+                  Enter your password
+                </label>
+                <input
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  value={data.password}
+                  onChange={handleOnChange}
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                />
+              </div>
+
+              <Button btnText={"Sign Up"} />
+
+              <div className="flex justify-center mt-4">
+                <Link to="/login" className="text-sm text-primary hover:underline">
+                  Already have an account? Login
+                </Link>
               </div>
             </form>
           </div>

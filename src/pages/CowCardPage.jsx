@@ -4,8 +4,6 @@ import axios from "axios";
 import DonateNow from "../component/DonateNow";
 import { memberShipStatus } from "../data/tableData";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
-
 function CowCardPage() {
   const { id } = useParams();
   const [showTable, setShowTable] = useState(true);
@@ -14,7 +12,7 @@ function CowCardPage() {
 
   const fetchGaumataData = async () => {
     try {
-      const res = await axios.get(`${API_KEY}/api/cattle/get-cattle/${id}`);
+      const res = await axios.get(`/api/cattle/get-cattle/${id}`);
       if (res) {
         setResp(res.data.rows[0]);
       } else {

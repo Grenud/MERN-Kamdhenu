@@ -19,11 +19,19 @@ import DonateNow from './component/DonateNow';
 import Login from './pages/Auth/Login';
 import SignUp from './pages/Auth/SignUp';
 import { AuthProvider } from './component/Auth/AuthContext';
+import Navbar from './component/Navbar';
+import ForgotPassword from './pages/Auth/ForgetPassword';
+import ResetPassword from './pages/Auth/ResetPassword';
+import MyAccount from './pages/MyAccount';
+import Footer from './component/Footer';
+import { Toaster } from 'react-hot-toast';
+import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
 
 
 function App() {
   return (
     <AuthProvider>
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about-project" element={<AboutProject />} />
@@ -37,12 +45,28 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/profile" element={<Profile />} />
-      <Route path="/gaumata/:id" element={<CowCardPage />} />
+        <Route path="/gaumata/:id" element={<CowCardPage />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/donate-now" element={<DonateNow />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        {/* Protected Route */}
+        <Route
+          path="/my-account"
+          element={
+            <RedirectUnauthorized>
+              <MyAccount />
+            </RedirectUnauthorized>
+          }
+        />
       </Routes>
+      <Footer />
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
     </AuthProvider>
   );
 }
