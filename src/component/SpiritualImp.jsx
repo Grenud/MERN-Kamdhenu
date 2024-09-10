@@ -46,7 +46,7 @@ function SpiritualImp() {
   };
 
   return (
-    <div className="container mx-auto mt-36 px-4 md:px-0">
+    <div className="container mx-auto mt-24 px-4 md:px-0">
       <p className="mt-8 leading-8 text-justify">
         Hindu religion considers cows as goddesses, as it bestows us with life
         savior milk.

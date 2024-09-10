@@ -14,7 +14,7 @@ function AboutDevraha() {
         <h1 className="text-3xl md:text-4xl font-bold">About Sri Devraha Baba Ashram</h1>
         <button
           onClick={openModal}
-          className="bg-[#6d9051] text-white hidden sm:inline-block px-8 py-1 rounded-3xl md:mr-14"
+          className="bg-[#6d9051] text-white hidden sm:inline-block px-2 lg:px-8 py-1 rounded-3xl md:mr-14"
         >
           Donate Now
         </button>

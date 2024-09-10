@@ -4,16 +4,15 @@ import Button from "../component/Button";
 
 function AboutProject() {
   return (
-    <section className="main-container">
-      <h1 className="text-3xl font-bold tracking-wider mb-2">About</h1>
-      <figure className="w-full">
+    <main className="main-container flex flex-col p-4 lg:p-12 gap-5 mt-0 md:mt-14">
+      <figure className="relative">
         <img
           src={cowSeva}
           alt="cow-seva-cover-image"
-          className="w-full h-auto object-cover rounded-lg"
+          className="w-full h-full object-cover rounded-lg shadow-xl"
         />
       </figure>
-      <p className="my-2 text-neutral-600">
+      <p className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-5xl mx-auto">
         The cow is an amazing divine being who carries the most powerful and
         sublime vibrations of the Universe, the true mother of mankind. She
         feeds her children, her people, with her own milk. From the milk of a
@@ -29,8 +28,17 @@ function AboutProject() {
         basis for the well-being of the family, its health and happiness. And
         from the well-being in families comes the well-being of all mankind.
       </p>
-      <section className="w-full flex flex-col lg:flex-row gap-2 my-5 text-neutral-600 p-2 bg-neutral-100">
-        <div className="flex justify-around flex-col">
+      <section className="w-full md:max-w-4xl md:mx-auto">
+      <div className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl">
+      <figure className="w-4/4 mb-6"> {/* Adjust width as needed */}
+  <img
+    src={cowSevaPerson}
+    alt="cow-seva-person"
+    className="w-full h-full object-cover rounded-lg shadow-xl"
+  />
+</figure>
+
+        <div className="flex flex-col gap-4">
           <p>
             Previously there were more than a hundred breeds of cows in India
             but today there are only 32. The Ashram of Sri Devraha Baba
@@ -50,19 +58,14 @@ function AboutProject() {
             communicates and generously shares its love with people.
           </p>
         </div>
-        <figure className="w-full lg:w-1/2">
-          <img
-            src={cowSevaPerson}
-            alt="cow-seva-person"
-            className="w-full h-auto object-cover rounded-lg"
-          />
-        </figure>
+        </div>
+
       </section>
       <Button
         btnText={"ADOPT A COW"}
-        className="w-60 md:w-72  font-semibold bg-accent1 hover:bg-accent2 text-light duration-300 my-4"
+       className="w-36 lg:ml-32"
       />
-    </section>
+    </main>
   );
 }
 
