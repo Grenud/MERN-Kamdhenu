@@ -8,6 +8,11 @@ import {
   IoIosArrowDown,
 } from "react-icons/io";
 import { GoPerson } from "react-icons/go";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { SetUser } from "../redux/AuthSlice";
 
 const links = [{ to: "/join-mission", label: "Join Mission" }];
 
@@ -36,6 +41,8 @@ function Navbar() {
   const [scrollY, setScrollY] = useState(0);
   const [scrollUp, setScrollUp] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch()
+  const {user} = useSelector((state)=>state.Auth)
 
   const serviceRef = useRef(null);
   const aboutRef = useRef(null);
@@ -48,6 +55,20 @@ function Navbar() {
       setAboutDropdown(false);
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      const {data} = await axios.post('/api/auth/logout')
+      if(data.success){
+        dispatch(SetUser({
+          user:null
+        }))
+        toast.success(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,9 +105,8 @@ function Navbar() {
     <>
       {/* Desktop and Tablet Navbar */}
       <div
-        className={`bg-green-800 p-2 h-[10vh] md:h-[11vh] lg:h-[12vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
-          scrollUp ? "" : "-translate-y-full"
-        }`}
+        className={`bg-green-800 p-2 h-[10vh] md:h-[11vh] lg:h-[12vh] fixed top-0 w-full z-50 transition-transform duration-300 ${scrollUp ? "" : "-translate-y-full"
+          }`}
       >
         <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[10px] mx-auto h-full">
           {/* Logo */}
@@ -180,29 +200,26 @@ function Navbar() {
               <li className="text-lg cursor-pointer">
                 <a
                   href="https://bayava-shop.vercel.app"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 font-bold"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Shop
                 </a>
               </li>
-               
-              <div className="flex items-center justify-between gap-2 lg:ml-10">
-          <Link to={isLoggedIn ? "/signup" : "/login"}>
-            <SmallYellowOutlineButton text="Get Started" />
-          </Link>
-        
-        </div>
-                
-           
 
               {/* Profile */}
-              <li className="text-lg cursor-pointer">
+             {(user.user?._id || user.user?.id || user.user) && <li className="text-lg cursor-pointer font-bold">
                 <Link to={"/my-account"} className="flex items-center gap-2">
-                  <GoPerson size={25} /> My Account
+                  <GoPerson size={30} fontWeight={'bold'} /> My Account
                 </Link>
-              </li>
+              </li>}
+              <div className="flex items-center justify-between gap-2 font-bold">
+                {(user.user?._id || user.user?.id || user.user) ? <button onClick={handleLogout} >Logout</button> : <Link to={isLoggedIn ? "/signup" : "/login"}>
+                  <SmallYellowOutlineButton text="Get Started" />
+                </Link>}
+
+              </div>
             </ul>
           </div>
 
@@ -222,121 +239,120 @@ function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {toggle && (
-     <div className="fixed top-[10vh] left-0 w-full h-[90vh] bg-green-800 text-white z-40 overflow-auto">
-    <ul className="flex flex-col gap-6 py-10">
-     
-      {links.map((link, index) => (
-        <li key={index} className="px-4">
-          <Link
-            to={link.to}
-            className="text-lg font-bold"
-            onClick={handleMobileLinkClick}  
-          >
-            {link.label}
-          </Link>
-        </li>
-      ))}
+        <div className="fixed top-[10vh] left-0 w-full h-[90vh] bg-green-800 text-white z-40 overflow-auto">
+          <ul className="flex flex-col gap-6 py-10">
 
-      {/* Services Dropdown */}
-      <li className="relative">
-        <div
-          className="flex items-center text-lg font-bold px-4 cursor-pointer"
-          onClick={() => handleMobileDropdown("service")}  
-        >
-          <span>Services</span>
-          {mobileServiceDropdown ? (
-            <IoIosArrowUp className="ml-2" />
-          ) : (
-            <IoIosArrowDown className="ml-2" />
-          )}
-        </div>
-        {mobileServiceDropdown && (
-          <ul className="w-40 flex flex-col gap-2 ml-6 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
-            {serviceLinks.map((link, index) => (
+            {links.map((link, index) => (
               <li key={index} className="px-4">
                 <Link
                   to={link.to}
-                  className="text-base"
-                  onClick={handleMobileLinkClick}  
+                  className="text-lg font-bold"
+                  onClick={handleMobileLinkClick}
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
-          </ul>
-        )}
-      </li>
 
-      {/* About Dropdown */}
-      <li className="relative">
-        <div
-          className="flex items-center text-lg px-4 font-bold cursor-pointer"
-          onClick={() => handleMobileDropdown("about")}  
-        >
-          <span>About</span>
-          {mobileAboutDropdown ? (
-            <IoIosArrowUp className="ml-2" />
-          ) : (
-            <IoIosArrowDown className="ml-2" />
-          )}
+            {/* Services Dropdown */}
+            <li className="relative">
+              <div
+                className="flex items-center text-lg font-bold px-4 cursor-pointer"
+                onClick={() => handleMobileDropdown("service")}
+              >
+                <span>Services</span>
+                {mobileServiceDropdown ? (
+                  <IoIosArrowUp className="ml-2" />
+                ) : (
+                  <IoIosArrowDown className="ml-2" />
+                )}
+              </div>
+              {mobileServiceDropdown && (
+                <ul className="w-40 flex flex-col gap-2 ml-6 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
+                  {serviceLinks.map((link, index) => (
+                    <li key={index} className="px-4">
+                      <Link
+                        to={link.to}
+                        className="text-base"
+                        onClick={handleMobileLinkClick}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+
+            {/* About Dropdown */}
+            <li className="relative">
+              <div
+                className="flex items-center text-lg px-4 font-bold cursor-pointer"
+                onClick={() => handleMobileDropdown("about")}
+              >
+                <span>About</span>
+                {mobileAboutDropdown ? (
+                  <IoIosArrowUp className="ml-2" />
+                ) : (
+                  <IoIosArrowDown className="ml-2" />
+                )}
+              </div>
+              {mobileAboutDropdown && (
+                <ul className="w-48 flex flex-col ml-6 gap-2 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
+                  {aboutLinks.map((link, index) => (
+                    <li key={index} className="px-4">
+                      <Link
+                        to={link.to}
+                        className="text-base"
+                        onClick={handleMobileLinkClick}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+
+            {/* External Shop Link */}
+            <li className="px-4 font-semibold">
+              <a
+                href="https://bayava-shop.vercel.app"
+                className="text-lg font-bold"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Shop
+              </a>
+            </li>
+
+            {/* Get Started Button */}
+            {(user.user?._id || user.user?.id || user.user) ? <li className="flex items-center justify-between gap-5 px-4 font-bold">
+              <Link
+                to={isLoggedIn ? "/signup" : "/login"}
+                onClick={handleMobileLinkClick}
+              >
+                <SmallYellowOutlineButton
+                  text="Get Started"
+                />
+              </Link>
+            </li> : <button className="font-bold mr-auto px-4" onClick={handleLogout} >Logout</button>}
+
+
+            {/* My Account */}
+            {(user.user?._id || user.user?.id || user.user)&&<li className="px-4 flex items-center">
+              <Link
+                to={"/my-account"}
+                className="text-lg font-bold flex items-center"
+                onClick={handleMobileLinkClick}
+              >
+                <GoPerson size={25} className="mr-2" />
+                My Account
+              </Link>
+            </li>}
+          </ul>
         </div>
-        {mobileAboutDropdown && (
-          <ul className="w-48 flex flex-col ml-6 gap-2 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
-            {aboutLinks.map((link, index) => (
-              <li key={index} className="px-4">
-                <Link
-                  to={link.to}
-                  className="text-base"
-                  onClick={handleMobileLinkClick}  
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-
-      {/* External Shop Link */}
-      <li className="px-4">
-        <a
-          href="https://bayava-shop.vercel.app"
-          className="text-lg font-bold"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Shop
-        </a>
-      </li>
-
-      {/* Get Started Button */}
-      <li className="flex items-center justify-between gap-5 px-4">
-  <Link 
-    to={isLoggedIn ? "/signup" : "/login"} 
-    onClick={handleMobileLinkClick}
-  >
-    <SmallYellowOutlineButton
-      text="Get Started"
-     
-    />
-  </Link>
-</li>
-
-
-      {/* My Account */}
-      <li className="px-4 flex items-center">
-        <Link
-          to={"/my-account"}
-          className="text-lg font-bold flex items-center"
-          onClick={handleMobileLinkClick}  
-        >
-          <GoPerson size={25} className="mr-2" /> 
-          My Account
-        </Link>
-      </li>
-    </ul>
-  </div>
-)}
+      )}
 
     </>
   );

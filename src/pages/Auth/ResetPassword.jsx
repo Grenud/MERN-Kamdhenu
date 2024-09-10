@@ -1,4 +1,3 @@
-// ResetPassword.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -37,28 +36,49 @@ const ResetPassword = () => {
     };
 
     return (
-        <div className='w-full bg-primary py-10 px-5 flex flex-col gap-4 main-container'>
-            <h2 className='font-semibold text-2xl text-smoke-yellow'>Reset Password</h2>
-            <form onSubmit={handleResetPassword} className='flex flex-col gap-4'>
-                <input
-                    type="password"
-                    placeholder="Enter new password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className='py-2 px-4 rounded-md'
-                />
-                <input
-                    type="password"
-                    placeholder="Confirm new password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    className='py-2 px-4 rounded-md'
-                />
-                <button className='bg-smoke-yellow text-primary py-2 rounded-md' type="submit">Set New Password</button>
-            </form>
-            {message && <p>{message}</p>}
+        <div className="flex min-h-screen items-center justify-center p-4 bg-light">
+            <div className="flex flex-col w-full max-w-lg bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10 p-8">
+                <h2 className="text-center text-2xl md:text-3xl font-extrabold text-gray-900">
+                    Reset Password
+                </h2>
+                <form onSubmit={handleResetPassword} className="mt-8 space-y-6">
+                    <div className="flex flex-col gap-2">
+                        <label className="font-semibold tracking-wider text-black">
+                            New Password
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Enter new password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <label className="font-semibold tracking-wider text-black">
+                            Confirm New Password
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Confirm new password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        />
+                    </div>
+
+                    <button
+                        className={`text-light bg-secondary hover:bg-[#33465a] px-5 h-10 rounded-full flex justify-center items-center`}
+                    >
+                        Set New Password
+                    </button>
+
+                    {message && <p className="text-sm text-yellow-500 mt-4">{message}</p>}
+                </form>
+            </div>
         </div>
     );
 };

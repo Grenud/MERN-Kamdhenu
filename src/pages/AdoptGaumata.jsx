@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import dummyCow from '../assets/cowcover4.png'
 
 function AdoptGaumata() {
-  console.log(API_KEY)
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [gender, setGender] = useState("");

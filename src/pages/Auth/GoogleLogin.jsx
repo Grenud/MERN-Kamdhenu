@@ -1,4 +1,6 @@
 import React from 'react';
+const VITE_API_KEY = import.meta.env.VITE_API_KEY
+console.log(VITE_API_KEY)
 
 function GoogleLogin() {
   const handleGoogleLogin = () => {
@@ -6,7 +8,7 @@ function GoogleLogin() {
     const currentUrl = window.location.origin;
 
     // Redirect to your backend Google login route, including the current URL in the state parameter
-    window.location.href = `http://localhost:8000/auth/google?state=${encodeURIComponent(currentUrl)}`;
+    window.location.href = `${VITE_API_KEY}/auth/google?state=${encodeURIComponent(currentUrl)}`;
   };
 
   return (
