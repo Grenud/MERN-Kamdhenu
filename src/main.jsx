@@ -15,11 +15,11 @@ axios.defaults.withCredentials = true;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store} >
-      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <PersistGate loading={null} persistor={persistor}>
         <AuthLayout>
           <App />
         </AuthLayout>
-      {/* </PersistGate> */}
+      </PersistGate>
     </Provider>
   </BrowserRouter>
 );
