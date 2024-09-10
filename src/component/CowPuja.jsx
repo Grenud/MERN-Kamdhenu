@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 
 function CowPuja() {
   return (
-    <div className='max-w-[1240px] p-6 mx-auto my-10 mt-12'>
+    <div className='container mx-auto mt-20 px-4 md:px-0'>
       <div className='p-4 md:grid grid-cols-3 mx-auto shadow-2xl'>
         <div className='col-span-1 md:w-[80%] text-center object-cover shadow-md p-5 leading-8 '>
           <img className='justify-center' src='https://kamdhenuseva.com/wp-content/uploads/2023/01/gai-tihar-300x197-1.jpg' alt='Cow Puja' />

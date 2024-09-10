@@ -23,7 +23,7 @@ function Slider({ bottomRef }) {
   return (
     <div>
       {/* Image Slider Section */}
-      <div className="relative overflow-hidden w-full mt-[11vh]">
+      <div className="relative overflow-hidden w-full mt-[10vh]">
         <div
           className="flex transition-transform duration-500"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
