@@ -5,8 +5,6 @@ import Loading from "../component/Loading";
 import { Link } from "react-router-dom";
 import dummyCow from '../assets/cowcover4.png'
 
-const API_KEY = import.meta.env.VITE_API_KEY;
-
 function AdoptGaumata() {
   console.log(API_KEY)
   const [items, setItems] = useState([]);
@@ -24,7 +22,7 @@ function AdoptGaumata() {
   const fetchItems = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`${API_KEY}/api/cattle/get-cattle`, {
+      const response = await axios.get(`/api/cattle/get-cattle`, {
         params: {
           page,
           limit,
