@@ -9,8 +9,6 @@ function AuthLayout({ children }) {
     const navigate = useNavigate();
     const location = useLocation();  // get the current location
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.Auth);
-
     const fetchUserData = async () => {
         console.log('running fetch user data')
         try {
