@@ -1,3 +1,4 @@
+console.log('authLayout is running')
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +12,10 @@ function AuthLayout({ children }) {
     const { user } = useSelector((state) => state.Auth);
 
     const fetchUserData = async () => {
+        console.log('running fetch user data')
         try {
             const response = await axios.get("/api/auth/google-user-data");
+            console.log('response is ------ ',response)
             if (response.data.success) {
                 dispatch(SetUser({
                     user: response.data.user
@@ -22,6 +25,7 @@ function AuthLayout({ children }) {
             dispatch(SetUser({
                 user: null
             }));
+            console.log(error)
             navigate('/login');
         }
     };
