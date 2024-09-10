@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetUser } from '../../redux/AuthSlice';
 import { useNavigate, useLocation } from 'react-router-dom';  // import useLocation
+console.log('hello world')
 
 function AuthLayout({ children }) {
     const navigate = useNavigate();
