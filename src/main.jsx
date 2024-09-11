@@ -10,13 +10,19 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from './redux/Store.js'
 import { Provider } from "react-redux";
 import axios from "axios";
+import { Toaster } from "react-hot-toast";
 axios.defaults.baseURL = `${import.meta.env.VITE_API_KEY}`;
+console.log(axios.defaults.baseURL,"base url")
 axios.defaults.withCredentials = true;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store} >
       <PersistGate loading={null} persistor={persistor}>
           <App />
+          <Toaster
+          position="bottom-right"
+          reverseOrder={false}
+        />
       </PersistGate>
     </Provider>
   </BrowserRouter>
