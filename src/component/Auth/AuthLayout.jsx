@@ -9,16 +9,17 @@ function AuthLayout({ children }) {
     const location = useLocation();  // get the current location
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.Auth);
-
     const fetchUserData = async () => {
         try {
-            console.log("Fetching user data...");
-            const response = await axios.get("/api/auth/google-user-data");
-            if (response.data.success) {
-                console.log("User data fetched successfully:", response.data.user);
+            const { data } = await axios.get("/api/auth/google-user-data");
+            if (data.success) {
                 dispatch(SetUser({
-                    user: response.data.user
+                    user: data.user
                 }));
+            } else {
+                dispatch(SetUser({
+                    user: null
+                }))
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -28,16 +29,12 @@ function AuthLayout({ children }) {
             navigate('/login');
         }
     };
-    
+
 
     useEffect(() => {
-        setTimeout(() => {
-            if (!user.user) {
-                fetchUserData();
-            }
-        }, 500); // Delay the fetch by 500ms
-    }, [location.pathname, user, dispatch]);
-    
+        fetchUserData();
+    }, []);
+
 
     return (
         <>

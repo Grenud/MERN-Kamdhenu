@@ -9,7 +9,7 @@ import GoogleLogin from "./GoogleLogin";
 import Button from "../../component/Button"; // Assuming you have a Button component
 
 function Login() {
-  const [data, setData] = useState({
+  const [userData, setUserData] = useState({
     email: "",
     password: ""
   });
@@ -19,30 +19,30 @@ function Login() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('/api/auth/login', {
-      email: data.email,
-      password: data.password
+    const {data} = await axios.post('/api/auth/login', {
+      email: userData.email,
+      password: userData.password
     });
-    if (res.data && res.data.success) {
-      toast.success(res.data.message);
+    if (data.success) {
+      toast.success(data.message);
       dispatch(SetUser({
-        user: res.data.user
+        user: data.user
       }));
       navigate('/');
     } else {
-      toast.error(res.data.message);
+      toast.error(data.message);
     }
   };
 
   const handleChange = (e) => {
-    setData({
-      ...data,
+    setUserData({
+      ...userData,
       [e.target.name]: e.target.value
     });
   };
 
   useEffect(() => {
-    if (user && user.user && (user.user._id || user.user.id)) {
+    if (user && user._id) {
       navigate('/');
     }
   }, [user, navigate]);
@@ -70,7 +70,7 @@ function Login() {
                   Enter your email
                 </label>
                 <input
-                  value={data.email}
+                  value={userData.email}
                   onChange={handleChange}
                   placeholder="Email"
                   required
@@ -85,7 +85,7 @@ function Login() {
                   Enter your password
                 </label>
                 <input
-                  value={data.password}
+                  value={userData.password}
                   onChange={handleChange}
                   placeholder="Password"
                   name="password"

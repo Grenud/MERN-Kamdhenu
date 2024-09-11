@@ -211,13 +211,13 @@ function Navbar() {
               </li>
 
               {/* Profile */}
-             {(user.user?._id || user.user?.id || user.user) && <li className="text-lg cursor-pointer font-bold">
+             {(user?._id || user?.id || user) && <li className="text-lg cursor-pointer font-bold">
                 <Link to={"/my-account"} className="flex items-center gap-2">
                   <GoPerson size={30} fontWeight={'bold'} /> My Account
                 </Link>
               </li>}
               <div className="flex items-center justify-between gap-2 font-bold">
-                {(user.user?._id || user.user?.id || user.user) ? <button onClick={handleLogout} >Logout</button> : <Link to={isLoggedIn ? "/signup" : "/login"}>
+                {(user?._id || user?.id || user) ? <button onClick={handleLogout} >Logout</button> : <Link to={isLoggedIn ? "/signup" : "/login"}>
                   <SmallYellowOutlineButton text="Get Started" />
                 </Link>}
 
@@ -329,7 +329,7 @@ function Navbar() {
             </li>
 
             {/* Get Started Button */}
-            {(user.user?._id || user.user?.id || user.user) ? <li className="flex items-center justify-between gap-5 px-4 font-bold">
+            {(user?._id || user?.id || user) ? <li className="flex items-center justify-between gap-5 px-4 font-bold">
               <Link
                 to={isLoggedIn ? "/signup" : "/login"}
                 onClick={handleMobileLinkClick}
@@ -342,7 +342,7 @@ function Navbar() {
 
 
             {/* My Account */}
-            {(user.user?._id || user.user?.id || user.user)&&<li className="px-4 flex items-center">
+            {(user?._id || user?.id || user)&&<li className="px-4 flex items-center">
               <Link
                 to={"/my-account"}
                 className="text-lg font-bold flex items-center"
