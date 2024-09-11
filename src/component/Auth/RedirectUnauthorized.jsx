@@ -20,7 +20,9 @@ function RedirectUnauthorized({ children }) {
     }, [location.pathname, dispatch]);  // Add location.pathname as a dependency
 
     return (
+        <>
             {children}
+        </>
     );
 }
 

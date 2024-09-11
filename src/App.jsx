@@ -25,12 +25,10 @@ import ResetPassword from './pages/Auth/ResetPassword';
 import MyAccount from './pages/MyAccount';
 import Footer from './component/Footer';
 import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
-import AuthLayout from './component/Auth/AuthLayout';
 
 
 function App() {
   return (
-    <AuthLayout>
       <AuthProvider>
         <Navbar />
         <Routes>
@@ -65,7 +63,6 @@ function App() {
         </Routes>
         <Footer />
       </AuthProvider>
-    </AuthLayout>
   );
 }
 

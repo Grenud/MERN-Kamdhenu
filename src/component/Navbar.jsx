@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { SetUser } from "../redux/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const links = [{ to: "/join-mission", label: "Join Mission" }];
 
@@ -43,7 +44,7 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch()
   const {user} = useSelector((state)=>state.Auth)
-
+  const navigate = useNavigate()
   const serviceRef = useRef(null);
   const aboutRef = useRef(null);
 
@@ -64,6 +65,7 @@ function Navbar() {
           user:null
         }))
         toast.success(data.message)
+        navigate("/")
       }
     } catch (error) {
       toast.error(error.message)
