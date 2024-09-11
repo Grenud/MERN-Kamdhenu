@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';  // import useLocation
+import AuthLayout from './AuthLayout';
 
 function RedirectUnauthorized({ children }) {
     const navigate = useNavigate();
@@ -20,9 +21,9 @@ function RedirectUnauthorized({ children }) {
     }, [location.pathname, dispatch]);  // Add location.pathname as a dependency
 
     return (
-        <>
+        <AuthLayout>
             {children}
-        </>
+        </AuthLayout>
     );
 }
 
