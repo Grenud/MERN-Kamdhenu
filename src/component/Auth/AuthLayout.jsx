@@ -12,23 +12,32 @@ function AuthLayout({ children }) {
 
     const fetchUserData = async () => {
         try {
+            console.log("Fetching user data...");
             const response = await axios.get("/api/auth/google-user-data");
             if (response.data.success) {
+                console.log("User data fetched successfully:", response.data.user);
                 dispatch(SetUser({
                     user: response.data.user
                 }));
             }
         } catch (error) {
+            console.error("Error fetching user data:", error);
             dispatch(SetUser({
                 user: null
             }));
             navigate('/login');
         }
     };
+    
 
     useEffect(() => {
-        fetchUserData();
-    }, [location.pathname, dispatch]);  // Add location.pathname as a dependency
+        setTimeout(() => {
+            if (!user) {
+                fetchUserData();
+            }
+        }, 500); // Delay the fetch by 500ms
+    }, [location.pathname, user, dispatch]);
+    
 
     return (
         <>
