@@ -32,7 +32,7 @@ function AuthLayout({ children }) {
 
     useEffect(() => {
         setTimeout(() => {
-            if (!user) {
+            if (!user.user) {
                 fetchUserData();
             }
         }, 500); // Delay the fetch by 500ms
