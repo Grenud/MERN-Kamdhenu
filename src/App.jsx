@@ -58,11 +58,7 @@ function App() {
 
 
   useEffect(() => {
-    setTimeout(() => {
-      if (!user.user) {
-        fetchUserData();
-      }
-    }, 500); // Delay the fetch by 500ms
+    fetchUserData();
   }, [location.pathname, user, dispatch]);
   return (
     <AuthProvider>
