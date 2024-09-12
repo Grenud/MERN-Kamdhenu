@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 function MyAccount() {
     const {user} = useSelector((state)=>state.Auth)
   return (
-    <section className='main-container'>
-        <div>User Details</div>
+    <section className='main-container w-full h-screen'>
+        <div className='font-semibold text-green-dark text-2xl'>Hello , {user?.name} </div>
+        <div className='font-semibold text-secondary'>Email : {user?.email}</div>
     </section>
   )
 }

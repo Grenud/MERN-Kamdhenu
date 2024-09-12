@@ -1,6 +1,5 @@
 import React from 'react';
 const VITE_API_KEY = import.meta.env.VITE_API_KEY
-console.log(VITE_API_KEY)
 
 function GoogleLogin() {
   const handleGoogleLogin = () => {

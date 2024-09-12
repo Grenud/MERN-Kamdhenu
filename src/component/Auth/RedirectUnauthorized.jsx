@@ -8,9 +8,8 @@ function RedirectUnauthorized({ children }) {
     const location = useLocation();  // get the current location
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.Auth);
-
     const fetchUserData = async () => {
-        if (!user || !user.user || !(user.user._id || user.user.id)) {
+        if ( !user || !user._id) {
             navigate('/login');
         }
     };
