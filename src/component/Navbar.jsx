@@ -151,7 +151,7 @@ function Navbar() {
                   )}
                 </div>
                 {serviceDropdown && (
-                  <div className="absolute top-10 left-0 w-40 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
+                  <div className="absolute top-10 left-0 w-36 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
                     {serviceLinks.map((link, index) => (
                       <div
                         key={index}
@@ -182,7 +182,7 @@ function Navbar() {
                   )}
                 </div>
                 {aboutDropdown && (
-                  <div className="absolute top-10 left-0 w-52 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
+                  <div className="absolute top-10 left-0 w-44 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
                     {aboutLinks.map((link, index) => (
                       <div
                         key={index}
@@ -270,7 +270,7 @@ function Navbar() {
                 )}
               </div>
               {mobileServiceDropdown && (
-                <ul className="w-40 flex flex-col gap-2 ml-6 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
+                <ul className="w-36 flex flex-col gap-2 ml-6 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
                   {serviceLinks.map((link, index) => (
                     <li key={index} className="px-4">
                       <Link
