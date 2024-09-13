@@ -2,7 +2,7 @@ import React from 'react';
 
 function VedaAboutCow() {
   return (
-    <div className='container mx-auto mt-28 px-6 md:px-10 lg:px-16'>
+    <div className='container mx-auto mt-28 px-6 lg:mt-52 md:px-10 lg:px-16'>
       <h2 className='text-3xl font-bold text-black'>What is Vedas?</h2>
       <div className='leading-8 text-justify'>
         <p className='mt-6'>

@@ -4,7 +4,7 @@ import Button from '../component/Button';
 function AboutCowPuja() {
   return (
     <div>
-    <div className="container mx-auto mt-36 px-4 md:px-0">
+    <div className="container mx-auto mt-36 lg:mt-52 px-4 md:px-0">
       <h1 className="text-3xl font-semibold text-black text-center md:text-left">About KamdhenuSeva</h1>
       <p className="mt-8 leading-8 text-justify">
         At Sri Devraha Baba’s Ashram, Vrindavan, we have a long tradition of dedicated Cow seva as Sri Devraha Baba stated his blessings are with those devotees who serve and protect Cow Mata.

@@ -42,9 +42,9 @@ function Navbar() {
   const [scrollY, setScrollY] = useState(0);
   const [scrollUp, setScrollUp] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const dispatch = useDispatch()
-  const {user} = useSelector((state)=>state.Auth)
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.Auth);
+  const navigate = useNavigate();
   const serviceRef = useRef(null);
   const aboutRef = useRef(null);
 
@@ -59,18 +59,20 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const {data} = await axios.post('/api/auth/logout')
-      if(data.success){
-        dispatch(SetUser({
-          user:null
-        }))
-        toast.success(data.message)
-        navigate("/")
+      const { data } = await axios.post("/api/auth/logout");
+      if (data.success) {
+        dispatch(
+          SetUser({
+            user: null,
+          })
+        );
+        toast.success(data.message);
+        navigate("/");
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,8 +109,9 @@ function Navbar() {
     <>
       {/* Desktop and Tablet Navbar */}
       <div
-        className={`bg-green-800 p-2 h-[10vh] md:h-[11vh] lg:h-[12vh] fixed top-0 w-full z-50 transition-transform duration-300 ${scrollUp ? "" : "-translate-y-full"
-          }`}
+        className={`bg-green-800 p-2 h-[10vh] md:h-[11vh] lg:h-[12vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
+          scrollUp ? "" : "-translate-y-full"
+        }`}
       >
         <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[10px] mx-auto h-full">
           {/* Logo */}
@@ -122,6 +125,9 @@ function Navbar() {
                 />
               </Link>
             </div>
+            <Link to="/" className="ml-2 md:ml-3">
+              <h1 className="text-md md:text-xl text-white font-semibold">Kamdhenu Seva</h1>
+            </Link>
           </div>
 
           {/* Desktop and Tablet Links */}
@@ -153,14 +159,15 @@ function Navbar() {
                 {serviceDropdown && (
                   <div className="absolute top-10 left-0 w-36 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
                     {serviceLinks.map((link, index) => (
-                      <div
+                      <Link
                         key={index}
-                        className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300"
+                        to={link.to}
+                        onClick={() => setToggle(false)}
                       >
-                        <Link to={link.to} onClick={() => setToggle(false)}>
+                        <div className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300">
                           {link.label}
-                        </Link>
-                      </div>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -184,14 +191,14 @@ function Navbar() {
                 {aboutDropdown && (
                   <div className="absolute top-10 left-0 w-44 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
                     {aboutLinks.map((link, index) => (
-                      <div
+                      <Link
                         key={index}
-                        className="px-6 py-2 text-sm hover:bg-[#6d9051] duration-300"
+                        to={link.to}
+                        onClick={() => setToggle(false)}
+                        className="block px-6 py-2 text-sm hover:bg-[#6d9051] duration-300"
                       >
-                        <Link to={link.to} onClick={() => setToggle(false)}>
-                          {link.label}
-                        </Link>
-                      </div>
+                        {link.label}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -211,16 +218,21 @@ function Navbar() {
               </li>
 
               {/* Profile */}
-             {(user?._id || user?.id || user) && <li className="text-lg cursor-pointer font-bold">
-                <Link to={"/my-account"} className="flex items-center gap-2">
-                  <GoPerson size={30} fontWeight={'bold'} /> My Account
-                </Link>
-              </li>}
+              {(user?._id || user?.id || user) && (
+                <li className="text-lg cursor-pointer font-bold">
+                  <Link to={"/my-account"} className="flex items-center gap-2">
+                    <GoPerson size={30} fontWeight={"bold"} /> My Account
+                  </Link>
+                </li>
+              )}
               <div className="flex items-center justify-between gap-2 font-bold">
-                {(user?._id || user?.id || user) ? <button onClick={handleLogout} >Logout</button> : <Link to={isLoggedIn ? "/signup" : "/login"}>
-                  <SmallYellowOutlineButton text="Get Started" />
-                </Link>}
-
+                {user?._id || user?.id || user ? (
+                  <button onClick={handleLogout}>Logout</button>
+                ) : (
+                  <Link to={isLoggedIn ? "/signup" : "/login"}>
+                    <SmallYellowOutlineButton text="Get Started" />
+                  </Link>
+                )}
               </div>
             </ul>
           </div>
@@ -243,7 +255,6 @@ function Navbar() {
       {toggle && (
         <div className="fixed top-[10vh] left-0 w-full h-[90vh] bg-green-800 text-white z-40 overflow-auto">
           <ul className="flex flex-col gap-6 py-10">
-
             {links.map((link, index) => (
               <li key={index} className="px-4">
                 <Link
@@ -269,13 +280,14 @@ function Navbar() {
                   <IoIosArrowDown className="ml-2" />
                 )}
               </div>
+
               {mobileServiceDropdown && (
                 <ul className="w-36 flex flex-col gap-2 ml-6 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
                   {serviceLinks.map((link, index) => (
                     <li key={index} className="px-4">
                       <Link
                         to={link.to}
-                        className="text-base"
+                        className="text-base hover:text-[#6d9051] duration-300"
                         onClick={handleMobileLinkClick}
                       >
                         {link.label}
@@ -299,13 +311,14 @@ function Navbar() {
                   <IoIosArrowDown className="ml-2" />
                 )}
               </div>
+
               {mobileAboutDropdown && (
                 <ul className="w-48 flex flex-col ml-6 gap-2 text-start bg-white shadow-lg shadow-gray-800 p-2 text-black py-2 rounded-se-3xl rounded-es-3xl">
                   {aboutLinks.map((link, index) => (
                     <li key={index} className="px-4">
                       <Link
                         to={link.to}
-                        className="text-base"
+                        className="text-base hover:text-[#6d9051] duration-300"
                         onClick={handleMobileLinkClick}
                       >
                         {link.label}
@@ -329,33 +342,37 @@ function Navbar() {
             </li>
 
             {/* Get Started Button */}
-            {(user?._id || user?.id || user) ? <li className="flex items-center justify-between gap-5 px-4 font-bold">
-              <Link
-                to={isLoggedIn ? "/signup" : "/login"}
-                onClick={handleMobileLinkClick}
-              >
-                <SmallYellowOutlineButton
-                  text="Get Started"
-                />
-              </Link>
-            </li> : <button className="font-bold mr-auto px-4" onClick={handleLogout} >Logout</button>}
-
+            {user?._id || user?.id || user ? (
+              <li className="flex items-center justify-between gap-5 px-4 font-bold">
+                <Link
+                  to={isLoggedIn ? "/signup" : "/login"}
+                  onClick={handleMobileLinkClick}
+                >
+                  <SmallYellowOutlineButton text="Get Started" />
+                </Link>
+              </li>
+            ) : (
+              <button className="font-bold mr-auto px-4" onClick={handleLogout}>
+                Logout
+              </button>
+            )}
 
             {/* My Account */}
-            {(user?._id || user?.id || user)&&<li className="px-4 flex items-center">
-              <Link
-                to={"/my-account"}
-                className="text-lg font-bold flex items-center"
-                onClick={handleMobileLinkClick}
-              >
-                <GoPerson size={25} className="mr-2" />
-                My Account
-              </Link>
-            </li>}
+            {(user?._id || user?.id || user) && (
+              <li className="px-4 flex items-center">
+                <Link
+                  to={"/my-account"}
+                  className="text-lg font-bold flex items-center"
+                  onClick={handleMobileLinkClick}
+                >
+                  <GoPerson size={25} className="mr-2" />
+                  My Account
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       )}
-
     </>
   );
 }
