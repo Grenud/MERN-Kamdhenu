@@ -29,7 +29,7 @@ function CowImgSlider({ bottomRef }) {
         <div className='w-10/12 md:w-11/12 flex overflow-hidden'>
           <div className="flex transition-transform duration-500 gap-3 mt-12" style={{ transform: `translateX(-${slide * (100 / 3)}%)` }}>
             {CowSlider.map((item, index) => (
-              <div key={index} className='min-w-[33%] border rounded-md flex-shrink-0'>
+              <div key={index} className='min-w-[33%] border shadow-lg hover:scale-95 duration-200 rounded-md flex-shrink-0'>
                 <div className='rounded-t-xl'>
                   {/* Increase height on large devices */}
                   <img 

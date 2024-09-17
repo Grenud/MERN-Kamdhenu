@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function CowCard({ imgSrc , id , name}) {
   return (
-    <section className="bg-light text-neutral-800 rounded-lg overflow-hidden p-2  flex flex-col gap-2">
+    <section className="bg-green-800 text-white rounded-lg overflow-hidden p-2  flex flex-col gap-2">
       <Link to={`/gaumata/${id}`}>
       <figure className="overflow-hidden duration-300">
         <img
@@ -14,7 +14,7 @@ function CowCard({ imgSrc , id , name}) {
       </Link>
       <h2 className="text-lg font-semibold tracking-wider">{name}</h2>
       <h2 className="font-semibold tracking-wide text-xl">
-        Help us to Care Sharaddha Gaumata
+        Help us to Care {name}
       </h2>
       <p className="text-sm tracking-wide">
         Support and reward options for our sponsoring partners GUARDIANSHIP OF A

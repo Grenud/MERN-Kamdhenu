@@ -9,13 +9,6 @@ function CowPuja() {
         <div className='col-span-1 md:col-span-1 text-center bg-white shadow-md rounded-lg p-5'>
           <img className='w-full h-auto rounded-lg' src='https://kamdhenuseva.com/wp-content/uploads/2023/01/gai-tihar-300x197-1.jpg' alt='Cow Puja' />
           <h4 className='text-xl font-semibold mt-4'>Cow Puja</h4>
-          <div className='flex justify-center text-[#f3b732] mt-2'>
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-          </div>
           <div className='flex justify-center mt-2'>
             <p className='line-through text-gray-500'>₹2,000.00</p>
             <span className='ml-2 text-xl font-bold'>₹1,500.00</span>

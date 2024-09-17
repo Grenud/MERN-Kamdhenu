@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-light text-secondary lg:grid lg:grid-cols-5">
+    <footer className="bg-green-800 text-light lg:grid lg:grid-cols-5">
       <div className="relative block h-32 lg:col-span-2 lg:h-full">
         <img
           src={cowImage}
@@ -17,19 +17,19 @@ function Footer() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           <div>
             <p>
-              <span className="text-xs uppercase tracking-wide text-secondary">
+              <span className="text-xs uppercase tracking-wide text-light">
                 Call us
               </span>
 
               <Link
                 to="/" 
-                className="block text-2xl font-medium text-secondary hover:opacity-75 sm:text-3xl"
+                className="block text-2xl font-medium text-light hover:opacity-75 sm:text-3xl"
               >
                 Do you have questions? Call or visit us.
               </Link>
             </p>
 
-            <ul className="mt-8 space-y-1 text-sm text-secondary">
+            <ul className="mt-8 space-y-1 text-sm text-light">
               <li>
                 DEVRAHA BABA ASRAM Bhaktivedanta Swami Marg, Panigaon Khader,
                 Uttar Pradesh 281202, India
@@ -43,7 +43,7 @@ function Footer() {
                   to="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -67,7 +67,7 @@ function Footer() {
                   to="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -91,7 +91,7 @@ function Footer() {
                   to="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -111,7 +111,7 @@ function Footer() {
                   to="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -135,7 +135,7 @@ function Footer() {
                   to="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   <span className="sr-only">Dribbble</span>
 
@@ -158,13 +158,13 @@ function Footer() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <p className="font-medium text-secondary">Services</p>
+              <p className="font-medium text-light">Services</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
                     to="/shop"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Our Products
                   </Link>
@@ -173,7 +173,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/blog"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Our Blog
                   </Link>
@@ -182,7 +182,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/contact-us"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Contact us
                   </Link>
@@ -191,7 +191,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/profile"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     My Account
                   </Link>
@@ -200,7 +200,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/donar-dashboard"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Donor Dashboard
                   </Link>
@@ -209,13 +209,13 @@ function Footer() {
             </div>
 
             <div>
-              <p className="font-medium text-secondary">About</p>
+              <p className="font-medium text-light">About</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
                     to="/cow-puja"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Cow Puja
                   </Link>
@@ -224,7 +224,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/veda-about-cow"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Veda About Cow
                   </Link>
@@ -233,7 +233,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/spiritual-importance"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Spiritual Importance
                   </Link>
@@ -241,7 +241,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/testimonials"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Testimonials
                   </Link>
@@ -249,7 +249,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/gallery"
-                    className="text-secondary transition hover:opacity-75"
+                    className="text-light transition hover:opacity-75"
                   >
                     Gallery
                   </Link>
@@ -265,7 +265,7 @@ function Footer() {
               <li>
                 <Link
                   to="/terms-and-conditions"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   Terms & Conditions
                 </Link>
@@ -274,7 +274,7 @@ function Footer() {
               <li>
                 <Link
                   to="/privacy-policy"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   Privacy Policy
                 </Link>
@@ -283,14 +283,14 @@ function Footer() {
               <li>
                 <Link
                   to="/policy"
-                  className="text-secondary transition hover:opacity-75"
+                  className="text-light transition hover:opacity-75"
                 >
                   Return & Refund Policy
                 </Link>
               </li>
             </ul>
 
-            <p className="mt-8 text-xs text-secondary sm:mt-0">
+            <p className="mt-8 text-xs text-light sm:mt-0">
               Copyright &copy; 2024 Kamdhenuseva. All Rights Reserved.
             </p>
           </div>
