@@ -22,30 +22,30 @@ function ContactUs() {
           <p className="text-muted font-light tracking-wide">
             Want to reach out? We&apos;d love to hear from you!
           </p>
-          <form className="w-full flex flex-col gap-2 bg-light p-6">
+          <form className="w-full flex flex-col gap-2 bg-green-800 p-6">
             <div className="w-full flex flex-col md:flex-row gap-4">
               <input
-                className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-gray-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
+                className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-green-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
                 name="fullName"
                 placeholder="Your name*"
               />
               <input
-                className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-gray-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
+                className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-green-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
                 name="email"
                 placeholder="Your email*"
               />
             </div>
             <input
-              className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-gray-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
+              className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-green-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
               name="fullName"
               placeholder="Subject"
             />
             <textarea
-              className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-gray-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
+              className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-green-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
               name="fullName"
               placeholder="Message"
             />
-            <Button btnText="SUBMIT" />
+            <Button btnText="SUBMIT" className="bg-green-600 hover:bg-green-800 text-white border-2 border-green-500" />
           </form>
           {/* TODO */}
         </section>
@@ -56,14 +56,14 @@ function ContactUs() {
           {/* Link to open phone dialer */}
           <a
             href={`tel:${phoneNumber}`}
-            className="w-full h-12 flex items-center justify-center bg-secondary hover:bg-primary text-light duration-300 rounded-full hover:scale-[.98]"
+            className="w-full h-12 flex items-center justify-center bg-green-600 hover:bg-green-800 text-light duration-300 rounded-full hover:scale-[.98]"
           >
             Call {phoneNumber}
           </a>
           {/* Link to open Gmail app */}
           <a
             href={`mailto:${email}`}
-            className="w-full h-12 flex items-center justify-center bg-secondary hover:bg-primary text-light duration-300 rounded-full hover:scale-[.98]"
+            className="w-full h-12 flex items-center justify-center bg-green-600 hover:bg-green-800 text-light duration-300 rounded-full hover:scale-[.98]"
           >
             Email {email}
           </a>

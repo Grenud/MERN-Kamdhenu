@@ -14,23 +14,23 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { SetUser } from "../redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
+import Logo from '/logo.png'
+import { useLocation } from "react-router-dom";
 
 const links = [{ to: "/join-mission", label: "Join Mission" }];
 
 const serviceLinks = [
-  { to: "/blog", label: "Our Blog" },
-  { to: "/donar-dashboard", label: "Donar Dashboard" },
-  { to: "/contact-us", label: "Contact us" },
+  { to: "/adopt-gaumata", label: "Adopt Gaumata" },
+  { to: "/cow-puja", label: "Cow Puja" }
 ];
 
 const aboutLinks = [
   { to: "/about-project", label: "About Project" },
-  { to: "/adopt-gaumata", label: "Adopt Gaumata" },
-  { to: "/cow-puja", label: "Cow Puja" },
   { to: "/veda-cow", label: "Veda About Cow" },
   { to: "/spiritual-importance", label: "Spiritual Importance" },
   { to: "/testimonials", label: "Testimonials" },
   { to: "/gallery", label: "Gallery" },
+  { to: "/contact-us", label: "Contact us" }
 ];
 
 function Navbar() {
@@ -105,6 +105,30 @@ function Navbar() {
     setMobileAboutDropdown(false);
   };
 
+  const location = useLocation();
+
+  const goToHomePage = () => {
+    if (location.pathname !== '/') {
+      // Navigate to the home page
+      navigate('/');
+      
+      // Use setTimeout to wait for the navigation to complete, then scroll
+      setTimeout(() => {
+        const topElement = document.getElementById('home-top');
+        if (topElement) {
+          topElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Add a delay to wait for navigation to complete
+    } else {
+      // If already on the home page, just scroll to the top
+      const topElement = document.getElementById('home-top');
+      if (topElement) {
+        topElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+
   return (
     <>
       {/* Desktop and Tablet Navbar */}
@@ -115,15 +139,16 @@ function Navbar() {
       >
         <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[10px] mx-auto h-full">
           {/* Logo */}
-          <div className="flex items-center h-full">
+          <div className="flex items-center h-full cursor-pointer" onClick={goToHomePage}
+          >
             <div className="w-9 h-9 md:w-12 md:h-12 rounded-full lg:ml-6 overflow-hidden flex items-center justify-center">
-              <Link to="/">
+              <div to="/">
                 <img
-                  src="https://kamdhenuseva.com/wp-content/uploads/2021/05/Untitled-design-4.png"
+                  src={Logo}
                   className="object-contain h-full w-full"
                   alt="Logo"
                 />
-              </Link>
+              </div>
             </div>
             <Link to="/" className="ml-2 md:ml-3">
               <h1 className="text-md md:text-xl text-white font-semibold">Kamdhenu Seva</h1>
@@ -157,7 +182,7 @@ function Navbar() {
                   )}
                 </div>
                 {serviceDropdown && (
-                  <div className="absolute top-10 left-0 w-36 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
+                  <div className="absolute top-10 left-0 w-48 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
                     {serviceLinks.map((link, index) => (
                       <Link
                         key={index}
@@ -189,7 +214,7 @@ function Navbar() {
                   )}
                 </div>
                 {aboutDropdown && (
-                  <div className="absolute top-10 left-0 w-44 bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
+                  <div className="absolute top-10 left-0 w-[13rem] bg-white shadow-lg text-black py-2 rounded-se-3xl rounded-es-3xl overflow-hidden z-40">
                     {aboutLinks.map((link, index) => (
                       <Link
                         key={index}

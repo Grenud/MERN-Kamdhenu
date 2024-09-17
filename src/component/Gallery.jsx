@@ -41,7 +41,7 @@ function Gallery() {
 
   return (
     <div className='container mx-auto mt-24 lg:mt-56 px-6 md:px-10 lg:px-16'>
-      <h1 className='text-3xl font-bold text-[#6d9051] mb-10'>Gallery</h1>
+      <h1 className='text-5xl tracking-wider font-bold text-[#6d9051] mb-10'>Gallery</h1>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20 mt-10'>
         {image.map((item, index) => (
           <div key={index} className={`relative overflow-hidden rounded-lg shadow-lg ${zoomedIndex === index ? 'lg:col-span-2 lg:row-span-2' : ''}`}>
