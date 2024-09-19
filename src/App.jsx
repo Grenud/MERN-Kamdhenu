@@ -22,7 +22,7 @@ import { AuthProvider } from './component/Auth/AuthContext';
 import Navbar from './component/Navbar';
 import ForgotPassword from './pages/Auth/ForgetPassword';
 import ResetPassword from './pages/Auth/ResetPassword';
-import MyAccount from './pages/MyAccount';
+import UserDashboard from './pages/UserDashboard';
 import Footer from './component/Footer';
 import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
 import AuthLayout from './component/Auth/AuthLayout';
@@ -58,7 +58,7 @@ function App() {
             path="/my-account"
             element={
               <RedirectUnauthorized>
-                <MyAccount />
+                <UserDashboard/>
               </RedirectUnauthorized>
             }
           />
