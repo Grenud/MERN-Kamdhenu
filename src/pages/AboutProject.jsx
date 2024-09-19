@@ -69,7 +69,7 @@ function AboutProject() {
       <section className="flex justify-center mt-10">
         <Button
           btnText="ADOPT A COW"
-          className="w-full h-14 bg-neutral-700 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
+          className="w-full h-14 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </section>
     </main>
