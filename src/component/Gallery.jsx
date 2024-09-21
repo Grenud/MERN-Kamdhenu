@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 function Gallery() {
-  const [zoomedIndex, setZoomedIndex] = useState(null);
-
   const images = [
     {
       id: 1,
@@ -31,39 +29,23 @@ function Gallery() {
     },
   ];
 
-  const toggleZoom = (index) => {
-    if (zoomedIndex === index) {
-      setZoomedIndex(null);
-    } else {
-      setZoomedIndex(index);
-    }
-  };
-
   return (
-    <div className="container mx-auto mt-24 lg:mt-32 px-6 md:px-10 lg:px-16">
-      <h1 className="text-5xl tracking-wider font-bold text-[#6d9051] mb-10">Gallery</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20 mt-10">
+    <div className="container mx-auto mt-24 lg:mt-32 px-6 md:px-10 lg:px-16 mb-10">
+      <h1 className="text-5xl tracking-wider font-bold text-[#6d9051] mb-10 text-center">Gallery</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {images.map((item, index) => (
-          <div
+          <motion.div
             key={index}
-            className={`relative overflow-hidden rounded-lg shadow-lg ${
-              zoomedIndex === index ? 'lg:col-span-2 lg:row-span-2' : ''
-            }`}
-            style={{ maxWidth: '300px', margin: 'auto' }}  // Reduce the div size and center it
+            className="overflow-hidden rounded-lg shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           >
-            <motion.img
+            <img
               src={item.image}
               alt={`Image ${item.id}`}
-              className={`w-full h-auto object-cover rounded-lg ${
-                zoomedIndex === index ? 'scale-150' : 'scale-100'
-              }`}
-              onClick={() => toggleZoom(index)}
-              initial={{ scale: 1, opacity: 0 }}
-              whileInView={{ scale: 1.05, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              style={{ maxWidth: '100%', maxHeight: '100%' }}  // Responsive image
+              className="w-full h-80 object-cover rounded-lg" // Fixed height with object-cover
             />
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

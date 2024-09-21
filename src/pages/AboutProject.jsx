@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import cowSeva from "../assets/Cowseva.png";
 import cowSevaPerson from "../assets/CowsevaP.png";
 import Button from "../component/Button";
@@ -67,10 +68,7 @@ function AboutProject() {
 
       {/* Call to Action Button with smooth hover effect */}
       <section className="flex justify-center mt-10">
-        <Button
-          btnText="ADOPT A COW"
-          className="w-full h-14 text-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
-        />
+        <Link className="bg-green-800 hover:bg-green-900 w-full py-3 text-white flex items-center justify-center font-semibold rounded-md" to="/adopt-gaumata">Adopt Gaumata</Link>
       </section>
     </main>
   );

@@ -6,15 +6,11 @@ function CowImgSlider({ bottomRef }) {
   const [slide, setSlide] = useState(0);
 
   const nextSlide = () => {
-    if (slide < CowSlider.length - 3) {
-      setSlide(slide + 1);
-    }
+    setSlide((prevSlide) => (prevSlide + 1) % CowSlider.length);
   };
 
   const prevSlide = () => {
-    if (slide > 0) {
-      setSlide(slide - 1);
-    }
+    setSlide((prevSlide) => (prevSlide - 1 + CowSlider.length) % CowSlider.length);
   };
 
   return (
@@ -27,13 +23,15 @@ function CowImgSlider({ bottomRef }) {
           </div>
         </div>
         <div className='w-10/12 md:w-11/12 flex overflow-hidden'>
-          <div className="flex transition-transform duration-500 gap-3 mt-12" style={{ transform: `translateX(-${slide * (100 / 3)}%)` }}>
-            {CowSlider.map((item, index) => (
+          <div 
+            className="flex transition-transform duration-500 gap-3 mt-12" 
+            style={{ transform: `translateX(-${(slide % CowSlider.length) * (100 / 3)}%)` }}
+          >
+            {CowSlider.concat(CowSlider.slice(0, 3)).map((item, index) => (
               <div key={index} className='min-w-[33%] border shadow-lg hover:scale-95 duration-200 rounded-md flex-shrink-0'>
                 <div className='rounded-t-xl'>
-                  {/* Increase height on large devices */}
                   <img 
-                    className='h-36 md:h-48 lg:h-64 w-full object-cover rounded-t-md' 
+                    className='h-36 md:h-56 lg:h-64 w-full object-cover rounded-t-md' 
                     src={item.image} 
                     alt={item.Name} 
                   />

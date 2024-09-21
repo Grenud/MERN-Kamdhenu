@@ -14,7 +14,7 @@ function CowCard({ imgSrc , id , name}) {
       </Link>
       <h2 className="text-lg font-semibold tracking-wider">{name}</h2>
       <h2 className="font-semibold tracking-wide text-xl">
-        Help us to Care {name}
+        Help us to Care {name.replace(/\b[A-Z]{1,2}\d{1,2}\b/, '').trim() + " Gaumata"}
       </h2>
       <p className="text-sm tracking-wide">
         Support and reward options for our sponsoring partners GUARDIANSHIP OF A
