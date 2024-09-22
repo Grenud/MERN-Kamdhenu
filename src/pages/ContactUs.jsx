@@ -1,7 +1,10 @@
 import Button from "../component/Button.jsx";
+
 function ContactUs() {
   const phoneNumber = "+917302756618";
   const email = "welcome@kamdhenuseva.com";
+  const instagramUrl = "https://www.instagram.com/your_instagram_handle/";
+
   return (
     <section className="main-container grid lg:grid-cols-6 mb-4">
       <section className="lg:col-span-4 col-span-6">
@@ -16,9 +19,7 @@ function ContactUs() {
           ></iframe>
         </section>
         <section className="flex flex-col items-start gap-3">
-          <h2 className="text-2xl font-bold tracing-wide my-3">
-            Drop Us a Line
-          </h2>
+          <h2 className="text-2xl font-bold tracing-wide my-3">Drop Us a Line</h2>
           <p className="text-muted font-light tracking-wide">
             Want to reach out? We&apos;d love to hear from you!
           </p>
@@ -37,37 +38,46 @@ function ContactUs() {
             </div>
             <input
               className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-green-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
-              name="fullName"
+              name="subject"
               placeholder="Subject"
             />
             <textarea
               className="py-2 pr-4 pl-4 border-0 outline-0 border-b-2 border-green-700 placeholder:text-light placeholder:opacity-80 rounded-lg"
-              name="fullName"
+              name="message"
               placeholder="Message"
             />
-            <Button btnText="SUBMIT" className="bg-green-600 hover:bg-green-800 text-white border-2 border-green-500" />
+            <Button
+              btnText="SUBMIT"
+              className="bg-green-600 hover:bg-green-800 text-white border-2 border-green-500"
+            />
           </form>
-          {/* TODO */}
         </section>
       </section>
+
       <section className="col-span-6 lg:col-span-2 text-sm flex flex-col gap-4 my-4 lg:px-4 p-0">
         <div className="w-full flex flex-col gap-2">
           <h2 className="font-semibold lg:mt-4">CONNECT WITH US</h2>
-          {/* Link to open phone dialer */}
-          <a
-            href={`tel:${phoneNumber}`}
-            className="w-full h-12 flex items-center justify-center bg-green-600 hover:bg-green-800 text-light duration-300 rounded-full hover:scale-[.98]"
-          >
-            Call {phoneNumber}
-          </a>
-          {/* Link to open Gmail app */}
-          <a
-            href={`mailto:${email}`}
-            className="w-full h-12 flex items-center justify-center bg-green-600 hover:bg-green-800 text-light duration-300 rounded-full hover:scale-[.98]"
-          >
-            Email {email}
-          </a>
+          <div className="flex justify-start gap-6 my-4">
+            {/* Call Icon */}
+            <a href={`tel:${phoneNumber}`} className="text-green-600 hover:text-green-800 text-2xl">
+              <img src="/phone.svg" />
+            </a>
+            {/* Email Icon */}
+            <a href={`mailto:${email}`} className="text-green-600 hover:text-green-800 text-2xl">
+              <img src="mail.png"/>
+            </a>
+            {/* Instagram Icon */}
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:text-green-800 text-2xl"
+            >
+              <img src="/instagram.png"/>
+            </a>
+          </div>
         </div>
+
         <div className="flex flex-col gap-8 font-light">
           <h2 className="font-semibold">CONTACT INFO</h2>
           <div className="flex flex-col gap-2">

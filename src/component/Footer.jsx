@@ -5,19 +5,20 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer className="bg-green-800 text-light lg:grid lg:grid-cols-5">
-      <div className="relative block h-32 lg:col-span-2 lg:h-full">
+      <div className=" block h-32 lg:col-span-2 lg:h-full">
         <img
           src={cowImage}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover"
+          className=" inset-0 h-full w-full object-cover"
         />
       </div>
 
-      <div className="px-4 py-16 sm:px-6 lg:col-span-3 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+      <div className="px-4 sm:px-6 lg:col-span-3 lg:px-8 pt-4">
+      <img src="rounded-logo .png" className='w-16 h-16' />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <p>
-              <span className="text-xs uppercase tracking-wide text-light">
+              <span className="text-xs uppercase tracking-wide text-light pt-4">
                 Call us
               </span>
 
