@@ -12,10 +12,13 @@ function GoogleLogin() {
 
   return (
     <button
-      className='bg-primary text-light py-2 px-4 items-center justify-center text-center w-full'
+      className='bg-white text-light py-2 px-4 items-center justify-center text-center w-full'
       onClick={handleGoogleLogin}
     >
-      Login with Google
+      <div className='flex gap-3 items-center justify-center'>
+      <img src='/google-svg.svg' className='w-6 h-6'/>
+        <div className='text-lg text-gray-400'>Sign in with Google</div>
+      </div>
     </button>
   );
 }

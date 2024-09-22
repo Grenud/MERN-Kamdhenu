@@ -12,6 +12,7 @@ export default function SignUp() {
     email: "",
     password: ""
   });
+  const [show,setShow] = useState('password')
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.Auth);
 
@@ -87,20 +88,22 @@ export default function SignUp() {
                   onChange={handleOnChange}
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
+                
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 relative">
                 <label className="font-semibold tracking-wider text-black">
                   Enter your password
                 </label>
                 <input
                   placeholder="Password"
                   name="password"
-                  type="password"
+                  type={show}
                   value={data.password}
                   onChange={handleOnChange}
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
+                <span onClick={()=>setShow(show=='text'?'password':'text')} className="cursor-pointer absolute right-3 bottom-[0.6rem] z-50">{show=='text'?'hide':'show'}</span>
               </div>
 
               <Button btnText={"Sign Up"} />
