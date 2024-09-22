@@ -133,15 +133,15 @@ function Navbar() {
     <>
       {/* Desktop and Tablet Navbar */}
       <div
-        className={`bg-green-800 p-2 h-[10vh] md:h-[11vh] lg:h-[12vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
+        className={`bg-green-800 h-[10vh] md:h-[11vh] px-2 lg:h-[12vh] fixed top-0 w-full z-50 transition-transform duration-300 ${
           scrollUp ? "" : "-translate-y-full"
         }`}
       >
-        <div className="max-w-[1240px] flex items-center justify-between py-[2px] md:py-[10px] mx-auto h-full">
+        <div className="max-w-[1240px] flex items-center justify-between mx-auto h-full">
           {/* Logo */}
           <div className="flex items-center h-full cursor-pointer" onClick={goToHomePage}
           >
-            <div className="w-9 h-9 md:w-12 md:h-12 rounded-full lg:ml-6 overflow-hidden flex items-center justify-center">
+            <div className="w-16 h-16 md:w-14 md:h-14 rounded-full lg:ml-6 overflow-hidden flex items-center justify-center">
               <div to="/">
                 <img
                   src={Logo}

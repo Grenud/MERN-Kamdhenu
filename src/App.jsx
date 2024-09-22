@@ -26,6 +26,7 @@ import UserDashboard from './pages/UserDashboard';
 import Footer from './component/Footer';
 import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
 import AuthLayout from './component/Auth/AuthLayout';
+import WhatsAppFloatingButton from './component/FloatingWhatsApp';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           />
         </Routes>
         <Footer />
+        <WhatsAppFloatingButton/>
       </AuthProvider>
     </AuthLayout>
   );
