@@ -1,27 +1,80 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import Axios
 
-const DonateNow = ({ showModal, closeModal }) => {
+const RAZORPAY_KEY_ID = import.meta.env.RAZORPAY_KEY_ID;
+
+const DonateNow = ({ showModal, closeModal, cattleId }) => {
+  const { user } = useSelector((state) => state.Auth);
+  const navigate = useNavigate();
   const modalRef = useRef(null);
   const [selectedAmount, setSelectedAmount] = useState(58800); // Default amount
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [tel, setTel] = useState(""); // Phone number state
-  const [errors, setErrors] = useState({});
   const [messageVisible, setMessageVisible] = useState(false);
+  const [error, setError] = useState('');
+
+  // Handle Razorpay payment
+  const handlePayment = async () => {
+    try {
+      const response = await axios.post("/create-order", {
+        amount: selectedAmount,
+        userId: user._id,
+        cattleId: cattleId
+      });
+      console.log(response)
+
+      const { order } = response.data;
+
+      const options = {
+        key: RAZORPAY_KEY_ID, // Your Razorpay Key ID
+        amount: order.amount,
+        currency: order.currency,
+        name: "Kamdhenu-seva",
+        description: "Donation for Cattle",
+        order_id: order.id,
+        handler: async function (response) {
+          // Verify payment after successful transaction
+          try {
+            const verificationResponse = await axios.post("/verify-payment", {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            });
+
+            const result = verificationResponse.data;
+            alert(result.message); // Show payment verification result
+          } catch (error) {
+            setError("Payment verification failed.");
+          }
+        },
+        prefill: {
+          name: user.name || "", // Ensure to fill user details
+          email: user.email || "",
+        },
+        theme: {
+          color: "#F37254", // Customize Razorpay's payment modal color
+        },
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to create order");
+    }
+  };
 
   // Reset form when modal is opened
   useEffect(() => {
     if (showModal) {
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setTel("");
-      setErrors({});
       setMessageVisible(false);
-      setSelectedAmount(58800); // Reset to default amount
+      setSelectedAmount(580); // Reset to default amount
     }
-  }, [showModal]);
+
+    // Check if user is logged in
+    if (!user || !user._id) {
+      navigate('/login'); // Redirect to login if user is not logged in
+    }
+  }, [showModal, user]); // Include user in the dependency array
 
   // Handle closing modal on outside click
   useEffect(() => {
@@ -32,10 +85,19 @@ const DonateNow = ({ showModal, closeModal }) => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [closeModal]);
+
+  useEffect(() => {
+    // Dynamically load Razorpay script
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
 
   if (!showModal) return null;
 
@@ -45,40 +107,7 @@ const DonateNow = ({ showModal, closeModal }) => {
 
   const handleDonateNow = (e) => {
     e.preventDefault();
-    const newErrors = {};
-
-    if (!firstName) {
-      newErrors.firstName = "Please fill in the first name.";
-    }
-    if (!lastName) {
-      newErrors.lastName = "Please fill in the last name.";
-    }
-    if (!email) {
-      newErrors.email = "Please fill in the email.";
-    }
-    if (!tel) {
-      newErrors.tel = "Please fill in the phone.";
-    }
-
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Donation details:", { selectedAmount, firstName, lastName, email, tel });
-      // Hide form and show thank you message
-      setMessageVisible(true);
-      setTimeout(() => {
-        setMessageVisible(false);
-        closeModal();
-      }, 3000);
-    }
-  };
-
-  const handleInputChange = (setter, field) => (e) => {
-    setter(e.target.value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [field]: "",
-    }));
+    handlePayment(); // Trigger payment directly
   };
 
   return (
@@ -99,7 +128,7 @@ const DonateNow = ({ showModal, closeModal }) => {
         <div className="flex flex-wrap space-x-1 mb-2">
           <button
             className="p-2 bg-green-800 text-black font-semibold text-xs w-[48%]"
-            onClick={() => handleTierClick(58800)}
+            onClick={() => handleTierClick(580)}
           >
             GREEN (1 MONTH), MONTHLY
           </button>
@@ -149,122 +178,32 @@ const DonateNow = ({ showModal, closeModal }) => {
         {/* Payment Method Radio Buttons */}
         <div className="flex space-x-4 mb-4">
           <label className="flex items-center space-x-2 text-xs">
-            <input type="radio" name="payment-method" value="razorpay" />
+            <input type="radio" name="payment-method" value="razorpay" defaultChecked />
             <span>RAZORPAY</span>
-          </label>
-          <label className="flex items-center space-x-2 text-xs">
-            <input type="radio" name="payment-method" value="paypal" />
-            <span>PAYPAL</span>
           </label>
         </div>
 
-        {/* Conditionally render form or thank you message */}
+        {/* Conditionally render thank you message */}
         {!messageVisible ? (
           <form className="p-1" onSubmit={handleDonateNow}>
-            <h2 className="font-bold text-black text-sm">Personal Info</h2>
-            <hr className="my-2" />
-
-            <div className="flex flex-wrap space-x-1 mb-2">
-              <div className="flex-1">
-                <label className="block text-xs font-semibold mb-1">
-                  First Name<span className="ml-1 text-red-700 text-xs">*</span>
-                </label>
-                <input
-                  type="text"
-                  className="border p-2 w-full text-xs"
-                  placeholder="First Name"
-                  value={firstName}
-                  onChange={handleInputChange(setFirstName, "firstName")}
-                />
-                {errors.firstName && (
-                  <p className="text-red-500 text-xs">{errors.firstName}</p>
-                )}
-              </div>
-              <div className="flex-1">
-                <label className="block text-xs font-semibold mb-1">
-                  Last Name<span className="ml-1 text-red-700 text-xs">*</span>
-                </label>
-                <input
-                  type="text"
-                  className="border p-2 w-full text-xs"
-                  placeholder="Last Name"
-                  value={lastName}
-                  onChange={handleInputChange(setLastName, "lastName")}
-                />
-                {errors.lastName && (
-                  <p className="text-red-500 text-xs">{errors.lastName}</p>
-                )}
-              </div>
+            {/* Submit Button */}
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Donate Now
+              </button>
             </div>
-
-            <div className="mb-2">
-              <label className="block text-xs font-semibold mb-1">
-                Email Address<span className="ml-1 text-red-700 text-xs">*</span>
-              </label>
-              <input
-                type="email"
-                className="border p-2 w-full text-xs"
-                placeholder="Email Address"
-                value={email}
-                onChange={handleInputChange(setEmail, "email")}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
-              )}
-            </div>
-
-            <div className="mb-2">
-              <label className="block text-xs font-semibold mb-1">
-                Phone<span className="ml-1 text-red-700 text-xs">*</span>
-              </label>
-              <input
-                type="tel"
-                className="border p-2 w-full text-xs"
-                placeholder="Phone"
-                value={tel}
-                onChange={handleInputChange(setTel, "tel")}
-              />
-              {errors.tel && <p className="text-red-500 text-xs">{errors.tel}</p>}
-            </div>
-
-              {/* Agree to Terms */}
-          <div className="flex justify-between text-[10px] mt-3">
-            <label className="flex items-center">
-              <input type="checkbox" className="mr-2" />
-              Agree to Terms?
-            </label>
-            <p className='font-semibold text-black pr-1'>Show Terms</p>
-          </div>
-             
-
-            <h2 className="text-xs font-bold mb-1 mt-3">
-              <span className="font-semibold text-black inline-block">Donation Total:</span>
-              <span className="text-green-800"> ₹{selectedAmount.toFixed(2)}</span>
-            </h2>
-
-            <button
-          className="absolute top-2 right-2 p-1 text-gray-500"
-          onClick={closeModal}
-        >
-          <span className="text-2xl">&times;</span>
-        </button>
-
-
-            <button
-              type="submit"
-                         className="text-black bg-[#6d9051] w-32 h-8 text-sm rounded-full flex items-center justify-center mt-3"
-            >
-              Donate Now
-            </button>
           </form>
         ) : (
-          <div className="text-center text-sm">
-            <h3 className="text-green-600 font-bold">
-              Thank you for your donation!
-            </h3>
-            <p className="text-xs mt-1">You will be redirected shortly.</p>
+          <div className="p-4 bg-green-100 text-green-700 text-center rounded-md">
+            <p>Thank you for your generous donation! We truly appreciate your support.</p>
           </div>
         )}
+
+        {/* Error Message Display */}
+        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </div>
     </div>
   );
