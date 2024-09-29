@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import bgx from '../../assets/bgx.jpg'
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -36,8 +37,13 @@ const ResetPassword = () => {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center p-4 bg-light">
-            <div className="flex flex-col w-full max-w-lg bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10 p-8">
+        <div className="flex min-h-screen items-center justify-center p-4 
+        style={{
+            backgroundImage: `url(${bgx})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        }}">
+            <div className="flex flex-col w-full max-w-lg  rounded-lg shadow-lg h-auto mt-20 mb-10 p-8 bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
                 <h2 className="text-center text-2xl md:text-3xl font-extrabold text-gray-900">
                     Reset Password
                 </h2>
