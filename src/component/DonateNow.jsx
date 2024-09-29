@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Import Axios
+import toast from "react-hot-toast";
 
 const RAZORPAY_KEY_ID = import.meta.env.RAZORPAY_KEY_ID;
 
@@ -70,11 +71,7 @@ const DonateNow = ({ showModal, closeModal, cattleId }) => {
       setSelectedAmount(580); // Reset to default amount
     }
 
-    // Check if user is logged in
-    if (!user || !user._id) {
-      navigate('/login'); // Redirect to login if user is not logged in
-    }
-  }, [showModal, user]); // Include user in the dependency array
+  }, [showModal]); // Include user in the dependency array
 
   // Handle closing modal on outside click
   useEffect(() => {
@@ -107,6 +104,10 @@ const DonateNow = ({ showModal, closeModal, cattleId }) => {
 
   const handleDonateNow = (e) => {
     e.preventDefault();
+    if(!user){
+      toast.error("Please login to donate")
+      return
+    }
     handlePayment(); // Trigger payment directly
   };
 
