@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ayurveda from "../../assets/cowcover3.png";
+import bgx from '../../assets/bgx.jpg'
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,8 +50,12 @@ function Login() {
   }, [user, navigate]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-light">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10">
+    <div className="flex min-h-screen items-center justify-center p-4 bg-light" style={{
+      backgroundImage: `url(${bgx})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}>
+      <div className="flex flex-col md:flex-row  max-w-4xl  rounded-lg shadow-lg h-auto mt-20 mb-10 w-full bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
         <div
           className="w-full md:w-1/2 min-h-[250px] md:h-auto bg-cover bg-center rounded-ts-lg md:rounded-l-lg"
           style={{

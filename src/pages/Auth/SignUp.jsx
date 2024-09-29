@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ayurveda from "../../assets/cowcover3.png";
+import bgx from '../../assets/bgx.jpg'
 import { toast } from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -12,7 +13,7 @@ export default function SignUp() {
     email: "",
     password: ""
   });
-  const [show,setShow] = useState('password')
+  const [show, setShow] = useState('password')
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.Auth);
 
@@ -45,8 +46,13 @@ export default function SignUp() {
   }, [user, navigate]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-light">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10">
+    <div className="flex min-h-screen items-center justify-center p-4 bg-light"
+      style={{
+        backgroundImage: `url(${bgx})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
+      <div className="flex flex-col md:flex-row w-full max-w-4xl  rounded-lg shadow-lg h-auto mt-20 mb-10 bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
         <div
           className="w-full md:w-1/2 min-h-[250px] md:h-auto bg-cover bg-center rounded-ts-lg md:rounded-l-lg"
           style={{
@@ -88,7 +94,7 @@ export default function SignUp() {
                   onChange={handleOnChange}
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
-                
+
               </div>
 
               <div className="flex flex-col gap-2 relative">
@@ -103,7 +109,7 @@ export default function SignUp() {
                   onChange={handleOnChange}
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
-                <span onClick={()=>setShow(show=='text'?'password':'text')} className="cursor-pointer absolute right-3 bottom-[0.6rem] z-50">{show=='text'?'hide':'show'}</span>
+                <span onClick={() => setShow(show == 'text' ? 'password' : 'text')} className="cursor-pointer absolute right-3 bottom-[0.6rem] z-50">{show == 'text' ? 'hide' : 'show'}</span>
               </div>
 
               <Button btnText={"Sign Up"} />
