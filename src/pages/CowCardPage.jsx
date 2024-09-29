@@ -3,12 +3,15 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import DonateNow from "../component/DonateNow";
 import { memberShipStatus } from "../data/tableData";
+import { useSelector } from "react-redux";
 
 function CowCardPage() {
     const { id } = useParams();
     const [showTable, setShowTable] = useState(true);
     const [resp, setResp] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const {user} = useSelector(state=>state.Auth)
+    console.log(user,'this is user')
 
     const fetchGaumataData = async () => {
         try {

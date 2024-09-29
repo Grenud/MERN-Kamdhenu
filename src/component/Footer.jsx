@@ -14,7 +14,7 @@ function Footer() {
       </div>
 
       <div className="px-4 sm:px-6 lg:col-span-3 lg:px-8 pt-4">
-      <img src="rounded-logo .png" className='w-16 h-16' />
+      <img src="/rounded-logo .png" className='w-16 h-16' alt='logo' />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <p>
