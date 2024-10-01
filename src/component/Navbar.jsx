@@ -7,6 +7,7 @@ import {
   IoIosArrowUp,
   IoIosArrowDown,
 } from "react-icons/io";
+import { RiAdminFill } from "react-icons/ri";
 import { GoPerson } from "react-icons/go";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -241,6 +242,13 @@ function Navbar() {
                   Shop
                 </a>
               </li>
+              
+              <Link to='/admin-dashboard'>
+              <li>
+              <RiAdminFill className="text-2xl" />
+
+              </li>
+              </Link>
 
               {/* Profile */}
               {(user?._id || user?.id || user) && (
@@ -365,6 +373,13 @@ function Navbar() {
                 Shop
               </a>
             </li>
+            
+            <Link to='/admin-dashboard'>
+              <li onClick={handleMobileLinkClick} className="px-4 text-xl">
+              <RiAdminFill />
+            
+              </li>
+              </Link>
 
             {/* Get Started Button */}
             {user?._id || user?.id || user ? (
