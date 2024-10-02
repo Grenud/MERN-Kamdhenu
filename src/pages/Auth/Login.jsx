@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from "react";
-import ayurveda from "../../assets/cowcover3.png";
-import bgx from '../../assets/bgx.jpg'
+import cow from "../../assets/cowcover3.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { SetUser } from "../../redux/AuthSlice";
 import GoogleLogin from "./GoogleLogin";
-import Button from "../../component/Button"; // Assuming you have a Button component
+import Button from "../../component/Button";
 
 function Login() {
   const [userData, setUserData] = useState({
     email: "",
     password: ""
   });
-  const [show,setShow] = useState('password')
+  const [show, setShow] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.Auth);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const {data} = await axios.post('/api/auth/login', {
+    const { data } = await axios.post("/api/auth/login", {
       email: userData.email,
       password: userData.password
     });
@@ -30,7 +29,7 @@ function Login() {
       dispatch(SetUser({
         user: data.user
       }));
-      navigate('/');
+      navigate("/");
     } else {
       toast.error(data.message);
     }
@@ -45,25 +44,38 @@ function Login() {
 
   useEffect(() => {
     if (user && user._id) {
-      navigate('/');
+      navigate("/");
     }
   }, [user, navigate]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-light" style={{
-      backgroundImage: `url(${bgx})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}>
-      <div className="flex flex-col md:flex-row  max-w-4xl  rounded-lg shadow-lg h-auto mt-20 mb-10 w-full bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
-        <div
-          className="w-full md:w-1/2 min-h-[250px] md:h-auto bg-cover bg-center rounded-ts-lg md:rounded-l-lg"
-          style={{
-            backgroundImage: `url(${ayurveda})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        ></div>
+    <div 
+      className="relative flex min-h-screen items-center justify-center p-4"
+    >
+      {/* Background image with reduced opacity */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${cow})`,
+          opacity:0.1, 
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          zIndex: -1
+        }}
+      ></div>
+
+      {/* Main content */}
+      <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10 relative z-10">
+        <div className="w-full md:w-1/2 min-h-[250px] md:h-auto bg-cover bg-center rounded-ts-lg md:rounded-l-lg">
+          <div
+            className="h-full"
+            style={{
+              backgroundImage: `url(${cow})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center"
+            }}
+          ></div>
+        </div>
 
         <div className="w-full md:w-1/2 flex items-center justify-center p-8">
           <div className="max-w-md w-full space-y-8">
@@ -98,9 +110,13 @@ function Login() {
                   type={show}
                   required
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                />
+                <span
+                  onClick={() => setShow(show === "text" ? "password" : "text")}
+                  className="cursor-pointer absolute right-3 bottom-[0.6rem] z-50"
                 >
-                </input>
-                  <span onClick={()=>setShow(show=='text'?'password':'text')} className="cursor-pointer absolute right-3 bottom-[0.6rem] z-50">{show=='text'?'hide':'show'}</span>
+                  {show === "text" ? "hide" : "show"}
+                </span>
               </div>
 
               <Button btnText={"Login"} />

@@ -27,7 +27,7 @@ import Footer from './component/Footer';
 import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
 import AuthLayout from './component/Auth/AuthLayout';
 import WhatsAppFloatingButton from './component/FloatingWhatsApp';
-
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -35,6 +35,7 @@ function App() {
       <AuthProvider>
         <Navbar />
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<HomePage />} />
           <Route path="/about-project" element={<AboutProject />} />
           <Route path="/adopt-gaumata" element={<AdoptGaumata />} />
@@ -50,22 +51,30 @@ function App() {
           <Route path="/gaumata/:id" element={<CowCardPage />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/donate-now" element={<DonateNow />} />
+
+          {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+
+          {/* Admin Route */}
+          <Route path='/admin-dashboard' element={<AdminDashboard />} />
+        
           {/* Protected Route */}
           <Route
             path="/my-account"
             element={
               <RedirectUnauthorized>
-                <UserDashboard/>
+                <UserDashboard />
               </RedirectUnauthorized>
             }
           />
         </Routes>
+
+        {/* Common Components */}
         <Footer />
-        <WhatsAppFloatingButton/>
+        <WhatsAppFloatingButton />
       </AuthProvider>
     </AuthLayout>
   );
