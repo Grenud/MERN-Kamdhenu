@@ -119,13 +119,14 @@ function AdoptGaumata() {
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.length > 0 &&
             items?.map((item) => (
+              <Link to={`/gaumata/${item.id}`}>
               <CowCard
                 imgSrc={item.cover_photo__c ?? dummyCow}  // Replace with a dynamic image source if available
                 name={item.name}
                 key={item.id}
-                id={item.id}
                 className="hover:shadow-lg transition-shadow duration-300"
               />
+              </Link>
             ))}
         </section>
       ) : (
