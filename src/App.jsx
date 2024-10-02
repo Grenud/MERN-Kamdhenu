@@ -28,6 +28,7 @@ import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
 import AuthLayout from './component/Auth/AuthLayout';
 import WhatsAppFloatingButton from './component/FloatingWhatsApp';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminLayout from './component/Auth/AdminLayout';
 
 function App() {
   return (
@@ -59,8 +60,10 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Admin Route */}
-          <Route path='/admin-dashboard' element={<AdminDashboard />} />
-        
+          {/* <AdminLayout>
+            <Route path='/admin-dashboard' element={<AdminDashboard />} />
+          </AdminLayout> */}
+
           {/* Protected Route */}
           <Route
             path="/my-account"
@@ -68,6 +71,14 @@ function App() {
               <RedirectUnauthorized>
                 <UserDashboard />
               </RedirectUnauthorized>
+            }
+          />
+          <Route
+            path="/admin-dashboard"
+            element={
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
             }
           />
         </Routes>
