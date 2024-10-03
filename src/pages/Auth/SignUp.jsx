@@ -51,12 +51,12 @@ export default function SignUp() {
         backgroundImage: `url(${cow})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        filter: "blur(8px)",
-        opacity: 0.1 
+        // filter: "blur(3px)",
+        // opacity: 0.1 
       }}
     >
       
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-light opacity-80"></div>
 
       {/* Form container */}
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10 relative z-10">
