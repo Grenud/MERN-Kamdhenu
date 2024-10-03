@@ -243,12 +243,12 @@ function Navbar() {
                 </a>
               </li>
               
-              <Link to='/admin-dashboard'>
+              {user && user.role==='admin' && <Link to='/admin-dashboard'>
               <li>
               <RiAdminFill className="text-2xl" />
 
               </li>
-              </Link>
+              </Link>}
 
               {/* Profile */}
               {(user?._id || user?.id || user) && (
