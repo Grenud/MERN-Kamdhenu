@@ -46,7 +46,7 @@ function SpiritualImp() {
   };
 
   return (
-    <div className="container mx-auto mt-24 lg:mt-56 px-6 md:px-10 lg:px-16">
+    <div className="container mx-auto mt-28 lg:mt-32 px-6 md:px-10 lg:px-16">
       <p className="mt-8 leading-8 text-justify">
         Hindu religion considers cows as goddesses, as it bestows us with life
         savior milk.
@@ -69,7 +69,7 @@ function SpiritualImp() {
         that he revealed “Bharat Varsh (India) will be saved by Cow Mata when
         time will come”.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 mt-8">
         {image.map((item, index) => (
           <div
             key={index}

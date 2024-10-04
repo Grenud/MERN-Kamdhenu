@@ -28,7 +28,7 @@ function Testimonials() {
   }, [controls2, inView2, isSmallDevice]);
 
   return (
-    <div className="container mx-auto mt-24 lg:mt-56 px-6 md:px-10 lg:px-16">
+    <div className="container mx-auto mt-28 lg:mt-32 px-6 md:px-10 lg:px-16">
       <h1 className="text-center font-bold text-3xl text-[#6d9051] mb-10">
         Donor's Experience
       </h1>
@@ -42,10 +42,10 @@ function Testimonials() {
           transition={{ duration: 0.4, ease: "easeOut" }}
         />
         <div className="flex flex-col">
-          <h2 className="text-xl text-black font-semibold group-hover:text-white mt-16">
+          <h2 className="text-xl text-black font-semibold group-hover:text-white mt-14">
             Help Cow Matas
           </h2>
-          <p className="mt-10 text-black leading-8">
+          <p className="mt-8 text-black leading-8">
             My family and I have had a great experience with cows. We have been
             participating in donations for the cows at our ashram for several
             years and taking care of them. Every time we come to the ashram, we
@@ -67,7 +67,7 @@ function Testimonials() {
             transition={{ duration: 0.4, ease: "easeOut" }}
           />
         </div>
-        <div className="mt-8">
+        <div className="mt-6">
           <img
             src={VishnuDas}
             alt="Vishnudas"

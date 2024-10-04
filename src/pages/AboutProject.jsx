@@ -5,9 +5,9 @@ import Button from "../component/Button";
 
 function AboutProject() {
   return (
-    <main className="main-container flex flex-col p-4 lg:p-12 gap-5 mt-0 md:mt-14">
+    <main className="main-container flex flex-col p-4 lg:px-16 lg:py-12 gap-10 mt-10 md:mt-16">
       {/* Cover Image with hover animation */}
-      <figure className="relative w-full overflow-hidden rounded-lg shadow-xl">
+      <figure className="relative w-full overflow-hidden rounded-lg shadow-xl mb-1">
         <img
           src={cowSeva}
           alt="cow-seva-cover-image"
@@ -16,7 +16,7 @@ function AboutProject() {
       </figure>
 
       {/* Main Text Content */}
-      <p className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-full mx-auto leading-relaxed">
+      <p className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-full mx-auto  leading-relaxed lg:px-4">
         The cow is an amazing divine being who carries the most powerful and
         sublime vibrations of the Universe, the true mother of mankind. She
         feeds her children, her people, with her own milk. From the milk of a
@@ -34,9 +34,9 @@ function AboutProject() {
       </p>
 
       {/* Image and Supporting Text */}
-      <section className="w-full flex flex-col md:flex-row items-center gap-8 mt-10">
+      <section className="w-full flex flex-col md:flex-row items-center gap-8 mt-7 lg:mt-8">
         {/* Second Image with hover effect */}
-        <figure className="w-full md:w-1/2 overflow-hidden rounded-lg shadow-xl">
+        <figure className="w-full md:w-1/2 overflow-hidden rounded-lg shadow-xl mb-8 md:mb-0">
           <img
             src={cowSevaPerson}
             alt="cow-seva-person"
@@ -45,7 +45,7 @@ function AboutProject() {
         </figure>
 
         {/* Text Block */}
-        <div className="w-full md:w-1/2 text-neutral-700 space-y-4">
+        <div className="w-full md:w-1/2 text-neutral-700 space-y-4 lg:px-4">
           <p>
             Previously there were more than a hundred breeds of cows in India but today there are only 32. The Ashram of Sri Devraha Baba
             undertook the mission of preserving and reproducing rare breeds. We
@@ -67,8 +67,13 @@ function AboutProject() {
       </section>
 
       {/* Call to Action Button with smooth hover effect */}
-      <section className="flex justify-center mt-10">
-        <Link className="bg-green-800 hover:bg-green-900 w-full py-3 text-white flex items-center justify-center font-semibold rounded-md" to="/adopt-gaumata">Adopt Gaumata</Link>
+      <section className="flex justify-center mt-10 lg:mt-12">
+        <Link
+          className="bg-green-800 hover:bg-green-900 w-full py-3 text-white flex items-center justify-center font-semibold rounded-md max-w-sm"
+          to="/adopt-gaumata"
+        >
+          Adopt Gaumata
+        </Link>
       </section>
     </main>
   );
