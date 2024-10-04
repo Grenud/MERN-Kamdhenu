@@ -30,7 +30,6 @@ function AuthLayout({ children }) {
         }
     };
 
-
     useEffect(() => {
         fetchUserData();
     }, []);
