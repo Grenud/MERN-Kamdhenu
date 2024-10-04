@@ -2,7 +2,7 @@ import React from 'react';
 
 function VedaAboutCow() {
   return (
-    <div className='container mx-auto mt-28 px-6 lg:mt-52 md:px-10 lg:px-16'>
+    <div className='container mx-auto mt-28 px-6 lg:mt-32 md:px-10 lg:px-16'>
       <h2 className='text-3xl font-bold text-black'>What is Vedas?</h2>
       <div className='leading-8 text-justify'>
         <p className='mt-6'>
@@ -13,7 +13,7 @@ function VedaAboutCow() {
         </p>
       </div>
       <h2 className='text-3xl font-bold text-black mt-8'>What does Vedas Say about Cows?</h2>
-      <div className='mt-8 mb-20 leading-8 text-justify'>
+      <div className='mt-8 mb-12 leading-8 text-justify'>
         <p>
           According to the Atharvavēda, “The cow is said to be the Universal sign to all Vedas.”
         </p>
