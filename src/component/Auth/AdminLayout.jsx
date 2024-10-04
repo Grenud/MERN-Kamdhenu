@@ -9,9 +9,12 @@ function AdminLayout({ children }) {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.Auth);
     const fetchUserData = async () => {
-        const {data} = await axios.post('/api/auth/admin')
-        console.log(data)
-        if(!data.success){
+        try {
+            const {data} = await axios.post('/api/auth/admin');
+            if(!data.success || !data.role==='admin'){
+                navigate('/')
+            }
+        } catch (error) {
             navigate("/")
         }
       };
