@@ -14,6 +14,15 @@ function AdminDashboard() {
     sick__c: "",
     adoption_status__c: "",
     old__c: "",
+    ctuid__c: "",
+    age__c: "",
+    calf__c: "",
+    ownerid: "",
+    image1__C: "",
+    cover_photo__c: "",
+    sfid: "",
+    isdeleted: "",
+   
   });
 
   useEffect(() => {
@@ -24,7 +33,12 @@ function AdminDashboard() {
     try {
       const response = await axios.post("/api/cattle/create", newCattle);
       setItems([...items, response.data]);
-      setNewCattle({ name: "", gender: "", sick: "", adoption_status: "", old: "" });
+      setNewCattle({ 
+        name: "",
+         gender: "", 
+         sick: "", 
+         adoption_status: "",
+        old: "",});
     } catch (error) {
       console.error("Error creating cattle", error);
     }
@@ -48,6 +62,15 @@ function AdminDashboard() {
       sick__c: cattle.sick__c,
       adoption_status__c: cattle.adoption_status__c,
       old__c: cattle.old__c,
+      ctuid: cattle.ctuid__c,
+      age: cattle.age__c,
+      calf: cattle.calf__c,
+      ownerid: cattle.ownerid,
+      image1: cattle.image1__c,
+      cover_photo: cattle.cover_photo__c,
+      sfid: cattle.sfid,
+      isdeleted: cattle.isdeleted,
+      
     });
   };
 
@@ -163,6 +186,66 @@ function AdminDashboard() {
             <option value="Adopted">Adopted</option>
             <option value="Not Adopted">Not Adopted</option>
           </select>
+          <input
+            type="number"
+            placeholder="Age"
+            value={newCattle.age}
+            onChange={(e) => setNewCattle({ ...newCattle, age: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+          <input
+            type="text"
+            placeholder="Calf"
+            value={newCattle.calf}
+            onChange={(e) => setNewCattle({ ...newCattle, calf: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+           <input
+            type="text"
+            placeholder="Owner ID"
+            value={newCattle.ownerid}
+            onChange={(e) => setNewCattle({ ...newCattle, ownerid: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+           <input
+            type="text"
+            placeholder="Image URL"
+            value={newCattle.image1}
+            onChange={(e) => setNewCattle({ ...newCattle, image1: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+          <input
+            type="text"
+            placeholder="Cover Photo"
+            value={newCattle.cover_photo}
+            onChange={(e) => setNewCattle({ ...newCattle, cover_photo: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+          <input
+            type="text"
+            placeholder="CTUID"
+            value={newCattle.ctuid}
+            onChange={(e) => setNewCattle({ ...newCattle, ctuid: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+           <input
+            type="text"
+            placeholder="SFID"
+            value={newCattle.sfid}
+            onChange={(e) => setNewCattle({ ...newCattle, sfid: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          />
+            <select
+            value={newCattle.isdeleted}
+            onChange={(e) => setNewCattle({ ...newCattle, isdeleted: e.target.value })}
+            className="p-2 rounded bg-gray-100"
+          >
+            <option value="">Deleted?</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+         
+
         </div>
         <button
           className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
@@ -223,6 +306,7 @@ function AdminDashboard() {
               <option value="false">Not old</option>
             </select>
           </div>
+       
         </section>
 
         <h1 className="text-3xl font-bold tracking-wide text-center text-primary mb-8">
@@ -367,77 +451,143 @@ function AdminDashboard() {
 
       {/* Update Cattle Popup */}
       {selectedCattle && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4 md:p-0">
-          <div className="relative bg-white p-4 sm:p-5 rounded shadow-lg w-full sm:max-w-lg md:max-w-2xl h-[84vh] md:h-auto overflow-y-auto "> {/* Added relative positioning */}
-            {/* Close button */}
-            <button
-              className="absolute top-2 right-4 text-gray-600 hover:text-gray-700"
-              onClick={() => setSelectedCattle(null)}
-            >
-              <span className="text-3xl">&times;</span>
-            </button>
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4 md:p-0">
+    <div className="relative bg-white p-4 sm:p-5 rounded shadow-lg  w-full sm:max-w-lg md:max-w-2xl h-[84vh] overflow-y-auto"> {/* Adjusted height */}
+      {/* Close button */}
+      <button
+        className="absolute top-2 right-4 text-gray-600 hover:text-gray-700"
+        onClick={() => setSelectedCattle(null)}
+      >
+        <span className="text-3xl">&times;</span>
+      </button>
 
-            {/* Popup content */}
-            <h2 className="text-xl font-bold mb-4">Update Cattle</h2>
-            <div className="mb-4">
-              <img
-                src={selectedCattle.cover_photo__c || dummyCow}
-                alt={selectedCattle.name}
-                className="w-full h-52 object-cover rounded mb-2"
-              />
-              <h3 className="text-lg font-semibold">{selectedCattle.name}</h3>
-              <p className="text-gray-600 mb-2">Gender: {selectedCattle.gender__c}</p>
-              <p className="text-gray-600 mb-2">Status: {selectedCattle.sick__c ? "Sick" : "Healthy"}</p>
-              <p className="text-gray-600 mb-2">Adoption Status: {selectedCattle.adoption_status__c}</p>
-              <p className="text-gray-600">Age: {selectedCattle.old__c} years</p>
-            </div>
-            <div className="flex flex-col md:flex-row md:gap-3 gap-2 mb-5">
-              <input
-                type="text"
-                placeholder="Cattle Name"
-                value={newCattle.name}
-                onChange={(e) => setNewCattle({ ...newCattle, name: e.target.value })}
-                className="p-2 rounded bg-white text-gray-600 border-2"
-              />
-              <select
-                value={newCattle.gender__c}
-                onChange={(e) => setNewCattle({ ...newCattle, gender__c: e.target.value })}
-                className="p-2 rounded bg-green-700 text-white"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-              <select
-                value={newCattle.sick__c}
-                onChange={(e) => setNewCattle({ ...newCattle, sick__c: e.target.value })}
-                className="p-2 rounded bg-green-700 text-white"
-              >
-                <option value="">Sick</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-              <select
-                value={newCattle.adoption_status__c}
-                onChange={(e) => setNewCattle({ ...newCattle, adoption_status__c: e.target.value })}
-                className="p-2 rounded bg-green-700 text-white"
-              >
-                <option value="">Adoption Status</option>
-                <option value="Adopted">Adopted</option>
-                <option value="Not Adopted">Not Adopted</option>
-              </select>
-            </div>
-            <div className="flex justify-between">
-              <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={handleUpdateCattle}>
-                Update
-              </button>
-              <button className="bg-red-500 text-white py-2 px-4 rounded" onClick={() => handleDeleteCattle(selectedCattle.id)}>
-                Delete
-              </button>
-            </div>
-          </div>
+      {/* Popup content */}
+      <div>
+        <h2 className="text-xl font-bold mb-4">Update Cattle</h2>
+        <div className="mb-4">
+          <img
+            src={selectedCattle.cover_photo__c || dummyCow}
+            alt={selectedCattle.name}
+            className="w-full h-52 object-cover rounded mb-2" // Keep the image height as is
+          />
+          <h3 className="text-lg font-semibold">{selectedCattle.name}</h3>
+          <p className="text-gray-600 mb-2">Gender: {selectedCattle.gender__c}</p>
+          <p className="text-gray-600 mb-2">Status: {selectedCattle.sick__c ? "Sick" : "Healthy"}</p>
+          <p className="text-gray-600 mb-2">Adoption Status: {selectedCattle.adoption_status__c}</p>
+          <p className="text-gray-600">Age: {selectedCattle.old__c} years</p>
         </div>
-      )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            type="text"
+            placeholder="Cattle Name"
+            value={newCattle.name}
+            onChange={(e) => setNewCattle({ ...newCattle, name: e.target.value })}
+            className="p-2 rounded bg-gray-100 text-gray-600 border-2"
+          />
+          <select
+            value={newCattle.gender__c}
+            onChange={(e) => setNewCattle({ ...newCattle, gender__c: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <select
+            value={newCattle.sick__c}
+            onChange={(e) => setNewCattle({ ...newCattle, sick__c: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          >
+            <option value="">Sick</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          <select
+            value={newCattle.adoption_status__c}
+            onChange={(e) => setNewCattle({ ...newCattle, adoption_status__c: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          >
+            <option value="">Adoption Status</option>
+            <option value="Adopted">Adopted</option>
+            <option value="Not Adopted">Not Adopted</option>
+          </select>
+          <input
+            type="number"
+            placeholder="Age"
+            value={newCattle.age}
+            onChange={(e) => setNewCattle({ ...newCattle, age: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <input
+            type="text"
+            placeholder="Calf"
+            value={newCattle.calf}
+            onChange={(e) => setNewCattle({ ...newCattle, calf: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <input
+            type="text"
+            placeholder="Owner ID"
+            value={newCattle.ownerid}
+            onChange={(e) => setNewCattle({ ...newCattle, ownerid: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <input
+            type="text"
+            placeholder="Image URL"
+            value={newCattle.image1}
+            onChange={(e) => setNewCattle({ ...newCattle, image1: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <input
+            type="text"
+            placeholder="Cover Photo"
+            value={newCattle.cover_photo}
+            onChange={(e) => setNewCattle({ ...newCattle, cover_photo: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <input
+            type="text"
+            placeholder="CTUID"
+            value={newCattle.ctuid__c}
+            onChange={(e) => setNewCattle({ ...newCattle, ctuid: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <input
+            type="text"
+            placeholder="SFID"
+            value={newCattle.sfid}
+            onChange={(e) => setNewCattle({ ...newCattle, sfid: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          />
+          <select
+            value={newCattle.isdeleted}
+            onChange={(e) => setNewCattle({ ...newCattle, isdeleted: e.target.value })}
+            className="p-2 rounded bg-green-700 text-white"
+          >
+            <option value="">Deleted?</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div className="mt-4 flex justify-between">
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+            onClick={handleUpdateCattle}
+          >
+            Update Cattle
+          </button>
+          <button
+            className="bg-red-500 text-white py-2 px-4 rounded"
+            onClick={() => handleDeleteCattle(selectedCattle.id)}
+          >
+            Delete Cattle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
     </section>
   );
