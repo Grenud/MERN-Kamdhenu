@@ -1,85 +1,86 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
+import React, { useState } from "react";
 
 const UserDashboard = () => {
-  const {user} = useSelector((state)=>state.Auth)
+  const [selectedTab, setSelectedTab] = useState("general");
+  const { user } = useSelector((state) => state.Auth)
   console.log(user)
-  const userData = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    orders: [
-      { id: 1, product: 'Laptop', date: '2024-09-15' },
-      { id: 2, product: 'Smartphone', date: '2024-08-12' },
-    ],
-    donations: [
-      {
-        id: 1,
-        name: "B14 Janardan",
-        gender: "Male",
-        adoptionStatus: "Not Adopted",
-        images: [
-          "https://bayava-test-bucket.s3.ap-southeast-2.amazonaws.com/Kamdhenu+Seva/Not+Adopted/Bulls/NA+Ashram+Bulls/B14+Janardan/main.JPG",
-        ],
-        donationDate: "2024-07-22",
-      },
-      {
-        id: 2,
-        name: "B15 Samatma",
-        gender: "Male",
-        adoptionStatus: "Not Adopted",
-        images: [
-          "https://bayava-test-bucket.s3.ap-southeast-2.amazonaws.com/Kamdhenu+Seva/Not+Adopted/Bulls/NA+Ashram+Bulls/B15+Samatma/main.JPG",
-        ],
-        donationDate: "2024-07-22",
-      },
-      // Add other donations similarly
-    ],
-  };
-
   return (
-    <div className="p-8 bg-gray-100 text-primary min-h-screen pt-[15vh]">
-      <h1 className="text-3xl font-bold mb-6 text-primary">User Dashboard</h1>
+    <div className="container mx-auto p-6 my-10 text-black ">
 
-      <div className="bg-gray-300 p-6 rounded-lg shadow-lg mb-8">
-        <h2 className="text-2xl font-semibold mb-2">User Info</h2>
-        {user.name && <p className="text-lg"><span className="font-bold">Name:</span> {user.name}</p>}
-        {user.email && <p className="text-lg"><span className="font-bold">Email:</span> {user.email}</p>}
-      </div>
+      <h2 className="font-bold py-3 mb-4">User DashBoard</h2>
+      <div className="bg-white  shadow-lg overflow-hidden">
+        <div className="grid grid-cols-12">
+          <div className="col-span-2">
+            <div className="list-group flex flex-col space-y-10  bg-gray-100 rounded-md">
+              <a
+                href="#account-general"
+                className={`block p-4 cursor-pointer ${selectedTab === "general" ? "font-bold text-gray-900" : ""
+                  }`}
+                onClick={() => setSelectedTab("general")}
+              >
+                General
+              </a>
+              <a
+                href="#account-info"
+                className={`block p-4 cursor-pointer ${selectedTab === "info" ? "font-bold text-gray-900" : ""
+                  }`}
+                onClick={() => setSelectedTab("info")}
+              >
+                Donation
+              </a>
 
-      <div className="bg-gray-300 p-6 rounded-lg shadow-lg mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Previous Orders</h2>
-        <ul className="">
-          {userData.orders.map(order => (
-            <li key={order.id} className="bg-gray-300 p-4 rounded-md">
-              <p><span className="font-bold">Product:</span> {order.product}</p>
-              <p><span className="font-bold">Order Date:</span> {order.date}</p>
-              <hr className='bg-gray-500 h-[1px] border-0 mt-3'/>
-            </li>
-          ))}
-        </ul>
-      </div>
+              <a
+                href="#account-connections"
+                className={`block p-4 cursor-pointer ${selectedTab === "connections" ? "font-bold text-gray-900" : ""
+                  }`}
+                onClick={() => setSelectedTab("connections")}
+              >
+                Previous Orders
+              </a>
 
-      <div className="bg-gray-300 p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4">Past Donations</h2>
-        <ul className="">
-          {userData.donations.map(donation => (
-            <li key={donation.id} className="bg-gray-300 p-4 rounded-md">
-              <p><span className="font-bold">Cow Name:</span> {donation.name}</p>
-              <p><span className="font-bold">Gender:</span> {donation.gender}</p>
-              <p><span className="font-bold">Adoption Status:</span> {donation.adoptionStatus}</p>
-              <p><span className="font-bold">Donation Date:</span> {donation.donationDate}</p>
-              <div className="flex space-x-2 mt-2">
-                {donation.images.map((image, index) => (
-                  <img key={index} src={image} alt={donation.name} className="w-32 h-32 object-cover rounded-md" />
-                ))}
+            </div>
+          </div>
+
+
+          <div className="col-span-9 mx-10 ">
+            {/* General Tab */}
+            {selectedTab === "general" && (
+              <div id="account-general">
+                <div className="mt-4">
+                  <label className="block text-sm font-bold mb-3">Username</label>
+                  <h2 className='mb-2'>{user.name + "@321"}</h2>
+                  <label className="block text-sm font-bold mb-3">Name</label>
+                  <h2 className='mb-2'>{user.name}</h2>
+                  <label className="block text-sm font-bold mb-2">E-mail</label>
+                  <h2>{user.email}</h2>
+
+                  <div className="text-green-600 bg-green-100 p-2 mt-2 ">
+                    Your email is confirmed. Please check your inbox.
+                  </div>
+                </div>
               </div>
-              <hr className='bg-gray-500 h-[1px] border-0 mt-3'/>
-            </li>
-          ))}
-        </ul>
+            )}
+            {/*buttons*/}
+          </div>
+        </div>
+        <div className="text-right p-4 bg-gray-100">
+          <button className="btn bg-green-700 hover:bg-green-800 text-white p-2 rounded">
+            Save changes
+          </button>
+          <button className="btn bg-gray-500 text-white p-2 rounded ml-2">
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default UserDashboard;
+
+
+
+
+
+
