@@ -27,8 +27,6 @@ import Footer from './component/Footer';
 import RedirectUnauthorized from './component/Auth/RedirectUnauthorized';
 import AuthLayout from './component/Auth/AuthLayout';
 import WhatsAppFloatingButton from './component/FloatingWhatsApp';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminLayout from './component/Auth/AdminLayout';
 
 function App() {
   return (
@@ -58,13 +56,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-
-          {/* Admin Route */}
-          {/* <AdminLayout>
-            <Route path='/admin-dashboard' element={<AdminDashboard />} />
-          </AdminLayout> */}
-
-          {/* Protected Route */}
           <Route
             path="/my-account"
             element={
@@ -73,16 +64,7 @@ function App() {
               </RedirectUnauthorized>
             }
           />
-          <Route
-            path="/admin-dashboard"
-            element={
-              <AdminLayout>
-                <AdminDashboard />
-              </AdminLayout>
-            }
-          />
         </Routes>
-
         {/* Common Components */}
         <Footer />
         <WhatsAppFloatingButton />

@@ -242,13 +242,6 @@ function Navbar() {
                   Shop
                 </a>
               </li>
-              
-              {user && user.role==='admin' && <Link to='/admin-dashboard'>
-              <li>
-              <RiAdminFill className="text-2xl" />
-
-              </li>
-              </Link>}
 
               {/* Profile */}
               {(user?._id || user?.id || user) && (
@@ -373,14 +366,6 @@ function Navbar() {
                 Shop
               </a>
             </li>
-            
-            <Link to='/admin-dashboard'>
-              <li onClick={handleMobileLinkClick} className="px-4 text-xl">
-              <RiAdminFill />
-            
-              </li>
-              </Link>
-
             {/* Get Started Button */}
             {user?._id || user?.id || user ? (
               <li className="flex items-center justify-between gap-5 px-4 font-bold">
