@@ -7,6 +7,7 @@ import CowPuja from "../component/CowPuja";
 
 function Home() {
   const bottomRef = useRef(null);
+
   return (
     <div className="bg-black/10" id="home-top">
       <Slider bottomRef={bottomRef} />

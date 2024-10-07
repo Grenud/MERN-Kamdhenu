@@ -367,7 +367,7 @@ function Navbar() {
               </a>
             </li>
             {/* Get Started Button */}
-            {user?._id || user?.id || user ? (
+            { !user ? (
               <li className="flex items-center justify-between gap-5 px-4 font-bold">
                 <Link
                   to={isLoggedIn ? "/signup" : "/login"}

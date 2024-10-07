@@ -14,7 +14,7 @@ function Footer() {
       </div>
 
       <div className="px-4 sm:px-6 lg:col-span-3 lg:px-8 pt-4">
-      <img src="/rounded-logo .png" className='w-16 h-16' alt='logo' />
+        <img src="/rounded-logo .png" className='w-16 h-16' alt='logo' />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <p>
@@ -35,8 +35,13 @@ function Footer() {
                 DEVRAHA BABA ASRAM Bhaktivedanta Swami Marg, Panigaon Khader,
                 Uttar Pradesh 281202, India
               </li>
-              <li>welcome@kamdhenuseva.com</li>
+              <li>
+                <a href="mailto:welcome@kamdhenuseva.com" className="text-light">
+                  welcome@kamdhenuseva.com
+                </a>
+              </li>
             </ul>
+
 
             <ul className="mt-8 flex gap-6">
               <li>

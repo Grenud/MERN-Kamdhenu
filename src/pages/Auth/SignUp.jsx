@@ -12,7 +12,8 @@ export default function SignUp() {
     email: "",
     password: ""
   });
-  const [show, setShow] = useState("password");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.Auth);
 
@@ -23,18 +24,37 @@ export default function SignUp() {
     });
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/auth/register", {
-      name: data.name,
-      email: data.email,
-      password: data.password
-    });
-    if (res.data && res.data.success) {
-      toast.success(res.data.message);
-      navigate("/login");
-    } else {
-      toast.error(res.data.message);
+
+    // Basic validation
+    if (!data.name || !data.email || !data.password) {
+      toast.error("All fields are required.");
+      return;
+    }
+    if (!validateEmail(data.email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/auth/register", data);
+      if (res.data && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/login");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,11 +71,8 @@ export default function SignUp() {
         backgroundImage: `url(${cow})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        // filter: "blur(3px)",
-        // opacity: 0.1 
       }}
     >
-      
       <div className="absolute inset-0 bg-light opacity-80"></div>
 
       {/* Form container */}
@@ -76,56 +93,60 @@ export default function SignUp() {
             </h2>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-2">
-                <label className="font-semibold tracking-wider text-black">
+                <label htmlFor="name" className="font-semibold tracking-wider text-black">
                   Enter your name
                 </label>
                 <input
+                  id="name"
                   placeholder="Name"
                   name="name"
                   type="text"
                   value={data.name}
                   onChange={handleOnChange}
+                  required
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-semibold tracking-wider text-black">
+                <label htmlFor="email" className="font-semibold tracking-wider text-black">
                   Enter your email
                 </label>
                 <input
+                  id="email"
                   placeholder="Email"
                   name="email"
                   type="email"
                   value={data.email}
                   onChange={handleOnChange}
+                  required
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
               </div>
 
               <div className="flex flex-col gap-2 relative">
-                <label className="font-semibold tracking-wider text-black">
+                <label htmlFor="password" className="font-semibold tracking-wider text-black">
                   Enter your password
                 </label>
                 <input
+                  id="password"
                   placeholder="Password"
                   name="password"
-                  type={show}
+                  type={showPassword ? "text" : "password"}
                   value={data.password}
                   onChange={handleOnChange}
+                  required
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 />
                 <span
-                  onClick={() =>
-                    setShow(show === "text" ? "password" : "text")
-                  }
+                  onClick={() => setShowPassword(!showPassword)}
                   className="cursor-pointer absolute right-3 bottom-[0.6rem] z-50"
                 >
-                  {show === "text" ? "hide" : "show"}
+                  {showPassword ? "hide" : "show"}
                 </span>
               </div>
 
-              <Button btnText={"Sign Up"} />
+              <Button btnText={loading ? "Signing Up..." : "Sign Up"} disabled={loading} />
 
               <div className="flex justify-center mt-4">
                 <Link to="/login" className="text-sm text-primary hover:underline">

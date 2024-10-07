@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import cowSeva from "../assets/Cowseva.png";
 import cowSevaPerson from "../assets/CowsevaP.png";
-import Button from "../component/Button";
 
 function AboutProject() {
   return (
@@ -10,13 +9,13 @@ function AboutProject() {
       <figure className="relative w-full overflow-hidden rounded-lg shadow-xl mb-1">
         <img
           src={cowSeva}
-          alt="cow-seva-cover-image"
+          alt="A serene image depicting the essence of Cow Seva"
           className="w-full h-full object-cover rounded-lg transition-transform duration-500 ease-in-out hover:scale-105"
         />
       </figure>
 
       {/* Main Text Content */}
-      <p className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-full mx-auto  leading-relaxed lg:px-4">
+      <p className="text-neutral-700 text-sm sm:text-base md:text-lg lg:text-xl max-w-full mx-auto leading-relaxed lg:px-4">
         The cow is an amazing divine being who carries the most powerful and
         sublime vibrations of the Universe, the true mother of mankind. She
         feeds her children, her people, with her own milk. From the milk of a
@@ -28,8 +27,8 @@ function AboutProject() {
         canonical Ayurveda and modern medicine. Everything that comes from the
         cow, even its breath, is healing for the body and soul. The bull in the
         farm plows the land, helps in sowing and harvesting, transports heavy
-        loads and is the father of the family! The cow and the bull are the
-        basis for the well-being of the family, its health and happiness. And
+        loads, and is the father of the family! The cow and the bull are the
+        basis for the well-being of the family, its health, and happiness. And
         from the well-being in families comes the well-being of all mankind.
       </p>
 
@@ -39,7 +38,7 @@ function AboutProject() {
         <figure className="w-full md:w-1/2 overflow-hidden rounded-lg shadow-xl mb-8 md:mb-0">
           <img
             src={cowSevaPerson}
-            alt="cow-seva-person"
+            alt="A person engaging in Cow Seva, showcasing the care for cows"
             className="w-full h-full object-cover rounded-lg transition-transform duration-500 ease-in-out hover:scale-105"
           />
         </figure>
@@ -47,7 +46,7 @@ function AboutProject() {
         {/* Text Block */}
         <div className="w-full md:w-1/2 text-neutral-700 space-y-4 lg:px-4">
           <p>
-            Previously there were more than a hundred breeds of cows in India but today there are only 32. The Ashram of Sri Devraha Baba
+            Previously there were more than a hundred breeds of cows in India, but today there are only 32. The Ashram of Sri Devraha Baba
             undertook the mission of preserving and reproducing rare breeds. We
             can work together to protect cows and become the voice of this
             silent animal.
@@ -69,8 +68,9 @@ function AboutProject() {
       {/* Call to Action Button with smooth hover effect */}
       <section className="flex justify-center mt-10 lg:mt-12">
         <Link
-          className="bg-green-800 hover:bg-green-900 w-full py-3 text-white flex items-center justify-center font-semibold rounded-md max-w-sm"
+          className="bg-green-800 hover:bg-green-900 transition duration-300 w-full py-3 text-white flex items-center justify-center font-semibold rounded-md max-w-sm"
           to="/adopt-gaumata"
+          aria-label="Adopt Gaumata"
         >
           Adopt Gaumata
         </Link>

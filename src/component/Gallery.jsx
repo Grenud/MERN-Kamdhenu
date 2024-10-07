@@ -33,16 +33,17 @@ function Gallery() {
     <div className="container mx-auto mt-24 lg:mt-32 px-6 md:px-10 lg:px-16 mb-10">
       <h1 className="text-5xl tracking-wider font-bold text-[#6d9051] mb-10 text-center">Gallery</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {images.map((item, index) => (
+        {images.map((item) => (
           <motion.div
-            key={index}
+            key={item.id} // Use unique ID for keys
             className="overflow-hidden rounded-lg shadow-lg"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.3)" }} // Added box shadow for hover
             transition={{ duration: 0.3 }}
           >
             <img
               src={item.image}
               alt={`Image ${item.id}`}
+              loading="lazy" // Lazy loading for performance
               className="w-full h-80 object-cover rounded-lg" // Fixed height with object-cover
             />
           </motion.div>

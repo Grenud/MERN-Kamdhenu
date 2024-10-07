@@ -19,6 +19,7 @@ function Login() {
   const { user } = useSelector((state) => state.Auth);
 
   const handleLoginSubmit = async (e) => {
+    console.log('hello')
     e.preventDefault();
     const { data } = await axios.post("/api/auth/login", {
       email: userData.email,
