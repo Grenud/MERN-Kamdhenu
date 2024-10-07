@@ -1,88 +1,70 @@
-import React, { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import VishnuDas from "../assets/Vishnu-das.png";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
-function Testimonials() {
-  const controls1 = useAnimation();
-  const controls2 = useAnimation();
-  const [ref1, inView1] = useInView({ threshold: 0.55 });
-  const [ref2, inView2] = useInView({ threshold: 0.55 });
+function SpiritualImp() {
+  const [zoomedIndex, setZoomedIndex] = useState(null);
 
-  const isSmallDevice = window.matchMedia("(max-width: 640px)").matches;
+  const images = [
+    {
+      id: 1,
+      image: "https://kamdhenuseva.com/wp-content/uploads/2023/01/Gopal-Krishna-with-Cow-HD-Wallaper-705x614-1.jpg",
+    },
+    {
+      id: 2,
+      image: "https://kamdhenuseva.com/wp-content/uploads/2023/01/ddc908fed9d84384198e112fd9cd0f8b-705x529-1.jpg",
+    },
+    {
+      id: 3,
+      image: "https://kamdhenuseva.com/wp-content/uploads/2023/01/govinda-705x414-1.jpg",
+    },
+    {
+      id: 4,
+      image: "https://kamdhenuseva.com/wp-content/uploads/2023/01/krishna-705x420-1.jpg",
+    },
+    {
+      id: 5,
+      image: "https://kamdhenuseva.com/wp-content/uploads/2023/01/lord_krishnas_cow_or38-705x506-1.jpg",
+    },
+    {
+      id: 6,
+      image: "https://kamdhenuseva.com/wp-content/uploads/2023/01/pure-cow-ghee-india-gomataseva.jpg",
+    },
+  ];
 
-  useEffect(() => {
-    if (inView1) {
-      controls1.start({ y: 0, x: 0 });
-    } else {
-      controls1.start({ y: -70, x: isSmallDevice ? -10 : -70 });
-    }
-  }, [controls1, inView1, isSmallDevice]);
-
-  useEffect(() => {
-    if (inView2) {
-      controls2.start({ y: 0, x: 0 });
-    } else {
-      controls2.start({ y: 70, x: isSmallDevice ? 10 : 70 });
-    }
-  }, [controls2, inView2, isSmallDevice]);
+  const toggleZoom = (index) => {
+    setZoomedIndex(prevIndex => (prevIndex === index ? null : index));
+  };
 
   return (
     <div className="container mx-auto mt-28 lg:mt-32 px-6 md:px-10 lg:px-16">
-      <h1 className="text-center font-bold text-3xl text-[#6d9051] mb-10">
-        Donor's Experience
-      </h1>
-      <div className="mt-30 shadow-xl p-10 mb-20 hover:bg-[#6d9051] group rounded-lg relative">
-        <motion.img
-          src="https://eiwgew27fhz.exactdn.com/wp-content/themes/puttosaurus/img/quote-left.svg"
-          className="w-10 h-10 absolute top-0 m-8 left-0 self-start mt-4"
-          initial={{ y: -70, x: isSmallDevice ? -10 : -70 }}
-          animate={controls1}
-          ref={ref1}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
-        <div className="flex flex-col">
-          <h2 className="text-xl text-black font-semibold group-hover:text-white mt-14">
-            Help Cow Matas
-          </h2>
-          <p className="mt-8 text-black leading-8">
-            My family and I have had a great experience with cows. We have been
-            participating in donations for the cows at our ashram for several
-            years and taking care of them. Every time we come to the ashram, we
-            interact with the cows, feed them, and take care of them. Since we
-            began to take part in the life of the ashram cows, everything in our
-            family has become balanced; material well-being does not leave our
-            house. The children in our family are always healthy, cheerful, and
-            do well at school. We believe that a big part of this success is
-            connected with the gratitude that cows give us on a spiritual level.
-            The cows are very thankful, kind, and responsive creatures. Help the
-            cows, and happiness will fill your life!
-          </p>
-          <motion.img
-            src="https://eiwgew27fhz.exactdn.com/wp-content/themes/puttosaurus/img/quote-right.svg"
-            className="w-10 h-10 self-end mt-4"
-            initial={{ y: 70, x: isSmallDevice ? 10 : 70 }}
-            animate={controls2}
-            ref={ref2}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-          />
-        </div>
-        <div className="mt-6">
-          <img
-            src={VishnuDas}
-            alt="Vishnudas"
-            className="rounded-full w-28 h-28"
-          />
-          <h4 className="text-black font-semibold mt-3 group-hover:text-white">
-            Vishnu Das
-          </h4>
-          <p className="text-black group-hover:text-white">
-            Guruji's student, head of a family with 4 children from Moscow
-          </p>
-        </div>
+      <p className="mt-8 leading-8 text-justify">
+        {/* Text content */}
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 mt-8">
+        {images.map((item, index) => (
+          <div
+            key={item.id}
+            className={`relative overflow-hidden rounded-lg shadow-lg ${
+              zoomedIndex === index ? "lg:col-span-2 lg:row-span-2" : ""
+            }`}
+          >
+            <motion.img
+              src={item.image}
+              alt={`Image of ${item.id}`}
+              className={`w-full h-full object-cover rounded-lg ${
+                zoomedIndex === index ? "scale-150" : "scale-100"
+              }`}
+              onClick={() => toggleZoom(index)}
+              initial={{ scale: 1, opacity: 0 }}
+              whileInView={{ scale: 1.05, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              aria-label={`Image ${item.id}`}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default Testimonials;
+export default SpiritualImp;

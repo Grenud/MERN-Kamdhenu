@@ -8,30 +8,34 @@ import { useSelector } from "react-redux";
 function CowCardPage() {
     const { id } = useParams();
     const [showTable, setShowTable] = useState(true);
-    const [resp, setResp] = useState({});
+    const [resp, setResp] = useState(null); // Changed initial state to null for clarity
     const [showModal, setShowModal] = useState(false);
-    const {user} = useSelector(state=>state.Auth)
-    console.log(user,'this is user')
+    const [loading, setLoading] = useState(true); // Added loading state
+    const [error, setError] = useState(null); // Added error state
+    const { user } = useSelector(state => state.Auth);
 
     const fetchGaumataData = async () => {
         try {
             const res = await axios.get(`/api/cattle/get-cattle/${id}`);
-            console.log(res);
-            console.log('id is ',res.data.rows[0].id)
             if (res.data.rows.length > 0) {
                 setResp(res.data.rows[0]);
             } else {
                 setResp(null);
             }
         } catch (error) {
+            setError("Failed to fetch data"); // Set error message
             setResp(null);
-            console.log(error);
+        } finally {
+            setLoading(false); // Set loading to false after fetching data
         }
     };
 
     useEffect(() => {
         fetchGaumataData();
     }, [id]);
+
+    if (loading) return <div>Loading...</div>; // Display loading message
+    if (error) return <div>{error}</div>; // Display error message
 
     return (
         <div className="main-container">

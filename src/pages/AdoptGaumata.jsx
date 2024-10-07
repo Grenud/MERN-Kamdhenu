@@ -29,11 +29,11 @@ function AdoptGaumata() {
     try {
       const { data } = await axios.get('/api/cattle/get-pages');
       setTotalPages((page) => page = data.noOfPages)
-      for(let i=1;i<totalPages;i++){
+      for (let i = 1; i < totalPages; i++) {
         totalPagesList.push(i)
       }
     } catch (error) {
-      setTotalPages((page)=>page=0)
+      setTotalPages((page) => page = 0)
     }
   }
 
@@ -119,13 +119,13 @@ function AdoptGaumata() {
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.length > 0 &&
             items?.map((item) => (
-              <Link to={`/gaumata/${item.id}`}>
-              <CowCard
-                imgSrc={item.cover_photo__c ?? dummyCow}  // Replace with a dynamic image source if available
-                name={item.name}
-                key={item.id}
-                className="hover:shadow-lg transition-shadow duration-300"
-              />
+              <Link to={`/gaumata/${item.id}`} key={item.id}>
+                <CowCard
+                  imgSrc={item.cover_photo__c ?? dummyCow}  // Replace with a dynamic image source if available
+                  name={item.name}
+                  key={item.id}
+                  className="hover:shadow-lg transition-shadow duration-300"
+                />
               </Link>
             ))}
         </section>
@@ -135,120 +135,116 @@ function AdoptGaumata() {
 
       {/* Pagination */}
       {/* Pagination */}
-<nav aria-label="Page navigation example" className="mt-8">
-  <ul className="flex items-center justify-center space-x-2">
-    <li>
-      <button
-        onClick={() => setPage((page) => page - 1)}
-        className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
-        disabled={page === 1}
-      >
-        Previous
-      </button>
-    </li>
-
-    {/* Show the first page */}
-    {page > 4 && (
-      <>
-        <li>
-          <button
-            onClick={() => setPage(1)}
-            className={`flex items-center justify-center px-4 h-10 leading-tight border ${
-              page === 1
-                ? "text-blue-600 bg-blue-50 border-blue-300"
-                : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-            }`}
-          >
-            1
-          </button>
-        </li>
-        <li>...</li>
-      </>
-    )}
-
-    {/* Show 3 previous pages */}
-    {Array.from({ length: 3 }, (_, index) => {
-      const pageNumber = page - 3 + index;
-      if (pageNumber > 1) {
-        return (
-          <li key={pageNumber}>
+      <nav aria-label="Page navigation example" className="mt-8">
+        <ul className="flex items-center justify-center space-x-2">
+          <li>
             <button
-              onClick={() => setPage(pageNumber)}
-              className={`flex items-center justify-center px-4 h-10 leading-tight border ${
-                page === pageNumber
-                  ? "text-blue-600 bg-blue-50 border-blue-300"
-                  : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+              onClick={() => setPage((page) => page - 1)}
+              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+              disabled={page === 1}
             >
-              {pageNumber}
+              Previous
             </button>
           </li>
-        );
-      }
-      return null;
-    })}
 
-    {/* Show current page */}
-    <li>
-      <button
-        className="flex items-center justify-center px-4 h-10 leading-tight text-blue-600 bg-blue-50 border border-blue-300"
-      >
-        {page}
-      </button>
-    </li>
+          {/* Show the first page */}
+          {page > 4 && (
+            <>
+              <li>
+                <button
+                  onClick={() => setPage(1)}
+                  className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === 1
+                      ? "text-blue-600 bg-blue-50 border-blue-300"
+                      : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    }`}
+                >
+                  1
+                </button>
+              </li>
+              <li>...</li>
+            </>
+          )}
 
-    {/* Show 3 next pages */}
-    {Array.from({ length: 3 }, (_, index) => {
-      const pageNumber = page + index + 1;
-      if (pageNumber < totalPages) {
-        return (
-          <li key={pageNumber}>
+          {/* Show 3 previous pages */}
+          {Array.from({ length: 3 }, (_, index) => {
+            const pageNumber = page - 3 + index;
+            if (pageNumber > 1) {
+              return (
+                <li key={pageNumber}>
+                  <button
+                    onClick={() => setPage(pageNumber)}
+                    className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === pageNumber
+                        ? "text-blue-600 bg-blue-50 border-blue-300"
+                        : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                      }`}
+                  >
+                    {pageNumber}
+                  </button>
+                </li>
+              );
+            }
+            return null;
+          })}
+
+          {/* Show current page */}
+          <li>
             <button
-              onClick={() => setPage(pageNumber)}
-              className={`flex items-center justify-center px-4 h-10 leading-tight border ${
-                page === pageNumber
-                  ? "text-blue-600 bg-blue-50 border-blue-300"
-                  : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+              className="flex items-center justify-center px-4 h-10 leading-tight text-blue-600 bg-blue-50 border border-blue-300"
             >
-              {pageNumber}
+              {page}
             </button>
           </li>
-        );
-      }
-      return null;
-    })}
 
-    {/* Show the last page */}
-    {page < totalPages - 3 && (
-      <>
-        <li>...</li>
-        <li>
-          <button
-            onClick={() => setPage(totalPages)}
-            className={`flex items-center justify-center px-4 h-10 leading-tight border ${
-              page === totalPages
-                ? "text-blue-600 bg-blue-50 border-blue-300"
-                : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-            }`}
-          >
-            {totalPages}
-          </button>
-        </li>
-      </>
-    )}
+          {/* Show 3 next pages */}
+          {Array.from({ length: 3 }, (_, index) => {
+            const pageNumber = page + index + 1;
+            if (pageNumber < totalPages) {
+              return (
+                <li key={pageNumber}>
+                  <button
+                    onClick={() => setPage(pageNumber)}
+                    className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === pageNumber
+                        ? "text-blue-600 bg-blue-50 border-blue-300"
+                        : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                      }`}
+                  >
+                    {pageNumber}
+                  </button>
+                </li>
+              );
+            }
+            return null;
+          })}
 
-    <li>
-      <button
-        onClick={() => setPage((page) => page + 1)}
-        className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
-        disabled={page === totalPages}
-      >
-        Next
-      </button>
-    </li>
-  </ul>
-</nav>
+          {/* Show the last page */}
+          {page < totalPages - 3 && (
+            <>
+              <li>...</li>
+              <li>
+                <button
+                  onClick={() => setPage(totalPages)}
+                  className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === totalPages
+                      ? "text-blue-600 bg-blue-50 border-blue-300"
+                      : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    }`}
+                >
+                  {totalPages}
+                </button>
+              </li>
+            </>
+          )}
+
+          <li>
+            <button
+              onClick={() => setPage((page) => page + 1)}
+              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
 
     </section>
   );

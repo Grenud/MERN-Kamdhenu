@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DonateNow from './DonateNow';
-const RAZORPAY_KEY_ID=import.meta.env.RAZORPAY_KEY_ID;
+
+const RAZORPAY_KEY_ID = import.meta.env.RAZORPAY_KEY_ID;
 
 const DonationComponent = () => {
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
-
 
   useEffect(() => {
     // Dynamically load Razorpay script
@@ -18,7 +18,7 @@ const DonationComponent = () => {
   }, []);
 
   const handlePayment = async () => {
-    if (amount < 100) {
+    if (!amount || amount < 100) {
       setError('The minimum donation amount is ₹100.');
       return;
     }
@@ -27,7 +27,7 @@ const DonationComponent = () => {
     try {
       // Step 1: Create an order on the server
       const orderResponse = await axios.post('/create-order', {
-        amount: amount, // Send the donation amount to the backend
+        amount: amount * 100, // Convert amount to paise
         currency: 'INR',
       });
 
@@ -41,7 +41,7 @@ const DonationComponent = () => {
         name: 'Your Organization Name',
         description: 'Donation',
         order_id: order_id,
-        handler: async function (response) {
+        handler: async (response) => {
           const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = response;
 
           // Step 3: Verify payment on the server
@@ -71,13 +71,13 @@ const DonationComponent = () => {
       razorpay.open();
     } catch (error) {
       console.error('Payment error:', error);
-      alert('Payment failed');
+      alert('Payment failed. Please try again.');
     }
   };
 
   return (
-    <div>
-      <h2>Donate to Support Us</h2>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Donate to Support Us</h2>
       <input
         type="number"
         value={amount}
@@ -87,9 +87,9 @@ const DonationComponent = () => {
         required
         className='w-full outline-none h-10 py-2 px-2 border-2 border-green-800 rounded-md my-4'
       />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
       <button
-        onClick={() => setShowModal(true)}
+        onClick={handlePayment} // Trigger payment directly
         className="text-light bg-secondary w-32 h-10 rounded-full flex justify-center items-center"
       >
         Donate Now
