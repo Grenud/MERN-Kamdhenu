@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import CowCard from "../component/CowCard";
 import axios from "axios";
 import Loading from "../component/Loading";
@@ -15,29 +15,36 @@ function AdoptGaumata() {
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const limit = 10;
-  const totalPagesList = []
+
+  // Memoize totalPagesList using useMemo
+  const totalPagesList = useMemo(() => {
+    const list = [];
+    for (let i = 1; i <= totalPages; i++) {
+      list.push(i);
+    }
+    return list;
+  }, [totalPages]);
 
   useEffect(() => {
     fetchItems();
   }, [page, gender, sick, adoption, old]);
 
   useEffect(() => {
-    fetchTotalPages()
-  }, [])
+    fetchTotalPages();
+  }, []);
 
-  const fetchTotalPages = async () => {
+  // useCallback for fetching total pages
+  const fetchTotalPages = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/cattle/get-pages');
-      setTotalPages((page) => page = data.noOfPages)
-      for (let i = 1; i < totalPages; i++) {
-        totalPagesList.push(i)
-      }
+      setTotalPages(data.noOfPages);
     } catch (error) {
-      setTotalPages((page) => page = 0)
+      setTotalPages(0);
     }
-  }
+  }, []);
 
-  const fetchItems = async () => {
+  // useCallback for fetching items
+  const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axios.get(`/api/cattle/get-cattle`, {
@@ -55,15 +62,20 @@ function AdoptGaumata() {
     } catch (error) {
       setLoading(false);
     }
-  };
+  }, [page, gender, sick, adoption, old]);
+
   return (
     <section className="min-h-screen main-container my-5">
       {/* Filter Section */}
+      <h1 className="text-3xl font-bold tracking-wide text-center text-primary mb-8">
+        Adopt Gaumatas
+      </h1>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
-        <div className="bg-green-800 p-3 flex gap-2 items-center text-light rounded-sm">
-          <label className="tracking-wide text-white">Gender</label>
+        {/* Gender Filter */}
+        <div className="bg-white border-2 p-3 flex gap-2 items-center text-black rounded-sm">
+          <label className="tracking-wide text-black">Gender</label>
           <select
-            className=" text-white py-1 px-2 outline-none transition-all duration-300 w-full h-full bg-green-700"
+            className="text-black py-1 px-2 outline-none transition-all duration-300 w-full h-full bg-gray-200"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
@@ -72,10 +84,12 @@ function AdoptGaumata() {
             <option value="Female">Female</option>
           </select>
         </div>
-        <div className="bg-green-800 p-3 flex gap-2 items-center text-light rounded-sm">
+
+        {/* Sick Filter */}
+        <div className="bg-white border-2 p-3 flex gap-2 items-center text-black rounded-sm">
           <label className="tracking-wide">Sick</label>
           <select
-            className=" text-white py-1 px-2 w-full h-full bg-green-700 outline-none transition-all duration-300"
+            className="text-black py-1 px-2 w-full h-full bg-gray-200 outline-none transition-all duration-300"
             value={sick}
             onChange={(e) => setSick(e.target.value)}
           >
@@ -84,10 +98,12 @@ function AdoptGaumata() {
             <option value="false">No</option>
           </select>
         </div>
-        <div className="bg-green-800 p-3 rounded-sm flex gap-2 items-center text-light">
+
+        {/* Adoption Filter */}
+        <div className="bg-white border-2 p-3 rounded-sm flex gap-2 items-center text-black">
           <label className="tracking-wide">Adoption</label>
           <select
-            className=" text-white py-1 px-2 w-full h-full bg-green-700 outline-none transition-all duration-300"
+            className="text-black py-1 px-2 w-full h-full bg-gray-200 outline-none transition-all duration-300"
             value={adoption}
             onChange={(e) => setAdoption(e.target.value)}
           >
@@ -96,10 +112,12 @@ function AdoptGaumata() {
             <option value="Not Adopted">Not Adopted</option>
           </select>
         </div>
-        <div className="bg-green-800 p-3 rounded-sm flex gap-2 items-center text-light">
+
+        {/* Old Filter */}
+        <div className="bg-white border-2 p-3 rounded-sm flex gap-2 items-center text-black">
           <label className="tracking-wide">Old</label>
           <select
-            className=" text-white py-1 px-2 w-full h-full bg-green-700 outline-none transition-all duration-300"
+            className="text-black py-1 px-2 w-full h-full bg-gray-200 outline-none transition-all duration-300"
             value={old}
             onChange={(e) => setOld(e.target.value)}
           >
@@ -110,9 +128,6 @@ function AdoptGaumata() {
         </div>
       </section>
 
-      <h1 className="text-3xl font-bold tracking-wide text-center text-primary mb-8">
-        Adopt Gaumatas
-      </h1>
 
       {/* Cow List Section */}
       {!loading ? (
@@ -120,12 +135,7 @@ function AdoptGaumata() {
           {items.length > 0 &&
             items?.map((item) => (
               <Link to={`/gaumata/${item.id}`} key={item.id}>
-                <CowCard
-                  imgSrc={item.cover_photo__c ?? dummyCow}  // Replace with a dynamic image source if available
-                  name={item.name}
-                  key={item.id}
-                  className="hover:shadow-lg transition-shadow duration-300"
-                />
+                <CowCard imgSrc={item.cover_photo__c ?? dummyCow} name={item.name} />
               </Link>
             ))}
         </section>
@@ -133,7 +143,6 @@ function AdoptGaumata() {
         <Loading />
       )}
 
-      {/* Pagination */}
       {/* Pagination */}
       <nav aria-label="Page navigation example" className="mt-8">
         <ul className="flex items-center justify-center space-x-2">
@@ -147,15 +156,15 @@ function AdoptGaumata() {
             </button>
           </li>
 
-          {/* Show the first page */}
+          {/* First Page */}
           {page > 4 && (
             <>
               <li>
                 <button
                   onClick={() => setPage(1)}
                   className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === 1
-                      ? "text-blue-600 bg-blue-50 border-blue-300"
-                      : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    ? "text-blue-600 bg-blue-50 border-blue-300"
+                    : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                     }`}
                 >
                   1
@@ -165,7 +174,7 @@ function AdoptGaumata() {
             </>
           )}
 
-          {/* Show 3 previous pages */}
+          {/* Previous 3 Pages */}
           {Array.from({ length: 3 }, (_, index) => {
             const pageNumber = page - 3 + index;
             if (pageNumber > 1) {
@@ -174,8 +183,8 @@ function AdoptGaumata() {
                   <button
                     onClick={() => setPage(pageNumber)}
                     className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === pageNumber
-                        ? "text-blue-600 bg-blue-50 border-blue-300"
-                        : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                      ? "text-blue-600 bg-blue-50 border-blue-300"
+                      : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                       }`}
                   >
                     {pageNumber}
@@ -186,16 +195,14 @@ function AdoptGaumata() {
             return null;
           })}
 
-          {/* Show current page */}
+          {/* Current Page */}
           <li>
-            <button
-              className="flex items-center justify-center px-4 h-10 leading-tight text-blue-600 bg-blue-50 border border-blue-300"
-            >
+            <button className="flex items-center justify-center px-4 h-10 leading-tight text-blue-600 bg-blue-50 border border-blue-300">
               {page}
             </button>
           </li>
 
-          {/* Show 3 next pages */}
+          {/* Next 3 Pages */}
           {Array.from({ length: 3 }, (_, index) => {
             const pageNumber = page + index + 1;
             if (pageNumber < totalPages) {
@@ -204,8 +211,8 @@ function AdoptGaumata() {
                   <button
                     onClick={() => setPage(pageNumber)}
                     className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === pageNumber
-                        ? "text-blue-600 bg-blue-50 border-blue-300"
-                        : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                      ? "text-blue-600 bg-blue-50 border-blue-300"
+                      : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                       }`}
                   >
                     {pageNumber}
@@ -216,7 +223,7 @@ function AdoptGaumata() {
             return null;
           })}
 
-          {/* Show the last page */}
+          {/* Last Page */}
           {page < totalPages - 3 && (
             <>
               <li>...</li>
@@ -224,8 +231,8 @@ function AdoptGaumata() {
                 <button
                   onClick={() => setPage(totalPages)}
                   className={`flex items-center justify-center px-4 h-10 leading-tight border ${page === totalPages
-                      ? "text-blue-600 bg-blue-50 border-blue-300"
-                      : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    ? "text-blue-600 bg-blue-50 border-blue-300"
+                    : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                     }`}
                 >
                   {totalPages}
@@ -234,6 +241,7 @@ function AdoptGaumata() {
             </>
           )}
 
+          {/* Next */}
           <li>
             <button
               onClick={() => setPage((page) => page + 1)}
@@ -245,8 +253,37 @@ function AdoptGaumata() {
           </li>
         </ul>
       </nav>
-
     </section>
+  );
+}
+
+function CowCardWithLoading({ imgSrc, name }) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="rounded overflow-hidden shadow-lg bg-white">
+      {isLoading ? (
+        <div className="w-full h-64 bg-gray-200 animate-pulse"></div>
+      ) : (
+        <img
+          className="w-full h-64 object-cover"
+          src={imgSrc}
+          alt={name}
+          loading="lazy"
+        />
+      )}
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{name}</div>
+      </div>
+    </div>
   );
 }
 
