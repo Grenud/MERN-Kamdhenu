@@ -17,43 +17,42 @@ const DonateNow = ({ showModal, closeModal, cattleId }) => {
   // Handle Razorpay payment
   const handlePayment = async () => {
     try {
+      // Create the order
       const response = await axios.post("/create-order", {
         amount: selectedAmount,
         userId: user._id,
         cattleId: cattleId
       });
-      console.log(response)
-
       const { order } = response.data;
 
+      // Set up Razorpay options
       const options = {
-        key: RAZORPAY_KEY_ID, // Your Razorpay Key ID
+        key: RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
         name: "Kamdhenu-seva",
         description: "Donation for Cattle",
         order_id: order.id,
         handler: async function (response) {
-          // Verify payment after successful transaction
           try {
+            // Verify payment
             const verificationResponse = await axios.post("/verify-payment", {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
             });
-
-            const result = verificationResponse.data;
-            alert(result.message); // Show payment verification result
+            toast.success("Payment verification successful! Thank you for your donation!");
           } catch (error) {
             setError("Payment verification failed.");
+            toast.error("Payment verification failed.");
           }
         },
         prefill: {
-          name: user.name || "", // Ensure to fill user details
+          name: user.name || "",
           email: user.email || "",
         },
         theme: {
-          color: "#F37254", // Customize Razorpay's payment modal color
+          color: "#F37254",
         },
       };
 
@@ -61,8 +60,10 @@ const DonateNow = ({ showModal, closeModal, cattleId }) => {
       rzp.open();
     } catch (error) {
       setError(error.response?.data?.message || "Failed to create order");
+      toast.error("Failed to create order. Please try again.");
     }
   };
+
 
   // Reset form when modal is opened
   useEffect(() => {
@@ -104,7 +105,7 @@ const DonateNow = ({ showModal, closeModal, cattleId }) => {
 
   const handleDonateNow = (e) => {
     e.preventDefault();
-    if(!user){
+    if (!user) {
       toast.error("Please login to donate")
       return
     }

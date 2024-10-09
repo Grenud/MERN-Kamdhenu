@@ -1,28 +1,19 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';  // import useLocation
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; 
 
 function RedirectUnauthorized({ children }) {
-    const navigate = useNavigate();
-    const location = useLocation();  // get the current location
-    const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.Auth);
-    const fetchUserData = async () => {
-        if ( !user || !user._id) {
-            navigate('/login');
-        }
-    };
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.Auth);
 
-    useEffect(() => {
-        fetchUserData();
-    }, [location.pathname, dispatch]);  // Add location.pathname as a dependency
+  useEffect(() => {
+    // Redirect to login if the user is not authenticated
+    if (!user || !user._id) {
+      navigate('/login');
+    }
+  }, [user, navigate]);  // Add user and navigate to the dependency array
 
-    return (
-        <>
-            {children}
-        </>
-    );
+  return <>{children}</>;
 }
 
 export default RedirectUnauthorized;

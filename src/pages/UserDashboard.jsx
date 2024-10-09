@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useEffect } from 'react';
 
 const UserDashboard = () => {
   const [selectedTab, setSelectedTab] = useState("general");
@@ -9,16 +8,20 @@ const UserDashboard = () => {
   const [donations, setDonations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true); // Loading state
 
   const fetchDonations = async (page = 1) => {
+    setLoading(true); // Set loading to true when fetching data
     try {
       const { data } = await axios.get(`/api/payment/user/${user._id}/donations?page=${page}`);
-      console.log(data);
       setDonations(data?.donations || []);
       setTotalPages(data?.totalPages || 1);
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
       setDonations([]);
+      alert("Failed to fetch donations. Please try again later."); // User feedback
+    } finally {
+      setLoading(false); // Set loading to false after fetching data
     }
   };
 
@@ -45,27 +48,24 @@ const UserDashboard = () => {
         <div className="grid grid-cols-12">
           <div className="col-span-2">
             <div className="list-group flex flex-col space-y-10 bg-gray-100 rounded-md">
-              <a
-                href="#account"
+              <button
                 className={`block p-4 cursor-pointer ${selectedTab === "general" ? "font-bold text-gray-900" : ""}`}
                 onClick={() => setSelectedTab("general")}
               >
                 General
-              </a>
-              <a
-                href="#account-info"
+              </button>
+              <button
                 className={`block p-4 cursor-pointer ${selectedTab === "donation" ? "font-bold text-gray-900" : ""}`}
                 onClick={() => setSelectedTab("donation")}
               >
                 Donations
-              </a>
-              <a
-                href="#account-connections"
+              </button>
+              <button
                 className={`block p-4 cursor-pointer ${selectedTab === "order" ? "font-bold text-gray-900" : ""}`}
                 onClick={() => setSelectedTab("order")}
               >
                 Previous Orders
-              </a>
+              </button>
             </div>
           </div>
 
@@ -89,37 +89,36 @@ const UserDashboard = () => {
             {selectedTab === "donation" && (
               <div id="account-donations">
                 <h2 className="text-xl font-semibold mb-4">Previous Donations</h2>
-                <div className="space-y-4">
-                  {donations.length === 0 ? (
-                    <p>No donations found.</p>
-                  ) : (
-                    donations.map((donation, index) => (
-                      <div key={index} className="p-4 border rounded-md shadow-sm flex items-center space-x-4 bg-gray-50">
-                        <div className="w-24 h-24">
-                          {donation.cover_photo__c ? (
-                            <img
-                              src={donation.cover_photo__c}
-                              alt={donation.name}
-                              className="w-full h-full object-cover rounded-md"
-                            />
-                          ) : (
-                            <div className="bg-gray-300 w-full h-full rounded-md flex items-center justify-center text-gray-500">
-                              No Image
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-lg">{donation.name}</h3>
-                          <p className="text-sm">Order ID: {donation.order_id}</p>
-                          <p className="text-sm">Amount: ₹{donation.amount}</p>
-                          <p className="text-sm">Status: {donation.status}</p>
-                          <p className="text-sm">Date: {new Date(donation.created_at).toLocaleString()}</p>
-                        </div>
+                {loading ? (
+                  <p>Loading donations...</p>
+                ) : donations.length === 0 ? (
+                  <p>No donations found.</p>
+                ) : (
+                  donations.map((donation,i) => (
+                    <div key={i} className="p-4 border rounded-md shadow-sm flex items-center space-x-4 bg-gray-50">
+                      <div className="w-24 h-24">
+                        {donation.cover_photo__c ? (
+                          <img
+                            src={donation.cover_photo__c}
+                            alt={donation.name}
+                            className="w-full h-full object-cover rounded-md"
+                          />
+                        ) : (
+                          <div className="bg-gray-300 w-full h-full rounded-md flex items-center justify-center text-gray-500">
+                            No Image
+                          </div>
+                        )}
                       </div>
-                    ))
-                  )}
-                </div>
-
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg">{donation.name}</h3>
+                        <p className="text-sm">Order ID: {donation.order_id}</p>
+                        <p className="text-sm">Amount: ₹{donation.amount}</p>
+                        <p className="text-sm">Status: {donation.status}</p>
+                        <p className="text-sm">Date: {new Date(donation.created_at).toLocaleString()}</p>
+                      </div>
+                    </div>
+                  ))
+                )}
                 <div className="flex justify-between items-center mt-6">
                   <button
                     className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 disabled:opacity-50"

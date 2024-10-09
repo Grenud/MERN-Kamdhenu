@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
-import bgx from '../../assets/bgx.jpg'
+import bgx from '../../assets/bgx.jpg';
 import axios from 'axios';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const origin = window.location.origin;
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setMessage('');
+
         try {
             const response = await axios.post('/api/auth/forgot-password', { email, origin });
             setMessage(response.data.message);
         } catch (error) {
             setMessage(error.response.data.message || 'An error occurred.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -23,7 +29,7 @@ const ForgotPassword = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
         }}>
-            <div className="flex flex-col w-full max-w-lg  rounded-lg shadow-lg h-auto mt-20 mb-10 p-8  bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
+            <div className="flex flex-col w-full max-w-lg rounded-lg shadow-lg h-auto mt-20 mb-10 p-8 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
                 <h2 className="text-center text-2xl md:text-3xl font-extrabold text-gray-900">
                     Forgot Password
                 </h2>
@@ -43,12 +49,18 @@ const ForgotPassword = () => {
                     </div>
 
                     <button
-                        className={`text-light bg-secondary hover:bg-[#33465a] px-5 h-10 rounded-full flex justify-center items-center`}
+                        type="submit"
+                        disabled={loading}
+                        className={`text-light bg-secondary hover:bg-[#33465a] px-5 h-10 rounded-full flex justify-center items-center ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                        Forget Password
+                        {loading ? 'Processing...' : 'Forget Password'}
                     </button>
 
-                    {message && <p className="text-sm text-yellow-500 mt-4">{message}</p>}
+                    {message && (
+                        <p className={`text-sm mt-4 ${message.includes('error') ? 'text-red-500' : 'text-yellow-500'}`}>
+                            {message}
+                        </p>
+                    )}
                 </form>
             </div>
         </div>

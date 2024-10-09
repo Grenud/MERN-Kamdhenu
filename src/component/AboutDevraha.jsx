@@ -26,17 +26,20 @@ function AboutDevraha() {
             Today, the ashram is run by the successor of Sri Devraha Baba, Mahatma Sri Devadas Maharaj, following the instructions of the great sage.
           </p>
           <button
-          onClick={openModal}
-          className="bg-green-800 text-white hidden sm:inline-block px-6 lg:px-12 py-3 rounded-md md:mr-14 hover:bg-green-900 duration-200 mt-10"
-        >
-          Donate Now
-        </button>
+            onClick={openModal}
+            aria-label="Donate Now"
+            className="bg-green-800 text-white hidden sm:inline-block px-6 lg:px-12 py-3 rounded-md md:mr-14 hover:bg-green-900 duration-200 mt-10"
+          >
+            Donate Now
+          </button>
         </div>
+
         <div className="w-full md:w-1/3 p-4 flex justify-end order-1 md:order-2 flex-col gap-2">
           <img
             src="https://kamdhenuseva.com/wp-content/uploads/2023/01/IMG_8577-1487x1536.jpg"
             alt="Sri Devraha Baba Ashram"
             className="object-cover rounded-md"
+            loading="lazy" // Lazy load the image for performance
           />
           <p className='italic'>Brahm Rishi Shri Shri Dev Das Ji Maharaj</p>
         </div>
