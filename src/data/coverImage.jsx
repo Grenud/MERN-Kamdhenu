@@ -1,7 +1,7 @@
 const coverImageData = [
     {
         id : 1,
-        image : "https://www.dairypesa.com/wp-content/uploads/2015/10/HOLSTEIN-COW.jpg",
+        image:"https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         heading : "SAVE A COW",
         paragraph : "Support our Spiritual Mission for Cow Seva to protect every cow.",
         button : "LEARN MORE"
@@ -25,3 +25,4 @@ const coverImageData = [
 ]
 
 export default coverImageData
+
