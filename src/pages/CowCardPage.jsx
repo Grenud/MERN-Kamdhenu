@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import DonateNow from "../component/DonateNow";
+import AdoptNow from "../component/AdoptNow";
 import { memberShipStatus } from "../data/tableData";
 import { useSelector } from "react-redux";
 
@@ -105,18 +105,18 @@ function CowCardPage() {
         <h3>Is old: {resp?.old__c ? "Yes" : "No"}</h3>
       </section>
 
-      {/* Donate Button that triggers modal */}
+      {/* Adopt Button that triggers modal */}
       {resp?.id && (
         <button
           onClick={() => setShowModal(true)}
           className="bg-secondary text-white w-32 h-10 rounded-full shadow-lg hover:bg-secondary-dark transition-colors duration-200 ease-in-out mx-auto"
         >
-          Donate Now
+          Adopt Now
         </button>
       )}
 
       {/* Modal */}
-      <DonateNow showModal={showModal} closeModal={() => setShowModal(false)} cattleId={resp?.id} />
+      <AdoptNow showModal={showModal} closeModal={() => setShowModal(false)} cattleId={resp?.id} />
 
       <div className="flex justify-center mt-10 space-x-8">
         <div className="relative group">
