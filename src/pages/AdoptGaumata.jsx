@@ -16,15 +16,6 @@ function AdoptGaumata() {
   const [totalPages, setTotalPages] = useState(0);
   const limit = 10;
 
-  // Memoize totalPagesList using useMemo
-  const totalPagesList = useMemo(() => {
-    const list = [];
-    for (let i = 1; i <= totalPages; i++) {
-      list.push(i);
-    }
-    return list;
-  }, [totalPages]);
-
   useEffect(() => {
     fetchItems();
   }, [page, gender, sick, adoption, old]);
@@ -254,36 +245,6 @@ function AdoptGaumata() {
         </ul>
       </nav>
     </section>
-  );
-}
-
-function CowCardWithLoading({ imgSrc, name }) {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <div className="rounded overflow-hidden shadow-lg bg-white">
-      {isLoading ? (
-        <div className="w-full h-64 bg-gray-200 animate-pulse"></div>
-      ) : (
-        <img
-          className="w-full h-64 object-cover"
-          src={imgSrc}
-          alt={name}
-          loading="lazy"
-        />
-      )}
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{name}</div>
-      </div>
-    </div>
   );
 }
 
