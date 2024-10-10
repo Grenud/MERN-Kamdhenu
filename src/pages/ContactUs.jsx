@@ -7,7 +7,7 @@ function ContactUs() {
   const instagramUrl = "https://www.instagram.com/your_instagram_handle/";
 
   return (
-    <section className="main-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-4">
+  <section className="main-container grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6 gap-2 mb-4">
       <section className="lg:col-span-4 col-span-6">
         <h1 className="text-xl md:text-2xl font-bold tracking-wide my-3 lg:my-4">
           Our Location
@@ -21,64 +21,7 @@ function ContactUs() {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </section>
-        <section className="flex flex-col items-start gap-3 p-4 lg:p-6">
-          <h2 className="text-xl md:text-2xl font-bold tracking-wide my-3">
-            Drop Us a Line
-          </h2>
-          <p className="font-semibold tracking-wide text-muted">
-            Want to reach out? We&apos;d love to hear from you!
-          </p>
-          <form className="w-full bg-green-700 grid grid-cols-1 md:grid-cols-2 gap-6 p-4 justify-center items-center">
-            <div className="w-full h-full">
-              <img
-                src={cow}
-                alt="Cow image"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <input
-                  className="w-full py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
-                  name="fullName"
-                  placeholder="Your name*"
-                  required
-                />
-                <input
-                  className="w-full py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
-                  name="email"
-                  type="email"
-                  placeholder="Your email*"
-                  required
-                />
-              </div>
-              <div className="w-full mb-6">
-                <input
-                  className="w-full py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
-                  name="subject"
-                  placeholder="Subject"
-                />
-              </div>
-              <div className="w-full mb-6">
-                <textarea
-                  className="w-full h-40 py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
-                  name="message"
-                  placeholder="Message"
-                  required
-                />
-              </div>
-              <div className="text-center flex justify-center">
-                <Button
-                  btnText="SUBMIT"
-                  className="py-3 px-6 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-                />
-              </div>
-            </div>
-          </form>
-        </section>
-      </section>
-
+ </section>
       <section className="col-span-6 lg:col-span-2 text-sm flex flex-col gap-4 my-4 lg:px-4 p-0">
         <div className="w-full flex flex-col gap-2">
           <h2 className="font-semibold lg:mt-4">CONNECT WITH US</h2>
@@ -139,7 +82,63 @@ function ContactUs() {
           </div>
         </div>
       </section>
-    </section>
+        <section className=" lg:col-span-4 col-span-6 left-0 flex flex-col items-center justify-start gap-3  w-[95vw] lg:w-[95vw] lg:p-6 ">
+          <h2 className="text-xl md:text-2xl font-bold tracking-wide my-3">
+            Drop Us a Line
+          </h2>
+          <p className="font-semibold tracking-wide text-muted">
+            Want to reach out? We&apos;d love to hear from you!
+          </p>
+          <form className="w-full bg-green-700 grid grid-cols-1 md:grid-cols-2 gap-6 p-4 justify-center items-center">
+            <div className="w-full h-full ">
+              <img
+                src={cow}
+                alt="Cow image"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <input
+                  className="w-full py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
+                  name="fullName"
+                  placeholder="Your name*"
+                  required
+                />
+                <input
+                  className="w-full py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
+                  name="email"
+                  type="email"
+                  placeholder="Your email*"
+                  required
+                />
+              </div>
+              <div className="w-full mb-6">
+                <input
+                  className="w-full py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
+                  name="subject"
+                  placeholder="Subject"
+                />
+              </div>
+              <div className="w-full mb-6">
+                <textarea
+                  className="w-full h-40 py-3 px-4 border-0 outline-0 border-b-2 border-green-600 bg-green-100 rounded-md focus:border-green-400 placeholder:text-gray-600 placeholder:opacity-70"
+                  name="message"
+                  placeholder="Message"
+                  required
+                />
+              </div>
+              <div className="text-center flex justify-center">
+                <Button
+                  btnText="SUBMIT"
+                  className="py-3 px-6 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+                />
+              </div>
+            </div>
+          </form>
+        </section>
+        </section>
   );
 }
 

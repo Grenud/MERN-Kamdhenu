@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer className="bg-green-800 text-light lg:grid lg:grid-cols-5">
-      <div className=" block h-32 lg:col-span-2 lg:h-full">
+      <div className=" block h-32 sm:h-full lg:col-span-2 lg:h-full">
         <img
           src={cowImage}
           alt=""
@@ -194,7 +194,5 @@ function Footer() {
     </footer>
   );
 }
-
-
 
 export default Footer;

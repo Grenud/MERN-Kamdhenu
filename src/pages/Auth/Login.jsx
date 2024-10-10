@@ -50,7 +50,7 @@ function Login() {
   }, [user, navigate]);
 
   return (
-    <div 
+    <div
       className="relative flex min-h-screen items-center justify-center p-4"
     >
       {/* Background image with reduced opacity */}
@@ -66,16 +66,18 @@ function Login() {
       ></div>
 
       {/* Main content */}
+      <div className="relative flex min-h-screen items-center justify-center ">
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-200 rounded-lg shadow-lg h-auto mt-20 mb-10 relative z-10">
-        <div className="w-full md:w-1/2 min-h-[250px] md:h-auto bg-cover bg-center rounded-ts-lg md:rounded-l-lg">
-          <div
-            className="h-full"
+        {/* Image Container */}
+        <div className="w-full md:w-1/2 min-h-[200px] flex items-center justify-center">
+          <img
+            src={cow}
+            alt="Cow"
+            className="w-full h-full object-cover" 
             style={{
-              backgroundImage: `url(${cow})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center"
+              opacity: 1, 
             }}
-          ></div>
+          />
         </div>
 
         <div className="w-full md:w-1/2 flex items-center justify-center p-8">
@@ -138,6 +140,7 @@ function Login() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

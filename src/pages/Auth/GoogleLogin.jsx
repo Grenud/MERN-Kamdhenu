@@ -16,7 +16,7 @@ function GoogleLogin() {
       onClick={handleGoogleLogin}
     >
       <div className='flex gap-3 items-center justify-center'>
-      <img src='/google-svg.svg' className='w-6 h-6'/>
+      <img src='/google-svg.svg'alt='google-svg' className='w-6 h-6'/>
         <div className='text-lg text-gray-400'>Sign in with Google</div>
       </div>
     </button>
