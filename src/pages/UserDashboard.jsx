@@ -101,8 +101,8 @@ const UserDashboard = () => {
                   </div>
                 </div>
                 <div className="text-right p-4 bg-gray-100">
-                  <button className="btn bg-green-700 hover:bg-green-800 text-white p-2 rounded">Save changes</button>
-                  <button className="btn bg-gray-500 text-white p-2 rounded ml-2">Cancel</button>
+                  <button  className="btn bg-green-700 hover:bg-green-800 text-white p-2 rounded">Save changes</button>
+                  <button  className="btn bg-gray-500 text-white p-2 rounded ml-2">Cancel</button>
                 </div>
               </div>
             )}
