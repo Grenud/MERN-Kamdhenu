@@ -4,6 +4,7 @@ import Slider from "../component/Slider";
 import JoinCampaign from "../component/JoinCampaign";
 import CowImgSlider from "../component/CowImgSlider";
 import CowPuja from "../component/CowPuja";
+import DonateButton from "../component/DonateNow";
 
 function Home() {
   const bottomRef = useRef(null);
